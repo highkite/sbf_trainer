@@ -1,10 +1,10 @@
-module DataHandler exposing (fetchQuestions)
+module DataHandler exposing (fetchQuestions, learnProgressDecoder)
 
 import Http
 import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
 import Json.Decode.Pipeline exposing (optional, optionalAt, required, requiredAt)
 
-import Messages exposing (Msg(..), Question, LearnData)
+import Messages exposing (Msg(..), Question, LearnData, QuestionLearnProgress, LearnProgress)
 
 questionDecoder : Decoder Question
 questionDecoder =
@@ -17,6 +17,17 @@ questionDecoder =
 learnDataDecoder : Decoder LearnData
 learnDataDecoder =
         JD.list questionDecoder
+
+questionProgressDecoder : Decoder QuestionLearnProgress
+questionProgressDecoder =
+    JD.succeed QuestionLearnProgress
+        |> required "ide" int
+        |> required "level" int
+        |> required "timestamp" string
+
+learnProgressDecoder : Decoder LearnProgress
+learnProgressDecoder =
+    JD.list questionProgressDecoder
 
 url : String
 url =

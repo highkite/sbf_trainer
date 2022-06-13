@@ -32,7 +32,8 @@
 			      localStorage.setItem(storageKey, value);
 			    });
 			    app.ports.doload.subscribe(function() {
-			      app.ports.load.send(localStorage.getItem(storageKey));
+					let data = localStorage.getItem(storageKey);
+			      app.ports.load.send(data);
 			    });
 		</script>
 

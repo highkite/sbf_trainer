@@ -1,4 +1,7 @@
-module Messages exposing (Msg(..), Question, LearnData, Model)
+module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress)
+import Json.Decode as JD exposing (Value)
+
+import Date exposing (Date)
 
 import Http
 
@@ -27,11 +30,15 @@ type Msg
         | SendHttpRequest
         | DataReceived (Result Http.Error LearnData)
         | SaveLocalStorage
-        | LoadLocalStorage
+        | DoLoadLocalStorage
+        | Load Value
+        | ReadDate Date
+        | ShuffleLearnProgress LearnProgress
 
 type alias Model =
         { page_state : Int
         , learnData : LearnData
         , learnProgress : LearnProgress
         , errorMessage : Maybe String
+        , currentDate : String
         }
