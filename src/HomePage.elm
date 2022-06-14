@@ -11,7 +11,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
-import List exposing (head, isEmpty, tail)
+import List exposing (head, isEmpty, tail, range, length)
 import Random.List exposing (shuffle)
 
 import MenuBar exposing (menuBar)
@@ -22,7 +22,7 @@ import DataHandler exposing (fetchQuestions, learnProgressDecoder)
 
 import QuestionHandler exposing (questionView)
 
-import Messages exposing (Msg(..), LearnData, Model, QuestionLearnProgress, Question)
+import Messages exposing (Msg(..), LearnData, Model, QuestionLearnProgress, Question, LearnProgress)
 
 
 port save : String -> Cmd msg
@@ -31,7 +31,7 @@ port doload : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = ""}, today |> Task.perform ReadDate)
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing}, today |> Task.perform ReadDate)
 
 createQuestionLearnProgress : Maybe (List Question) -> Model -> Model
 createQuestionLearnProgress lst model =
@@ -92,7 +92,7 @@ view model =
                         div []
                         [
                                 menuBar
-                                ,questionView (learnProgressToQuestion (Just model.learnData) (head model.learnProgress))
+                                ,questionView model.currentQuestion
                         ]
                 _ ->
                         div []
@@ -154,8 +154,76 @@ update msg model =
                                                         (model, Cmd.none)
 
                 ShuffleLearnProgress lPs ->
-                        Debug.log "shuffle"
-                        ({ model | learnProgress = lPs }, Cmd.none)
+                        let
+                            new_model = { model | learnProgress = lPs }
+                        in
+                        chooseQuestion new_model
+
+
+                RandomizeRandomization lst ->
+                        case model.currentQuestion of
+                                Just val ->
+                                        let
+                                            new_val = { val | randomization = lst }
+                                        in
+                                        ({model | currentQuestion = Just new_val }, Cmd.none)
+                                Nothing ->
+                                        (model, Cmd.none)
+
+
+chooseQuestion : Model -> (Model, Cmd Msg)
+chooseQuestion model =
+                case model.currentQuestion of
+                        Just cq ->
+                                let
+                                    selected_question = getElement (Just model.learnProgress) (cq.index + 1)
+                                in
+                                case selected_question of
+                                        Just val ->
+                                                let
+                                                    mapped_question = learnProgressToQuestion (Just model.learnData) selected_question
+                                                in
+                                                case mapped_question of
+                                                        Just qst ->
+                                                                let
+                                                                    rands = range 0 ((length qst.answers) - 1)
+                                                                in
+                                                                ({ model | currentQuestion = Just {index = cq.index + 1, progress = val, question = qst, randomization = rands}}, Random.generate RandomizeRandomization (shuffle rands))
+                                                        Nothing ->
+                                                                ({ model | currentQuestion = Nothing}, Cmd.none)
+                                        Nothing ->
+                                                ({ model | currentQuestion = Nothing}, Cmd.none)
+                        Nothing ->
+                                let
+                                    selected_question = head model.learnProgress
+                                in
+                                case selected_question of
+                                        Just val ->
+                                                let
+                                                    mapped_question = learnProgressToQuestion (Just model.learnData) selected_question
+                                                in
+                                                case mapped_question of
+                                                        Just qst ->
+                                                                let
+                                                                    rands = range 0 ((length qst.answers) - 1)
+                                                                in
+                                                                ({ model | currentQuestion = Just {index = 0, progress = val, question = qst, randomization = rands}}, Random.generate RandomizeRandomization (shuffle rands))
+                                                        Nothing ->
+                                                                ({ model | currentQuestion = Nothing}, Cmd.none)
+                                        Nothing ->
+                                                ({ model | currentQuestion = Nothing}, Cmd.none)
+
+getElement : Maybe LearnProgress -> Int -> Maybe QuestionLearnProgress
+getElement lst ind =
+        case lst of
+                Just lstl ->
+                        if ind > 0 then
+                                getElement (tail lstl) (ind - 1)
+                        else
+                                head lstl
+                Nothing ->
+                        Nothing
+
 
 buildErrorMessage : Http.Error -> String
 buildErrorMessage httpError =
