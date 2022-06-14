@@ -2,6 +2,7 @@ port module HomePage exposing (main, save, doload)
 
 import Browser
 
+import Process
 import Debug
 import Random
 import Task
@@ -17,12 +18,13 @@ import Random.List exposing (shuffle)
 import MenuBar exposing (menuBar)
 import StartUp exposing (startUp)
 
+import Json.Encode as Encode exposing (Value, int, string, object)
 import Json.Decode as JD exposing (Decoder, Error(..), decodeValue, list, string, int)
 import DataHandler exposing (fetchQuestions, learnProgressDecoder)
 
 import QuestionHandler exposing (questionView)
 
-import Messages exposing (Msg(..), LearnData, Model, QuestionLearnProgress, Question, LearnProgress)
+import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProgress, Question, LearnProgress, AnswerState(..))
 
 
 port save : String -> Cmd msg
@@ -126,7 +128,7 @@ update msg model =
                             )
 
                 SaveLocalStorage ->
-                      (model , save "abc")
+                      (model , save (Encode.encode 0 (encodeJSON model.learnProgress)))
 
                 DoLoadLocalStorage ->
                       (model , doload ())
@@ -170,6 +172,81 @@ update msg model =
                                 Nothing ->
                                         (model, Cmd.none)
 
+                ShowResultTimeout ->
+                        case model.currentQuestion of
+                                Just cq ->
+                                        let
+                                            new_cq = {cq | correct = NotSet}
+                                            new_model = { model | currentQuestion = Just new_cq }
+                                        in
+                                        chooseQuestion new_model
+                                Nothing ->
+                                        chooseQuestion model
+
+                SelectAnswer index ->
+                        case model.currentQuestion of
+                                Just cq ->
+                                        -- check result and show correct result for a second or two
+                                        if index == 0 then
+                                                -- colorize green
+                                                let
+                                                    new_cq = {cq | correct = Correct}
+                                                    new_learn_progress = increaseLevel (Just model.learnProgress) model cq
+                                                in
+                                                --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 500 |> Task.perform (always ShowResultTimeout) ] )
+                                        else
+                                                -- colorize red
+                                                let
+                                                    new_cq = {cq | correct = Incorrect}
+                                                    new_learn_progress = resetLevel (Just model.learnProgress) model cq
+                                                in
+                                                --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 500 |> Task.perform (always ShowResultTimeout) ])
+                                Nothing ->
+                                        (model, Cmd.none)
+
+                        -- increase or reset level
+                        -- store update to browser memory
+                        -- select next question
+
+resetLevel : Maybe LearnProgress -> Model -> CurQuest -> LearnProgress
+resetLevel lst model cq =
+        case lst of
+                Just lstl ->
+                        case (head lstl) of
+                                Just headel ->
+                                        if headel.ide == cq.progress.ide then
+                                                let
+                                                    new_head_el = {headel | level = 0, timestamp = model.currentDate}
+                                                in
+                                                new_head_el :: (increaseLevel (tail lstl) model cq)
+                                        else
+                                                headel :: (increaseLevel (tail lstl) model cq)
+                                Nothing ->
+                                        lstl
+
+                Nothing ->
+                        []
+
+increaseLevel : Maybe LearnProgress -> Model -> CurQuest -> LearnProgress
+increaseLevel lst model cq =
+        case lst of
+                Just lstl ->
+                        case (head lstl) of
+                                Just headel ->
+                                        if headel.ide == cq.progress.ide then
+                                                let
+                                                    new_head_el = {headel | level = (headel.level + 1), timestamp = model.currentDate}
+                                                in
+                                                new_head_el :: (increaseLevel (tail lstl) model cq)
+                                        else
+                                                headel :: (increaseLevel (tail lstl) model cq)
+                                Nothing ->
+                                        lstl
+
+                Nothing ->
+                        []
 
 chooseQuestion : Model -> (Model, Cmd Msg)
 chooseQuestion model =
@@ -188,7 +265,7 @@ chooseQuestion model =
                                                                 let
                                                                     rands = range 0 ((length qst.answers) - 1)
                                                                 in
-                                                                ({ model | currentQuestion = Just {index = cq.index + 1, progress = val, question = qst, randomization = rands}}, Random.generate RandomizeRandomization (shuffle rands))
+                                                                ({ model | currentQuestion = Just {index = cq.index + 1, progress = val, question = qst, randomization = rands, correct = NotSet}}, Random.generate RandomizeRandomization (shuffle rands))
                                                         Nothing ->
                                                                 ({ model | currentQuestion = Nothing}, Cmd.none)
                                         Nothing ->
@@ -207,11 +284,23 @@ chooseQuestion model =
                                                                 let
                                                                     rands = range 0 ((length qst.answers) - 1)
                                                                 in
-                                                                ({ model | currentQuestion = Just {index = 0, progress = val, question = qst, randomization = rands}}, Random.generate RandomizeRandomization (shuffle rands))
+                                                                ({ model | currentQuestion = Just {index = 0, progress = val, question = qst, randomization = rands, correct = NotSet}}, Random.generate RandomizeRandomization (shuffle rands))
                                                         Nothing ->
                                                                 ({ model | currentQuestion = Nothing}, Cmd.none)
                                         Nothing ->
                                                 ({ model | currentQuestion = Nothing}, Cmd.none)
+
+encodeQJSON : QuestionLearnProgress -> Encode.Value
+encodeQJSON lp =
+        Encode.object
+                [ ("ide", Encode.int lp.ide)
+                , ("level", Encode.int lp.level)
+                , ("timestamp", Encode.string lp.timestamp)
+                ]
+
+encodeJSON : LearnProgress -> Encode.Value
+encodeJSON lp =
+        Encode.list encodeQJSON lp
 
 getElement : Maybe LearnProgress -> Int -> Maybe QuestionLearnProgress
 getElement lst ind =

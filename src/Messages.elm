@@ -1,4 +1,4 @@
-module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress, CurQuest)
+module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress, CurQuest, AnswerState(..))
 import Json.Decode as JD exposing (Value)
 
 import Date exposing (Date)
@@ -35,6 +35,13 @@ type Msg
         | ReadDate Date
         | ShuffleLearnProgress LearnProgress
         | RandomizeRandomization (List Int)
+        | SelectAnswer Int
+        | ShowResultTimeout
+
+type AnswerState
+        = Correct
+        | Incorrect
+        | NotSet
 
 type alias CurQuest
         = {
@@ -42,6 +49,7 @@ type alias CurQuest
                 ,question : Question
                 ,progress : QuestionLearnProgress
                 ,randomization : List Int
+                ,correct : AnswerState
         }
 
 type alias Model =

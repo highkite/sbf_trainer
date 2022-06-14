@@ -5,12 +5,12 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
-import Messages exposing (CurQuest)
+import Messages exposing (CurQuest, Msg(..), AnswerState(..))
 
 import Array exposing (Array, fromList)
 import List exposing (head, tail)
 
-questionView : Maybe CurQuest -> Html msg
+questionView : Maybe CurQuest -> Html Msg
 questionView curQ =
         case curQ of
             Just cq ->
@@ -24,20 +24,29 @@ questionView curQ =
                         ,p [class "card-text"][
                                 text "Wähle unter den folgenden Antworten aus:"
                         ]
-                        , div[] (answersq (Just cq.randomization) cq.question.answers)
+                        , div[] (answersq (Just cq.randomization) cq cq.question.answers)
                 ]]]]]]
             Nothing ->
                 text "No question available"
 
-answersq : Maybe (List Int) -> List String -> (List (Html msg))
-answersq lst lstans =
+answersq : Maybe (List Int) -> CurQuest -> List String -> (List (Html Msg))
+answersq lst cq lstans =
     case lst of
         Just lstl ->
             case (head lstl) of
                 Just hl ->
                     case (answerByIndex hl (Just lstans)) of
                         Just val ->
-                            (div[class "btn btn-outline-secondary", style "margin-top" "5px"] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) lstans
+                            if hl == 0 then
+                                case cq.correct of
+                                    Correct ->
+                                        (div[class "btn btn-outline-secondary bg-success", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                                    Incorrect ->
+                                        (div[class "btn btn-outline-secondary bg-danger", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                                    NotSet ->
+                                        (div[class "btn btn-outline-secondary", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                            else
+                                (div[class "btn btn-outline-secondary", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
                         Nothing ->
                             []
                 Nothing ->
@@ -55,16 +64,3 @@ answerByIndex index lst =
                 head lstl
         Nothing ->
             Nothing
-
-
---answers : List Int -> Maybe (Array String) -> (List (Html msg))
---answers ilst lst =
---        case lst of
---            Just lstl ->
---                case (head lstl) of
---                    Just qst ->
---                            (div[class "btn btn-outline-secondary", style "margin-top" "5px"] [text qst]) :: answers (tail lstl)
---                    Nothing ->
---                        []
---            Nothing ->
---                        []
