@@ -31,7 +31,7 @@ type Msg
         | DataReceived (Result Http.Error LearnData)
         | SaveLocalStorage
         | DoLoadLocalStorage
-        | Load Value
+        | Load String
         | ReadDate Date
         | ShuffleLearnProgress LearnProgress
         | RandomizeRandomization (List Int)

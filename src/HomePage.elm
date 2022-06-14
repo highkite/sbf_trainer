@@ -19,7 +19,7 @@ import MenuBar exposing (menuBar)
 import StartUp exposing (startUp)
 
 import Json.Encode as Encode exposing (Value, int, string, object)
-import Json.Decode as JD exposing (Decoder, Error(..), decodeValue, list, string, int)
+import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
 import DataHandler exposing (fetchQuestions, learnProgressDecoder)
 
 import QuestionHandler exposing (questionView)
@@ -28,7 +28,7 @@ import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProg
 
 
 port save : String -> Cmd msg
-port load : (JD.Value -> msg) -> Sub msg
+port load : (String -> msg) -> Sub msg
 port doload : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
@@ -134,9 +134,12 @@ update msg model =
                       (model , doload ())
 
                 Load value ->
-                        case (decodeValue learnProgressDecoder value) of
+                        case (decodeString learnProgressDecoder value) of
                                 Ok val ->
-                                        (populateModel {model | learnProgress = val }, Random.generate ShuffleLearnProgress (shuffle model.learnProgress))
+                                        let
+                                            new_model = {model | learnProgress = val }
+                                        in
+                                        (populateModel new_model, Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress))
                                 Err errMsg ->
                                         case errMsg of
                                                 JD.Field erVal err ->
@@ -151,7 +154,7 @@ update msg model =
                                                         let
                                                             new_model = populateModel model
                                                         in
-                                                                (new_model, Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress))
+                                                        (new_model, Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress))
                                                 _ ->
                                                         (model, Cmd.none)
 
