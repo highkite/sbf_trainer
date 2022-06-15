@@ -6,7 +6,7 @@ import Process
 import Debug
 import Random
 import Task
-import Date exposing (today, toIsoString)
+import Date exposing (today, toIsoString, Unit(..), add, fromIsoString, compare)
 import Http exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -46,6 +46,122 @@ createQuestionLearnProgress lst model =
                                         model
                 Nothing ->
                         model
+
+phaseOneDue : String -> String -> Bool
+phaseOneDue today timestamp =
+        case (fromIsoString today) of
+                Ok today_date ->
+                        case (fromIsoString timestamp) of
+                                Ok ts ->
+                                        Date.compare today_date (add Days 1 ts) == GT
+                                Err value ->
+                                        Debug.log value
+                                        False
+                Err value ->
+                        Debug.log value
+                        False
+
+phaseTwoDue : String -> String -> Bool
+phaseTwoDue today timestamp =
+        case (fromIsoString today) of
+                Ok today_date ->
+                        case (fromIsoString timestamp) of
+                                Ok ts ->
+                                        Date.compare today_date (add Days 3 ts) == GT
+                                Err value ->
+                                        Debug.log value
+                                        False
+                Err value ->
+                        Debug.log value
+                        False
+
+phaseThreeDue : String -> String -> Bool
+phaseThreeDue today timestamp =
+        case (fromIsoString today) of
+                Ok today_date ->
+                        case (fromIsoString timestamp) of
+                                Ok ts ->
+                                        Date.compare today_date (add Days 9 ts) == GT
+                                Err value ->
+                                        Debug.log value
+                                        False
+                Err value ->
+                        Debug.log value
+                        False
+
+phaseFourDue : String -> String -> Bool
+phaseFourDue today timestamp =
+        case (fromIsoString today) of
+                Ok today_date ->
+                        case (fromIsoString timestamp) of
+                                Ok ts ->
+                                        Date.compare today_date (add Days 29 ts) == GT
+                                Err value ->
+                                        Debug.log value
+                                        False
+                Err value ->
+                        Debug.log value
+                        False
+
+phaseFiveDue : String -> String -> Bool
+phaseFiveDue today timestamp =
+        case (fromIsoString today) of
+                Ok today_date ->
+                        case (fromIsoString timestamp) of
+                                Ok ts ->
+                                        Date.compare today_date (add Days 90 ts) == GT
+                                Err value ->
+                                        Debug.log value
+                                        False
+                Err value ->
+                        Debug.log value
+                        False
+
+filterLearnProgress : Model -> Maybe LearnProgress -> LearnProgress
+filterLearnProgress model lpst =
+        case lpst of
+                Just lpstl ->
+                        case (head lpstl) of
+                                Just headel ->
+                                        case headel.level of
+                                                0 ->
+                                                        headel :: filterLearnProgress model (tail lpstl)
+                                                1 ->
+                                                        if phaseOneDue model.currentDate headel.timestamp then
+                                                                Debug.log "level 1 - valid"
+                                                                headel :: filterLearnProgress model (tail lpstl)
+                                                        else
+                                                                Debug.log "level 1 - invalid"
+                                                                filterLearnProgress model (tail lpstl)
+                                                2 ->
+                                                        if phaseTwoDue model.currentDate headel.timestamp then
+                                                                Debug.log "level 2 - valid"
+                                                                headel :: filterLearnProgress model (tail lpstl)
+                                                        else
+                                                                Debug.log "level 2 - invalid"
+                                                                filterLearnProgress model (tail lpstl)
+                                                3 ->
+                                                        if phaseThreeDue model.currentDate headel.timestamp then
+                                                                headel :: filterLearnProgress model (tail lpstl)
+                                                        else
+                                                                filterLearnProgress model (tail lpstl)
+                                                4 ->
+                                                        if phaseFourDue model.currentDate headel.timestamp then
+                                                                headel :: filterLearnProgress model (tail lpstl)
+                                                        else
+                                                                filterLearnProgress model (tail lpstl)
+                                                5 ->
+                                                        if phaseFiveDue model.currentDate headel.timestamp then
+                                                                headel :: filterLearnProgress model (tail lpstl)
+                                                        else
+                                                                filterLearnProgress model (tail lpstl)
+
+                                                _ ->
+                                                        filterLearnProgress model (tail lpstl)
+                                Nothing ->
+                                        []
+                Nothing ->
+                        []
 
 populateModel : Model -> Model
 populateModel model =
@@ -138,8 +254,11 @@ update msg model =
                                 Ok val ->
                                         let
                                             new_model = {model | learnProgress = val }
+                                            populated_model = populateModel new_model
+                                            filtered_list = filterLearnProgress model (Just populated_model.learnProgress)
+                                            model_populated_model = { model | learnProgress = filtered_list }
                                         in
-                                        (populateModel new_model, Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress))
+                                        (model_populated_model, Random.generate ShuffleLearnProgress (shuffle model_populated_model.learnProgress))
                                 Err errMsg ->
                                         case errMsg of
                                                 JD.Field erVal err ->
