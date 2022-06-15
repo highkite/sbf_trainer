@@ -39,8 +39,8 @@ with urllib.request.urlopen(url) as response:
             f.close()
             j += 1
 
+        obj = {"ide": i, "answers": answers, "question": question[0]}
         i += 1
-        obj = {"answers": answers, "question": question[0]}
         if len(image_names) > 0:
             obj["images"] = image_names
         data.append(obj)
