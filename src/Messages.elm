@@ -37,6 +37,8 @@ type Msg
         | RandomizeRandomization (List Int)
         | SelectAnswer Int
         | ShowResultTimeout
+        | ToggleSidePanel
+        | DeleteLearningProgress
 
 type AnswerState
         = Correct
@@ -59,4 +61,5 @@ type alias Model =
         , errorMessage : Maybe String
         , currentDate : String
         , currentQuestion : Maybe CurQuest
+        , showSidePanel : Bool
         }

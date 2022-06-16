@@ -5,13 +5,13 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
-import Messages exposing (CurQuest, Msg(..), AnswerState(..))
+import Messages exposing (CurQuest, Msg(..), AnswerState(..), Model)
 
 import Array exposing (Array, fromList)
-import List exposing (head, tail)
+import List exposing (head, tail, length)
 
-questionView : Maybe CurQuest -> Html Msg
-questionView curQ =
+questionView : Model -> Maybe CurQuest -> Html Msg
+questionView model curQ =
         case curQ of
             Just cq ->
                 div [class "jumbotron d-flex align-items-center min-vh-100"]
@@ -20,14 +20,35 @@ questionView curQ =
                 [div [class "col-12"]
                 [div [class "card text-center"]
                 [div [class "card-body"][
-                        h5 [class "card-title"][text cq.question.question]
+                        div [] [text (String.fromInt (cq.index + 1)), text " / ", text (String.fromInt (length model.learnProgress))]
+                        ,h5 [class "card-title"][text cq.question.question]
+                        , div [] [span [class "badge bg-secondary"] [text "Level: ", text (String.fromInt cq.progress.level)]]
+                        ,if length cq.question.images > 0 then
+                            div [] (showImages (Just cq.question.images))
+                        else
+                            text ""
                         ,p [class "card-text"][
                                 text "Wähle unter den folgenden Antworten aus:"
                         ]
                         , div[] (answersq (Just cq.randomization) cq cq.question.answers)
-                ]]]]]]
+                ]]]]
+                ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", href "/"] [text "Zurück"]]]
+                ]]
             Nothing ->
                 text "No question available"
+
+showImages : Maybe (List String) -> List (Html msg)
+showImages lst =
+    case lst of
+        Just lstl ->
+            case (head lstl) of
+                Just headel ->
+                    (img [src ("data_collector/" ++ headel)] []) :: showImages (tail lstl)
+                Nothing ->
+                    []
+        Nothing ->
+            []
+
 
 answersq : Maybe (List Int) -> CurQuest -> List String -> (List (Html Msg))
 answersq lst cq lstans =
@@ -40,13 +61,13 @@ answersq lst cq lstans =
                             if hl == 0 then
                                 case cq.correct of
                                     Correct ->
-                                        (div[class "btn btn-outline-secondary bg-success", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                                        (div[class "btn btn-outline-secondary bg-success", style "margin-top" "5px", onClick (SelectAnswer hl)] [text val]) :: answersq (tail lstl) cq lstans
                                     Incorrect ->
-                                        (div[class "btn btn-outline-secondary bg-danger", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                                        (div[class "btn btn-outline-secondary bg-danger", style "margin-top" "5px", onClick (SelectAnswer hl)] [text val]) :: answersq (tail lstl) cq lstans
                                     NotSet ->
-                                        (div[class "btn btn-outline-secondary", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                                        (div[class "btn btn-outline-secondary", style "margin-top" "5px", onClick (SelectAnswer hl)] [text val]) :: answersq (tail lstl) cq lstans
                             else
-                                (div[class "btn btn-outline-secondary", style "margin-top" "5px", onClick (SelectAnswer hl)] [text ((String.fromInt hl) ++ val)]) :: answersq (tail lstl) cq lstans
+                                (div[class "btn btn-outline-secondary", style "margin-top" "5px", onClick (SelectAnswer hl)] [text val]) :: answersq (tail lstl) cq lstans
                         Nothing ->
                             []
                 Nothing ->

@@ -22,6 +22,8 @@ import Json.Encode as Encode exposing (Value, int, string, object)
 import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
 import DataHandler exposing (fetchQuestions, learnProgressDecoder)
 
+import SideNav exposing (nav)
+
 import QuestionHandler exposing (questionView)
 
 import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProgress, Question, LearnProgress, AnswerState(..))
@@ -33,7 +35,7 @@ port doload : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing}, today |> Task.perform ReadDate)
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False}, today |> Task.perform ReadDate)
 
 createQuestionLearnProgress : Maybe (List Question) -> Model -> Model
 createQuestionLearnProgress lst model =
@@ -198,7 +200,11 @@ view model =
                 0 ->
                         div []
                         [
-                                menuBar
+                                if model.showSidePanel then
+                                        SideNav.nav model
+                                else
+                                        text ""
+                                ,menuBar
                                 ,startUp model
                                 ,case model.errorMessage of
                                         Just message ->
@@ -209,8 +215,12 @@ view model =
                 1 ->
                         div []
                         [
-                                menuBar
-                                ,questionView model.currentQuestion
+                                if model.showSidePanel then
+                                        SideNav.nav model
+                                else
+                                        text ""
+                                ,menuBar
+                                ,questionView model model.currentQuestion
                         ]
                 _ ->
                         div []
@@ -219,10 +229,25 @@ view model =
                                 ,text ("Gello")
                         ]
 
+invertBool : Bool -> Bool
+invertBool value =
+        if value == True then
+                False
+        else
+                True
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
         case msg of
+                ToggleSidePanel ->
+                        ({ model | showSidePanel = invertBool model.showSidePanel }, Cmd.none)
+
+                DeleteLearningProgress ->
+                        let
+                            new_model = { model | learnProgress = [], showSidePanel = False}
+                        in
+                        (new_model , save (Encode.encode 0 (encodeJSON new_model.learnProgress)))
+
                 StartUpView ->
                         ({ model | page_state = 0 }, Cmd.none)
 
