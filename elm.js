@@ -6352,10 +6352,30 @@ var $author$project$Messages$Question = F4(
 	function (ide, question, answers, images) {
 		return {answers: answers, ide: ide, images: images, question: question};
 	});
+var $author$project$Messages$Id = F2(
+	function (ide, questionType) {
+		return {ide: ide, questionType: questionType};
+	});
 var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom = $elm$json$Json$Decode$map2($elm$core$Basics$apR);
-var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $elm$json$Json$Decode$field = _Json_decodeField;
+var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
+	function (key, valDecoder, decoder) {
+		return A2(
+			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom,
+			A2($elm$json$Json$Decode$field, key, valDecoder),
+			decoder);
+	});
+var $author$project$DataHandler$idDecoder = A3(
+	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+	'questionType',
+	$elm$json$Json$Decode$int,
+	A3(
+		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+		'ide',
+		$elm$json$Json$Decode$int,
+		$elm$json$Json$Decode$succeed($author$project$Messages$Id)));
+var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
@@ -6412,13 +6432,6 @@ var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$optional = F4(
 				fallback),
 			decoder);
 	});
-var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
-	function (key, valDecoder, decoder) {
-		return A2(
-			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom,
-			A2($elm$json$Json$Decode$field, key, valDecoder),
-			decoder);
-	});
 var $elm$json$Json$Decode$string = _Json_decodeString;
 var $author$project$DataHandler$questionDecoder = A4(
 	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$optional,
@@ -6436,10 +6449,10 @@ var $author$project$DataHandler$questionDecoder = A4(
 			A3(
 				$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 				'ide',
-				$elm$json$Json$Decode$int,
+				$author$project$DataHandler$idDecoder,
 				$elm$json$Json$Decode$succeed($author$project$Messages$Question)))));
 var $author$project$DataHandler$learnDataDecoder = $elm$json$Json$Decode$list($author$project$DataHandler$questionDecoder);
-var $author$project$DataHandler$url = 'https://highkite.github.io/sbf_trainer/data_collector/data.json';
+var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/data.json';
 var $author$project$DataHandler$fetchQuestions = $elm$http$Http$get(
 	{
 		expect: A2($elm$http$Http$expectJson, $author$project$Messages$DataReceived, $author$project$DataHandler$learnDataDecoder),
@@ -7095,6 +7108,18 @@ var $elm$json$Json$Encode$object = function (pairs) {
 			_Json_emptyObject(_Utils_Tuple0),
 			pairs));
 };
+var $author$project$HomePage$encodeID = function (id) {
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'ide',
+				$elm$json$Json$Encode$int(id.ide)),
+				_Utils_Tuple2(
+				'questionType',
+				$elm$json$Json$Encode$int(id.questionType))
+			]));
+};
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$HomePage$encodeQJSON = function (lp) {
 	return $elm$json$Json$Encode$object(
@@ -7102,7 +7127,7 @@ var $author$project$HomePage$encodeQJSON = function (lp) {
 			[
 				_Utils_Tuple2(
 				'ide',
-				$elm$json$Json$Encode$int(lp.ide)),
+				$author$project$HomePage$encodeID(lp.ide)),
 				_Utils_Tuple2(
 				'level',
 				$elm$json$Json$Encode$int(lp.level)),
@@ -8315,7 +8340,7 @@ var $author$project$DataHandler$questionProgressDecoder = A3(
 		A3(
 			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 			'ide',
-			$elm$json$Json$Decode$int,
+			$author$project$DataHandler$idDecoder,
 			$elm$json$Json$Decode$succeed($author$project$Messages$QuestionLearnProgress))));
 var $author$project$DataHandler$learnProgressDecoder = $elm$json$Json$Decode$list($author$project$DataHandler$questionProgressDecoder);
 var $elm$core$Debug$log = _Debug_log;
@@ -9887,6 +9912,10 @@ var $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute = F2(
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueMax = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuemax');
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueMin = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuemin');
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueNow = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuenow');
+var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
 var $author$project$StartUp$procentualLearnProgress = function (lst) {
 	procentualLearnProgress:
 	while (true) {
@@ -9912,6 +9941,7 @@ var $author$project$StartUp$procentualLearnProgress = function (lst) {
 	}
 };
 var $elm$html$Html$small = _VirtualDom_node('small');
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$StartUp$startUp = function (model) {
 	var p_prog = $author$project$StartUp$procentualLearnProgress(
 		$elm$core$Maybe$Just(model.learnProgress));
@@ -9984,6 +10014,82 @@ var $author$project$StartUp$startUp = function (model) {
 															]),
 														_List_fromArray(
 															[
+																A2(
+																$elm$html$Html$p,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$input,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$type_('checkbox'),
+																				$elm$html$Html$Attributes$class('form-check-input'),
+																				$elm$html$Html$Attributes$id('cbx_example_check_1')
+																			]),
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Sail')
+																			])),
+																		A2(
+																		$elm$html$Html$label,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$class('form-check-label'),
+																				$elm$html$Html$Attributes$for('cbx_example_check_1')
+																			]),
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$span,
+																				_List_fromArray(
+																					[
+																						A2($elm$html$Html$Attributes$style, 'padding-left', '10px')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Spezifische Fragen Binnen')
+																					]))
+																			]))
+																	])),
+																A2(
+																$elm$html$Html$p,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$input,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$type_('checkbox'),
+																				$elm$html$Html$Attributes$class('form-check-input'),
+																				$elm$html$Html$Attributes$id('cbx_example_check_2')
+																			]),
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Sail')
+																			])),
+																		A2(
+																		$elm$html$Html$label,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$class('form-check-label'),
+																				$elm$html$Html$Attributes$for('cbx_example_check_2')
+																			]),
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$span,
+																				_List_fromArray(
+																					[
+																						A2($elm$html$Html$Attributes$style, 'padding-left', '10px')
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Spezifische Fragen Segeln')
+																					]))
+																			]))
+																	])),
 																A2(
 																$elm$html$Html$p,
 																_List_Nil,

@@ -1,12 +1,17 @@
-module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress, CurQuest, AnswerState(..))
+module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress, CurQuest, AnswerState(..), Id)
 import Json.Decode as JD exposing (Value)
 
 import Date exposing (Date)
 
 import Http
 
-type alias Question = {
+type alias Id = {
         ide : Int
+        ,questionType : Int
+        }
+
+type alias Question = {
+        ide : Id
         , question : String
         , answers : List String
         , images : List String
@@ -16,7 +21,7 @@ type alias LearnData =
         List Question
 
 type alias QuestionLearnProgress = {
-        ide : Int
+        ide : Id
         ,level : Int
         ,timestamp : String
         }

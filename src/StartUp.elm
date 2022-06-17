@@ -25,6 +25,14 @@ startUp model =
                 h5 [class "card-title"][text "SBF Binnen Training"]
                 ,p [class "card-text"][
                         p [] [
+                                input [type_ "checkbox", class "form-check-input", id "cbx_example_check_1"] [text "Sail"]
+                                ,label [class "form-check-label", for "cbx_example_check_1"] [span [style "padding-left" "10px"] [text "Spezifische Fragen Binnen"]]
+                        ]
+                        ,p [] [
+                                input [type_ "checkbox", class "form-check-input", id "cbx_example_check_2"] [text "Sail"]
+                                ,label [class "form-check-label", for "cbx_example_check_2"] [span [style "padding-left" "10px"] [text "Spezifische Fragen Segeln"]]
+                        ]
+                        ,p [] [
                                 text ("Available questions: " ++ String.fromInt (length model.learnData))
                         ]
                         ,p [] [

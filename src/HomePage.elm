@@ -26,7 +26,7 @@ import SideNav exposing (nav)
 
 import QuestionHandler exposing (questionView)
 
-import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProgress, Question, LearnProgress, AnswerState(..))
+import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProgress, Question, LearnProgress, AnswerState(..), Id)
 
 
 port save : String -> Cmd msg
@@ -428,10 +428,17 @@ chooseQuestion model =
                                         Nothing ->
                                                 ({ model | currentQuestion = Nothing}, Cmd.none)
 
+encodeID : Id -> Encode.Value
+encodeID id =
+        Encode.object
+        [ ("ide", Encode.int id.ide)
+        , ("questionType", Encode.int id.questionType)
+        ]
+
 encodeQJSON : QuestionLearnProgress -> Encode.Value
 encodeQJSON lp =
         Encode.object
-                [ ("ide", Encode.int lp.ide)
+                [ ("ide", encodeID lp.ide)
                 , ("level", Encode.int lp.level)
                 , ("timestamp", Encode.string lp.timestamp)
                 ]
