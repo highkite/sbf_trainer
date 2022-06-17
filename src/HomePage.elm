@@ -57,10 +57,8 @@ phaseOneDue today timestamp =
                                 Ok ts ->
                                         Date.compare today_date (add Days 1 ts) == GT
                                 Err value ->
-                                        Debug.log value
                                         False
                 Err value ->
-                        Debug.log value
                         False
 
 phaseTwoDue : String -> String -> Bool
@@ -71,10 +69,8 @@ phaseTwoDue today timestamp =
                                 Ok ts ->
                                         Date.compare today_date (add Days 3 ts) == GT
                                 Err value ->
-                                        Debug.log value
                                         False
                 Err value ->
-                        Debug.log value
                         False
 
 phaseThreeDue : String -> String -> Bool
@@ -85,10 +81,8 @@ phaseThreeDue today timestamp =
                                 Ok ts ->
                                         Date.compare today_date (add Days 9 ts) == GT
                                 Err value ->
-                                        Debug.log value
                                         False
                 Err value ->
-                        Debug.log value
                         False
 
 phaseFourDue : String -> String -> Bool
@@ -99,10 +93,8 @@ phaseFourDue today timestamp =
                                 Ok ts ->
                                         Date.compare today_date (add Days 29 ts) == GT
                                 Err value ->
-                                        Debug.log value
                                         False
                 Err value ->
-                        Debug.log value
                         False
 
 phaseFiveDue : String -> String -> Bool
@@ -113,10 +105,8 @@ phaseFiveDue today timestamp =
                                 Ok ts ->
                                         Date.compare today_date (add Days 90 ts) == GT
                                 Err value ->
-                                        Debug.log value
                                         False
                 Err value ->
-                        Debug.log value
                         False
 
 filterLearnProgress : Model -> Maybe LearnProgress -> LearnProgress
@@ -130,17 +120,13 @@ filterLearnProgress model lpst =
                                                         headel :: filterLearnProgress model (tail lpstl)
                                                 1 ->
                                                         if phaseOneDue model.currentDate headel.timestamp then
-                                                                Debug.log "level 1 - valid"
                                                                 headel :: filterLearnProgress model (tail lpstl)
                                                         else
-                                                                Debug.log "level 1 - invalid"
                                                                 filterLearnProgress model (tail lpstl)
                                                 2 ->
                                                         if phaseTwoDue model.currentDate headel.timestamp then
-                                                                Debug.log "level 2 - valid"
                                                                 headel :: filterLearnProgress model (tail lpstl)
                                                         else
-                                                                Debug.log "level 2 - invalid"
                                                                 filterLearnProgress model (tail lpstl)
                                                 3 ->
                                                         if phaseThreeDue model.currentDate headel.timestamp then
