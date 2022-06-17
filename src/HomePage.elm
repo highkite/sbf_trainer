@@ -35,7 +35,7 @@ port doload : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False}, today |> Task.perform ReadDate)
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False}, Cmd.batch [today |> Task.perform ReadDate, fetchQuestions, doload()])
 
 createQuestionLearnProgress : Maybe (List Question) -> Model -> Model
 createQuestionLearnProgress lst model =
@@ -238,7 +238,12 @@ update msg model =
                         ({ model | page_state = 0 }, Cmd.none)
 
                 GelloView ->
-                        ({ model | page_state = 1 }, Cmd.none)
+                        let
+                            populated_model = populateModel model
+                            filtered_list = filterLearnProgress model (Just populated_model.learnProgress)
+                            model_populated_model = { model | learnProgress = filtered_list, page_state = 1}
+                        in
+                        (model_populated_model, Random.generate ShuffleLearnProgress (shuffle model_populated_model.learnProgress))
 
                 ReadDate time ->
                         ({ model | currentDate = toIsoString time }, Cmd.none)
@@ -247,7 +252,7 @@ update msg model =
                         (model, fetchQuestions)
 
                 DataReceived (Ok learningData) ->
-                        ({ model | learnData = learningData,page_state = 1 }, doload() )
+                        ({ model | learnData = learningData }, Cmd.none )
 
                 DataReceived (Err httpError) ->
                         ( { model | errorMessage = Just (buildErrorMessage httpError) }
@@ -335,7 +340,7 @@ update msg model =
                                                     new_learn_progress = resetLevel (Just model.learnProgress) model cq
                                                 in
                                                 --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
-                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 500 |> Task.perform (always ShowResultTimeout) ])
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 1500 |> Task.perform (always ShowResultTimeout) ])
                                 Nothing ->
                                         (model, Cmd.none)
 

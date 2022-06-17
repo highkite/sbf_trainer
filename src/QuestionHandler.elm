@@ -35,7 +35,19 @@ questionView model curQ =
                 ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", href "/"] [text "Zurück"]]]
                 ]]
             Nothing ->
-                text "No question available"
+                div [class "jumbotron d-flex align-items-center min-vh-100"] [
+                    div [class "container"] [
+                        div [class "row"] [
+                            div [class "col-12"] [
+                                div [class "card text-center"] [
+                                    div [class "card-body"][
+                                        h5 [class "card-title"][text "No questions available"]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
 
 showImages : Maybe (List String) -> List (Html msg)
 showImages lst =
