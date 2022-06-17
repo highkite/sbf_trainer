@@ -33,7 +33,12 @@
 			    });
 			    app.ports.doload.subscribe(function() {
 					let data = localStorage.getItem(storageKey);
-			      app.ports.load.send(data);
+							    if (data === null) {
+							      localStorage.setItem(storageKey, "[]");
+							      app.ports.load.send("[]");
+							    } else {
+							      app.ports.load.send(data);
+							    }
 			    });
 		</script>
 
