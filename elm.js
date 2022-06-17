@@ -6439,7 +6439,7 @@ var $author$project$DataHandler$questionDecoder = A4(
 				$elm$json$Json$Decode$int,
 				$elm$json$Json$Decode$succeed($author$project$Messages$Question)))));
 var $author$project$DataHandler$learnDataDecoder = $elm$json$Json$Decode$list($author$project$DataHandler$questionDecoder);
-var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/data.json';
+var $author$project$DataHandler$url = 'https://highkite.github.io/sbf_trainer/data_collector/data.json';
 var $author$project$DataHandler$fetchQuestions = $elm$http$Http$get(
 	{
 		expect: A2($elm$http$Http$expectJson, $author$project$Messages$DataReceived, $author$project$DataHandler$learnDataDecoder),
