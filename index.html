@@ -25,21 +25,35 @@
 		<script src="elm.js"></script>
 		<script>
 			var app = Elm.HomePage.init({
-							node: document.getElementById("elm-app-is-loaded-here")
-						});
+				node: document.getElementById("elm-app-is-loaded-here")
+			});
 			  var storageKey = "learnProgress";
+			  var configKey = "config"
 			    app.ports.save.subscribe(function(value) {
 			      localStorage.setItem(storageKey, value);
 			    });
+			app.ports.saveConfig.subscribe(function(value) {
+				localStorage.setItem(configKey, value)
+						})
+
 			    app.ports.doload.subscribe(function() {
-					let data = localStorage.getItem(storageKey);
-							    if (data === null) {
-							      localStorage.setItem(storageKey, "[]");
-							      app.ports.load.send("[]");
-							    } else {
-							      app.ports.load.send(data);
-							    }
+				let data = localStorage.getItem(storageKey);
+				    if (data === null) {
+				      localStorage.setItem(storageKey, "[]");
+				      app.ports.load.send("[]");
+				    } else {
+				      app.ports.load.send(data);
+				    }
 			    });
+			    app.ports.doloadConfig.subscribe(function() {
+				let data = localStorage.getItem(configKey);
+				    if (data === null) {
+					    localStorage.setItem(storageKey, "{\"spez_fragen_binnen\": false, \"spez_fragen_segeln\": false}");
+					    app.ports.loadConfig.send("{\"spez_fragen_binnen\": false, \"spez_fragen_segeln\": false}");
+				    } else {
+				      app.ports.loadConfig.send(data);
+				    }
+						    })
 		</script>
 
 

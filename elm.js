@@ -5557,6 +5557,11 @@ var $author$project$HomePage$doload = _Platform_outgoingPort(
 	function ($) {
 		return $elm$json$Json$Encode$null;
 	});
+var $author$project$HomePage$doloadConfig = _Platform_outgoingPort(
+	'doloadConfig',
+	function ($) {
+		return $elm$json$Json$Encode$null;
+	});
 var $author$project$Messages$DataReceived = function (a) {
 	return {$: 'DataReceived', a: a};
 };
@@ -6691,21 +6696,41 @@ var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
 var $justinmimbs$date$Date$today = A3($elm$core$Task$map2, $justinmimbs$date$Date$fromPosix, $elm$time$Time$here, $elm$time$Time$now);
 var $author$project$HomePage$initialModel = function (_v0) {
 	return _Utils_Tuple2(
-		{currentDate: '', currentQuestion: $elm$core$Maybe$Nothing, errorMessage: $elm$core$Maybe$Nothing, learnData: _List_Nil, learnProgress: _List_Nil, page_state: 0, showSidePanel: false},
+		{
+			config: {spez_fragen_binnen: false, spez_fragen_segeln: false},
+			currentDate: '',
+			currentQuestion: $elm$core$Maybe$Nothing,
+			errorMessage: $elm$core$Maybe$Nothing,
+			learnData: _List_Nil,
+			learnProgress: _List_Nil,
+			page_state: 0,
+			showSidePanel: false
+		},
 		$elm$core$Platform$Cmd$batch(
 			_List_fromArray(
 				[
 					A2($elm$core$Task$perform, $author$project$Messages$ReadDate, $justinmimbs$date$Date$today),
 					$author$project$DataHandler$fetchQuestions,
-					$author$project$HomePage$doload(_Utils_Tuple0)
+					$author$project$HomePage$doload(_Utils_Tuple0),
+					$author$project$HomePage$doloadConfig(_Utils_Tuple0)
 				])));
 };
 var $author$project$Messages$Load = function (a) {
 	return {$: 'Load', a: a};
 };
+var $author$project$Messages$LoadConfig = function (a) {
+	return {$: 'LoadConfig', a: a};
+};
+var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $author$project$HomePage$load = _Platform_incomingPort('load', $elm$json$Json$Decode$string);
+var $author$project$HomePage$loadConfig = _Platform_incomingPort('loadConfig', $elm$json$Json$Decode$string);
 var $author$project$HomePage$subscriptions = function (model) {
-	return $author$project$HomePage$load($author$project$Messages$Load);
+	return $elm$core$Platform$Sub$batch(
+		_List_fromArray(
+			[
+				$author$project$HomePage$load($author$project$Messages$Load),
+				$author$project$HomePage$loadConfig($author$project$Messages$LoadConfig)
+			]));
 };
 var $author$project$Messages$Correct = {$: 'Correct'};
 var $author$project$Messages$Incorrect = {$: 'Incorrect'};
@@ -7094,7 +7119,21 @@ var $author$project$HomePage$chooseQuestion = function (model) {
 		}
 	}
 };
-var $elm$json$Json$Encode$int = _Json_wrap;
+var $author$project$Messages$Config = F2(
+	function (spez_fragen_binnen, spez_fragen_segeln) {
+		return {spez_fragen_binnen: spez_fragen_binnen, spez_fragen_segeln: spez_fragen_segeln};
+	});
+var $elm$json$Json$Decode$bool = _Json_decodeBool;
+var $author$project$DataHandler$configDecoder = A3(
+	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+	'spez_fragen_segeln',
+	$elm$json$Json$Decode$bool,
+	A3(
+		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+		'spez_fragen_binnen',
+		$elm$json$Json$Decode$bool,
+		$elm$json$Json$Decode$succeed($author$project$Messages$Config)));
+var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -7108,6 +7147,19 @@ var $elm$json$Json$Encode$object = function (pairs) {
 			_Json_emptyObject(_Utils_Tuple0),
 			pairs));
 };
+var $author$project$HomePage$encodeConfig = function (cfg) {
+	return $elm$json$Json$Encode$object(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				'spez_fragen_binnen',
+				$elm$json$Json$Encode$bool(cfg.spez_fragen_binnen)),
+				_Utils_Tuple2(
+				'spez_fragen_segeln',
+				$elm$json$Json$Encode$bool(cfg.spez_fragen_segeln))
+			]));
+};
+var $elm$json$Json$Encode$int = _Json_wrap;
 var $author$project$HomePage$encodeID = function (id) {
 	return $elm$json$Json$Encode$object(
 		_List_fromArray(
@@ -8428,6 +8480,7 @@ var $author$project$HomePage$resetLevel = F3(
 		}
 	});
 var $author$project$HomePage$save = _Platform_outgoingPort('save', $elm$json$Json$Encode$string);
+var $author$project$HomePage$saveConfig = _Platform_outgoingPort('saveConfig', $elm$json$Json$Encode$string);
 var $elm$core$Process$sleep = _Process_sleep;
 var $justinmimbs$date$Date$day = A2(
 	$elm$core$Basics$composeR,
@@ -9140,15 +9193,102 @@ var $author$project$HomePage$update = F2(
 							$elm$json$Json$Encode$encode,
 							0,
 							$author$project$HomePage$encodeJSON(model.learnProgress))));
+			case 'ToggleSpezBinnen':
+				var cfg = model.config;
+				var new_config = _Utils_update(
+					cfg,
+					{
+						spez_fragen_binnen: $author$project$HomePage$invertBool(model.config.spez_fragen_binnen)
+					});
+				var new_model = _Utils_update(
+					model,
+					{config: new_config});
+				return _Utils_Tuple2(
+					new_model,
+					$author$project$HomePage$saveConfig(
+						A2(
+							$elm$json$Json$Encode$encode,
+							0,
+							$author$project$HomePage$encodeConfig(new_model.config))));
+			case 'ToggleSpezSegeln':
+				var cfg = model.config;
+				var new_config = _Utils_update(
+					cfg,
+					{
+						spez_fragen_segeln: $author$project$HomePage$invertBool(model.config.spez_fragen_segeln)
+					});
+				var new_model = _Utils_update(
+					model,
+					{config: new_config});
+				return _Utils_Tuple2(
+					new_model,
+					$author$project$HomePage$saveConfig(
+						A2(
+							$elm$json$Json$Encode$encode,
+							0,
+							$author$project$HomePage$encodeConfig(new_model.config))));
+			case 'SaveConfig':
+				return _Utils_Tuple2(
+					model,
+					$author$project$HomePage$saveConfig(
+						A2(
+							$elm$json$Json$Encode$encode,
+							0,
+							$author$project$HomePage$encodeConfig(model.config))));
 			case 'DoLoadLocalStorage':
 				return _Utils_Tuple2(
 					model,
 					$author$project$HomePage$doload(_Utils_Tuple0));
-			case 'Load':
+			case 'DoLoadConfig':
+				return _Utils_Tuple2(
+					model,
+					$author$project$HomePage$doloadConfig(_Utils_Tuple0));
+			case 'LoadConfig':
 				var value = msg.a;
-				var _v1 = A2($elm$json$Json$Decode$decodeString, $author$project$DataHandler$learnProgressDecoder, value);
+				var _v1 = A2($elm$json$Json$Decode$decodeString, $author$project$DataHandler$configDecoder, value);
 				if (_v1.$ === 'Ok') {
 					var val = _v1.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{config: val}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var errMsg = _v1.a;
+					switch (errMsg.$) {
+						case 'Field':
+							var erVal = errMsg.a;
+							var err = errMsg.b;
+							return A2(
+								$elm$core$Debug$log,
+								'Error when loading config',
+								_Utils_Tuple2(model, $elm$core$Platform$Cmd$none));
+						case 'Index':
+							var nbr = errMsg.a;
+							var err = errMsg.b;
+							return A2(
+								$elm$core$Debug$log,
+								'Error when loading config',
+								_Utils_Tuple2(model, $elm$core$Platform$Cmd$none));
+						case 'Failure':
+							var erVal = errMsg.a;
+							var val = errMsg.b;
+							return _Utils_Tuple2(
+								_Utils_update(
+									model,
+									{
+										config: {spez_fragen_binnen: false, spez_fragen_segeln: false}
+									}),
+								$elm$core$Platform$Cmd$none);
+						default:
+							return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					}
+				}
+			case 'Load':
+				var value = msg.a;
+				var _v3 = A2($elm$json$Json$Decode$decodeString, $author$project$DataHandler$learnProgressDecoder, value);
+				if (_v3.$ === 'Ok') {
+					var val = _v3.a;
 					var new_model = _Utils_update(
 						model,
 						{learnProgress: val});
@@ -9167,7 +9307,7 @@ var $author$project$HomePage$update = F2(
 							$author$project$Messages$ShuffleLearnProgress,
 							$elm_community$random_extra$Random$List$shuffle(model_populated_model.learnProgress)));
 				} else {
-					var errMsg = _v1.a;
+					var errMsg = _v3.a;
 					switch (errMsg.$) {
 						case 'Field':
 							var erVal = errMsg.a;
@@ -9205,9 +9345,9 @@ var $author$project$HomePage$update = F2(
 				return $author$project$HomePage$chooseQuestion(new_model);
 			case 'RandomizeRandomization':
 				var lst = msg.a;
-				var _v3 = model.currentQuestion;
-				if (_v3.$ === 'Just') {
-					var val = _v3.a;
+				var _v5 = model.currentQuestion;
+				if (_v5.$ === 'Just') {
+					var val = _v5.a;
 					var new_val = _Utils_update(
 						val,
 						{randomization: lst});
@@ -9222,9 +9362,9 @@ var $author$project$HomePage$update = F2(
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
 			case 'ShowResultTimeout':
-				var _v4 = model.currentQuestion;
-				if (_v4.$ === 'Just') {
-					var cq = _v4.a;
+				var _v6 = model.currentQuestion;
+				if (_v6.$ === 'Just') {
+					var cq = _v6.a;
 					var new_cq = _Utils_update(
 						cq,
 						{correct: $author$project$Messages$NotSet});
@@ -9239,9 +9379,9 @@ var $author$project$HomePage$update = F2(
 				}
 			default:
 				var index = msg.a;
-				var _v5 = model.currentQuestion;
-				if (_v5.$ === 'Just') {
-					var cq = _v5.a;
+				var _v7 = model.currentQuestion;
+				if (_v7.$ === 'Just') {
+					var cq = _v7.a;
 					if (!index) {
 						var new_learn_progress = A3(
 							$author$project$HomePage$increaseLevel,
@@ -9893,6 +10033,8 @@ var $author$project$QuestionHandler$questionView = F2(
 		}
 	});
 var $author$project$Messages$GelloView = {$: 'GelloView'};
+var $author$project$Messages$ToggleSpezBinnen = {$: 'ToggleSpezBinnen'};
+var $author$project$Messages$ToggleSpezSegeln = {$: 'ToggleSpezSegeln'};
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -9912,6 +10054,14 @@ var $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute = F2(
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueMax = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuemax');
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueMin = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuemin');
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueNow = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuenow');
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
 var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$input = _VirtualDom_node('input');
@@ -10025,7 +10175,9 @@ var $author$project$StartUp$startUp = function (model) {
 																			[
 																				$elm$html$Html$Attributes$type_('checkbox'),
 																				$elm$html$Html$Attributes$class('form-check-input'),
-																				$elm$html$Html$Attributes$id('cbx_example_check_1')
+																				$elm$html$Html$Attributes$id('cbx_example_check_1'),
+																				$elm$html$Html$Attributes$checked(model.config.spez_fragen_binnen),
+																				$elm$html$Html$Events$onClick($author$project$Messages$ToggleSpezBinnen)
 																			]),
 																		_List_fromArray(
 																			[
@@ -10063,7 +10215,9 @@ var $author$project$StartUp$startUp = function (model) {
 																			[
 																				$elm$html$Html$Attributes$type_('checkbox'),
 																				$elm$html$Html$Attributes$class('form-check-input'),
-																				$elm$html$Html$Attributes$id('cbx_example_check_2')
+																				$elm$html$Html$Attributes$id('cbx_example_check_2'),
+																				$elm$html$Html$Attributes$checked(model.config.spez_fragen_segeln),
+																				$elm$html$Html$Events$onClick($author$project$Messages$ToggleSpezSegeln)
 																			]),
 																		_List_fromArray(
 																			[

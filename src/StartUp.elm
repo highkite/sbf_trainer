@@ -25,11 +25,11 @@ startUp model =
                 h5 [class "card-title"][text "SBF Binnen Training"]
                 ,p [class "card-text"][
                         p [] [
-                                input [type_ "checkbox", class "form-check-input", id "cbx_example_check_1"] [text "Sail"]
+                                input [type_ "checkbox", class "form-check-input", id "cbx_example_check_1", checked model.config.spez_fragen_binnen, onClick ToggleSpezBinnen] [text "Sail"]
                                 ,label [class "form-check-label", for "cbx_example_check_1"] [span [style "padding-left" "10px"] [text "Spezifische Fragen Binnen"]]
                         ]
                         ,p [] [
-                                input [type_ "checkbox", class "form-check-input", id "cbx_example_check_2"] [text "Sail"]
+                                input [type_ "checkbox", class "form-check-input", id "cbx_example_check_2", checked model.config.spez_fragen_segeln, onClick ToggleSpezSegeln] [text "Sail"]
                                 ,label [class "form-check-label", for "cbx_example_check_2"] [span [style "padding-left" "10px"] [text "Spezifische Fragen Segeln"]]
                         ]
                         ,p [] [

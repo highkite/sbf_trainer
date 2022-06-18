@@ -1,4 +1,4 @@
-port module HomePage exposing (main, save, doload)
+port module HomePage exposing (main, save, doload, doloadConfig, saveConfig)
 
 import Browser
 
@@ -20,22 +20,25 @@ import StartUp exposing (startUp)
 
 import Json.Encode as Encode exposing (Value, int, string, object)
 import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
-import DataHandler exposing (fetchQuestions, learnProgressDecoder)
+import DataHandler exposing (fetchQuestions, learnProgressDecoder, configDecoder)
 
 import SideNav exposing (nav)
 
 import QuestionHandler exposing (questionView)
 
-import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProgress, Question, LearnProgress, AnswerState(..), Id)
+import Messages exposing (Msg(..), LearnData, Model, CurQuest, QuestionLearnProgress, Question, LearnProgress, AnswerState(..), Id, Config)
 
 
 port save : String -> Cmd msg
+port saveConfig : String -> Cmd msg
 port load : (String -> msg) -> Sub msg
+port loadConfig : (String -> msg) -> Sub msg
 port doload : () -> Cmd msg
+port doloadConfig : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False}, Cmd.batch [today |> Task.perform ReadDate, fetchQuestions, doload()])
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, fetchQuestions, doload(), doloadConfig()])
 
 createQuestionLearnProgress : Maybe (List Question) -> Model -> Model
 createQuestionLearnProgress lst model =
@@ -262,8 +265,49 @@ update msg model =
                 SaveLocalStorage ->
                       (model , save (Encode.encode 0 (encodeJSON model.learnProgress)))
 
+                ToggleSpezBinnen ->
+                        let
+                            cfg = model.config
+                            new_config = {cfg | spez_fragen_binnen = invertBool model.config.spez_fragen_binnen}
+                            new_model = {model | config = new_config}
+                        in
+                        (new_model, saveConfig (Encode.encode 0 (encodeConfig new_model.config)))
+
+                ToggleSpezSegeln ->
+                        let
+                            cfg = model.config
+                            new_config = {cfg | spez_fragen_segeln = invertBool model.config.spez_fragen_segeln}
+                            new_model = {model | config = new_config}
+                        in
+                        (new_model, saveConfig (Encode.encode 0 (encodeConfig new_model.config)))
+
+                SaveConfig ->
+                        (model, saveConfig (Encode.encode 0 (encodeConfig model.config)))
+
                 DoLoadLocalStorage ->
                       (model , doload ())
+
+                DoLoadConfig ->
+                        (model, doloadConfig())
+
+                LoadConfig value ->
+                        case (decodeString configDecoder value) of
+                                Ok val ->
+                                      ({ model | config = val }, Cmd.none)
+                                Err errMsg ->
+                                        case errMsg of
+                                                JD.Field erVal err ->
+                                                        Debug.log "Error when loading config"
+                                                        (model, Cmd.none)
+
+                                                JD.Index nbr err ->
+                                                        Debug.log "Error when loading config"
+                                                        (model, Cmd.none)
+
+                                                JD.Failure erVal val ->
+                                                      ({ model | config = {spez_fragen_binnen = False, spez_fragen_segeln = False} }, Cmd.none)
+                                                _ ->
+                                                        (model, Cmd.none)
 
                 Load value ->
                         case (decodeString learnProgressDecoder value) of
@@ -443,6 +487,13 @@ encodeQJSON lp =
                 , ("timestamp", Encode.string lp.timestamp)
                 ]
 
+encodeConfig : Config -> Encode.Value
+encodeConfig cfg =
+        Encode.object
+                [ ("spez_fragen_binnen", Encode.bool cfg.spez_fragen_binnen)
+                , ("spez_fragen_segeln", Encode.bool cfg.spez_fragen_segeln)
+                ]
+
 encodeJSON : LearnProgress -> Encode.Value
 encodeJSON lp =
         Encode.list encodeQJSON lp
@@ -478,7 +529,7 @@ buildErrorMessage httpError =
             message
 
 subscriptions : Model -> Sub Msg
-subscriptions model = load Load
+subscriptions model = Sub.batch [load Load, loadConfig LoadConfig]
 
 main : Program () Model Msg
 main =

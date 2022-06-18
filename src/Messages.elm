@@ -1,9 +1,14 @@
-module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress, CurQuest, AnswerState(..), Id)
+module Messages exposing (Msg(..), Question, LearnData, Model, QuestionLearnProgress, LearnProgress, CurQuest, AnswerState(..), Id, Config)
 import Json.Decode as JD exposing (Value)
 
 import Date exposing (Date)
 
 import Http
+
+type alias Config = {
+        spez_fragen_binnen : Bool
+        ,spez_fragen_segeln : Bool
+        }
 
 type alias Id = {
         ide : Int
@@ -35,8 +40,11 @@ type Msg
         | SendHttpRequest
         | DataReceived (Result Http.Error LearnData)
         | SaveLocalStorage
+        | SaveConfig
         | DoLoadLocalStorage
         | Load String
+        | LoadConfig String
+        | DoLoadConfig
         | ReadDate Date
         | ShuffleLearnProgress LearnProgress
         | RandomizeRandomization (List Int)
@@ -44,6 +52,8 @@ type Msg
         | ShowResultTimeout
         | ToggleSidePanel
         | DeleteLearningProgress
+        | ToggleSpezBinnen
+        | ToggleSpezSegeln
 
 type AnswerState
         = Correct
@@ -67,4 +77,5 @@ type alias Model =
         , currentDate : String
         , currentQuestion : Maybe CurQuest
         , showSidePanel : Bool
+        , config : Config
         }
