@@ -48,7 +48,7 @@
 			    app.ports.doloadConfig.subscribe(function() {
 				let data = localStorage.getItem(configKey);
 				    if (data === null) {
-					    localStorage.setItem(storageKey, "{\"spez_fragen_binnen\": false, \"spez_fragen_segeln\": false}");
+					    localStorage.setItem(configKey, "{\"spez_fragen_binnen\": false, \"spez_fragen_segeln\": false}");
 					    app.ports.loadConfig.send("{\"spez_fragen_binnen\": false, \"spez_fragen_segeln\": false}");
 				    } else {
 				      app.ports.loadConfig.send(data);

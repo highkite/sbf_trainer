@@ -6,13 +6,13 @@ import Process
 import Debug
 import Random
 import Task
-import Date exposing (today, toIsoString, Unit(..), add, fromIsoString, compare)
+import Date exposing (today, toIsoString, Unit(..))
 import Http exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
-import List exposing (head, isEmpty, tail, range, length)
+import List exposing (head, tail)
 import Random.List exposing (shuffle)
 
 import MenuBar exposing (menuBar)
@@ -20,7 +20,9 @@ import StartUp exposing (startUp)
 
 import Json.Encode as Encode exposing (Value, int, string, object)
 import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
-import DataHandler exposing (fetchQuestions, learnProgressDecoder, configDecoder)
+import DataHandler exposing (fetchQuestions, learnProgressDecoder, configDecoder, fetchSpezBinnen, fetchSpezSegeln)
+
+import QuestionSelectionLogic exposing (mergeModel)
 
 import SideNav exposing (nav)
 
@@ -38,150 +40,7 @@ port doloadConfig : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, fetchQuestions, doload(), doloadConfig()])
-
-createQuestionLearnProgress : Maybe (List Question) -> Model -> Model
-createQuestionLearnProgress lst model =
-        case lst of
-                Just lstl ->
-                        case head lstl of
-                                Just headel ->
-                                        createQuestionLearnProgress (tail lstl) { model | learnProgress = { ide = headel.ide, level = 0, timestamp = model.currentDate } :: model.learnProgress }
-                                Nothing ->
-                                        model
-                Nothing ->
-                        model
-
-phaseOneDue : String -> String -> Bool
-phaseOneDue today timestamp =
-        case (fromIsoString today) of
-                Ok today_date ->
-                        case (fromIsoString timestamp) of
-                                Ok ts ->
-                                        Date.compare today_date (add Days 1 ts) == GT
-                                Err value ->
-                                        False
-                Err value ->
-                        False
-
-phaseTwoDue : String -> String -> Bool
-phaseTwoDue today timestamp =
-        case (fromIsoString today) of
-                Ok today_date ->
-                        case (fromIsoString timestamp) of
-                                Ok ts ->
-                                        Date.compare today_date (add Days 3 ts) == GT
-                                Err value ->
-                                        False
-                Err value ->
-                        False
-
-phaseThreeDue : String -> String -> Bool
-phaseThreeDue today timestamp =
-        case (fromIsoString today) of
-                Ok today_date ->
-                        case (fromIsoString timestamp) of
-                                Ok ts ->
-                                        Date.compare today_date (add Days 9 ts) == GT
-                                Err value ->
-                                        False
-                Err value ->
-                        False
-
-phaseFourDue : String -> String -> Bool
-phaseFourDue today timestamp =
-        case (fromIsoString today) of
-                Ok today_date ->
-                        case (fromIsoString timestamp) of
-                                Ok ts ->
-                                        Date.compare today_date (add Days 29 ts) == GT
-                                Err value ->
-                                        False
-                Err value ->
-                        False
-
-phaseFiveDue : String -> String -> Bool
-phaseFiveDue today timestamp =
-        case (fromIsoString today) of
-                Ok today_date ->
-                        case (fromIsoString timestamp) of
-                                Ok ts ->
-                                        Date.compare today_date (add Days 90 ts) == GT
-                                Err value ->
-                                        False
-                Err value ->
-                        False
-
-filterLearnProgress : Model -> Maybe LearnProgress -> LearnProgress
-filterLearnProgress model lpst =
-        case lpst of
-                Just lpstl ->
-                        case (head lpstl) of
-                                Just headel ->
-                                        case headel.level of
-                                                0 ->
-                                                        headel :: filterLearnProgress model (tail lpstl)
-                                                1 ->
-                                                        if phaseOneDue model.currentDate headel.timestamp then
-                                                                headel :: filterLearnProgress model (tail lpstl)
-                                                        else
-                                                                filterLearnProgress model (tail lpstl)
-                                                2 ->
-                                                        if phaseTwoDue model.currentDate headel.timestamp then
-                                                                headel :: filterLearnProgress model (tail lpstl)
-                                                        else
-                                                                filterLearnProgress model (tail lpstl)
-                                                3 ->
-                                                        if phaseThreeDue model.currentDate headel.timestamp then
-                                                                headel :: filterLearnProgress model (tail lpstl)
-                                                        else
-                                                                filterLearnProgress model (tail lpstl)
-                                                4 ->
-                                                        if phaseFourDue model.currentDate headel.timestamp then
-                                                                headel :: filterLearnProgress model (tail lpstl)
-                                                        else
-                                                                filterLearnProgress model (tail lpstl)
-                                                5 ->
-                                                        if phaseFiveDue model.currentDate headel.timestamp then
-                                                                headel :: filterLearnProgress model (tail lpstl)
-                                                        else
-                                                                filterLearnProgress model (tail lpstl)
-
-                                                _ ->
-                                                        filterLearnProgress model (tail lpstl)
-                                Nothing ->
-                                        []
-                Nothing ->
-                        []
-
-populateModel : Model -> Model
-populateModel model =
-        case isEmpty(model.learnProgress) of
-                True ->
-                        createQuestionLearnProgress (Just model.learnData) model
-                False ->
-                        model
-
-learnProgressToQuestion : Maybe LearnData -> Maybe QuestionLearnProgress -> Maybe Question
-learnProgressToQuestion ld lp =
-        case lp of
-                Just lpl ->
-                        case ld of
-                                Just ldl ->
-                                        case head ldl of
-                                                Just headel ->
-                                                        if headel.ide == lpl.ide then
-                                                                Just headel
-                                                        else
-                                                                learnProgressToQuestion (tail ldl) lp
-                                                Nothing ->
-                                                        Nothing
-
-                                Nothing ->
-                                        Nothing
-                Nothing ->
-                        Nothing
-
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, doloadConfig()])
 
 view : Model -> Html Msg
 view model =
@@ -241,12 +100,7 @@ update msg model =
                         ({ model | page_state = 0 }, Cmd.none)
 
                 GelloView ->
-                        let
-                            populated_model = populateModel model
-                            filtered_list = filterLearnProgress model (Just populated_model.learnProgress)
-                            model_populated_model = { model | learnProgress = filtered_list, page_state = 1}
-                        in
-                        (model_populated_model, Random.generate ShuffleLearnProgress (shuffle model_populated_model.learnProgress))
+                        (model, Cmd.none)
 
                 ReadDate time ->
                         ({ model | currentDate = toIsoString time }, Cmd.none)
@@ -255,9 +109,25 @@ update msg model =
                         (model, fetchQuestions)
 
                 DataReceived (Ok learningData) ->
-                        ({ model | learnData = learningData }, Cmd.none )
+                        ({ model | learnData = learningData }, fetchSpezBinnen model)
 
                 DataReceived (Err httpError) ->
+                        ( { model | errorMessage = Just (buildErrorMessage httpError) }
+                            , Cmd.none
+                            )
+
+                BinnenDataReceived (Ok learningData) ->
+                        ({ model | learnData = (model.learnData ++ learningData) }, fetchSpezSegeln model)
+
+                BinnenDataReceived (Err httpError) ->
+                        ( { model | errorMessage = Just (buildErrorMessage httpError) }
+                            , Cmd.none
+                            )
+
+                SegelnDataReceived (Ok learningData) ->
+                        ({ model | learnData = (model.learnData ++ learningData) }, doload() )
+
+                SegelnDataReceived (Err httpError) ->
                         ( { model | errorMessage = Just (buildErrorMessage httpError) }
                             , Cmd.none
                             )
@@ -293,7 +163,7 @@ update msg model =
                 LoadConfig value ->
                         case (decodeString configDecoder value) of
                                 Ok val ->
-                                      ({ model | config = val }, Cmd.none)
+                                      ({ model | config = val }, fetchQuestions)
                                 Err errMsg ->
                                         case errMsg of
                                                 JD.Field erVal err ->
@@ -305,7 +175,7 @@ update msg model =
                                                         (model, Cmd.none)
 
                                                 JD.Failure erVal val ->
-                                                      ({ model | config = {spez_fragen_binnen = False, spez_fragen_segeln = False} }, Cmd.none)
+                                                      ({ model | config = {spez_fragen_binnen = False, spez_fragen_segeln = False} }, fetchQuestions)
                                                 _ ->
                                                         (model, Cmd.none)
 
@@ -313,12 +183,9 @@ update msg model =
                         case (decodeString learnProgressDecoder value) of
                                 Ok val ->
                                         let
-                                            new_model = {model | learnProgress = val }
-                                            populated_model = populateModel new_model
-                                            filtered_list = filterLearnProgress model (Just populated_model.learnProgress)
-                                            model_populated_model = { model | learnProgress = filtered_list }
+                                            populated_model = mergeModel model (Just val)
                                         in
-                                        (model_populated_model, Random.generate ShuffleLearnProgress (shuffle model_populated_model.learnProgress))
+                                        (populated_model, Random.generate ShuffleLearnProgress (shuffle populated_model.learnProgress))
                                 Err errMsg ->
                                         case errMsg of
                                                 JD.Field erVal err ->
@@ -331,7 +198,7 @@ update msg model =
 
                                                 JD.Failure erVal val ->
                                                         let
-                                                            new_model = populateModel model
+                                                            new_model = mergeModel model (Just [])
                                                         in
                                                         (new_model, Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress))
                                                 _ ->
@@ -341,7 +208,7 @@ update msg model =
                         let
                             new_model = { model | learnProgress = lPs }
                         in
-                        chooseQuestion new_model
+                        (new_model, Cmd.none)
 
 
                 RandomizeRandomization lst ->
@@ -361,9 +228,9 @@ update msg model =
                                             new_cq = {cq | correct = NotSet}
                                             new_model = { model | currentQuestion = Just new_cq }
                                         in
-                                        chooseQuestion new_model
+                                        (new_model, Cmd.none)
                                 Nothing ->
-                                        chooseQuestion model
+                                        (model, Cmd.none)
 
                 SelectAnswer index ->
                         case model.currentQuestion of
@@ -430,48 +297,6 @@ increaseLevel lst model cq =
                 Nothing ->
                         []
 
-chooseQuestion : Model -> (Model, Cmd Msg)
-chooseQuestion model =
-                case model.currentQuestion of
-                        Just cq ->
-                                let
-                                    selected_question = getElement (Just model.learnProgress) (cq.index + 1)
-                                in
-                                case selected_question of
-                                        Just val ->
-                                                let
-                                                    mapped_question = learnProgressToQuestion (Just model.learnData) selected_question
-                                                in
-                                                case mapped_question of
-                                                        Just qst ->
-                                                                let
-                                                                    rands = range 0 ((length qst.answers) - 1)
-                                                                in
-                                                                ({ model | currentQuestion = Just {index = cq.index + 1, progress = val, question = qst, randomization = rands, correct = NotSet}}, Random.generate RandomizeRandomization (shuffle rands))
-                                                        Nothing ->
-                                                                ({ model | currentQuestion = Nothing}, Cmd.none)
-                                        Nothing ->
-                                                ({ model | currentQuestion = Nothing}, Cmd.none)
-                        Nothing ->
-                                let
-                                    selected_question = head model.learnProgress
-                                in
-                                case selected_question of
-                                        Just val ->
-                                                let
-                                                    mapped_question = learnProgressToQuestion (Just model.learnData) selected_question
-                                                in
-                                                case mapped_question of
-                                                        Just qst ->
-                                                                let
-                                                                    rands = range 0 ((length qst.answers) - 1)
-                                                                in
-                                                                ({ model | currentQuestion = Just {index = 0, progress = val, question = qst, randomization = rands, correct = NotSet}}, Random.generate RandomizeRandomization (shuffle rands))
-                                                        Nothing ->
-                                                                ({ model | currentQuestion = Nothing}, Cmd.none)
-                                        Nothing ->
-                                                ({ model | currentQuestion = Nothing}, Cmd.none)
-
 encodeID : Id -> Encode.Value
 encodeID id =
         Encode.object
@@ -497,17 +322,6 @@ encodeConfig cfg =
 encodeJSON : LearnProgress -> Encode.Value
 encodeJSON lp =
         Encode.list encodeQJSON lp
-
-getElement : Maybe LearnProgress -> Int -> Maybe QuestionLearnProgress
-getElement lst ind =
-        case lst of
-                Just lstl ->
-                        if ind > 0 then
-                                getElement (tail lstl) (ind - 1)
-                        else
-                                head lstl
-                Nothing ->
-                        Nothing
 
 
 buildErrorMessage : Http.Error -> String

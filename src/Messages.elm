@@ -39,6 +39,8 @@ type Msg
         | GelloView
         | SendHttpRequest
         | DataReceived (Result Http.Error LearnData)
+        | BinnenDataReceived (Result Http.Error LearnData)
+        | SegelnDataReceived (Result Http.Error LearnData)
         | SaveLocalStorage
         | SaveConfig
         | DoLoadLocalStorage

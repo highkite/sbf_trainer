@@ -46,6 +46,7 @@ questionView model curQ =
                                 ]
                             ]
                         ]
+                        ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", href "/"] [text "Zurück"]]]
                     ]
                 ]
 
