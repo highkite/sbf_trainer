@@ -8506,11 +8506,16 @@ var $author$project$HomePage$update = F2(
 					{config: new_config});
 				return _Utils_Tuple2(
 					new_model,
-					$author$project$HomePage$saveConfig(
-						A2(
-							$elm$json$Json$Encode$encode,
-							0,
-							$author$project$HomePage$encodeConfig(new_model.config))));
+					$elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[
+								$author$project$HomePage$saveConfig(
+								A2(
+									$elm$json$Json$Encode$encode,
+									0,
+									$author$project$HomePage$encodeConfig(new_model.config))),
+								$author$project$DataHandler$fetchQuestions
+							])));
 			case 'ToggleSpezSegeln':
 				var cfg = model.config;
 				var new_config = _Utils_update(
@@ -8523,11 +8528,16 @@ var $author$project$HomePage$update = F2(
 					{config: new_config});
 				return _Utils_Tuple2(
 					new_model,
-					$author$project$HomePage$saveConfig(
-						A2(
-							$elm$json$Json$Encode$encode,
-							0,
-							$author$project$HomePage$encodeConfig(new_model.config))));
+					$elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[
+								$author$project$HomePage$saveConfig(
+								A2(
+									$elm$json$Json$Encode$encode,
+									0,
+									$author$project$HomePage$encodeConfig(new_model.config))),
+								$author$project$DataHandler$fetchQuestions
+							])));
 			case 'SaveConfig':
 				return _Utils_Tuple2(
 					model,

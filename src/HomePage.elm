@@ -141,7 +141,7 @@ update msg model =
                             new_config = {cfg | spez_fragen_binnen = invertBool model.config.spez_fragen_binnen}
                             new_model = {model | config = new_config}
                         in
-                        (new_model, saveConfig (Encode.encode 0 (encodeConfig new_model.config)))
+                        (new_model, Cmd.batch[saveConfig (Encode.encode 0 (encodeConfig new_model.config)), fetchQuestions])
 
                 ToggleSpezSegeln ->
                         let
@@ -149,7 +149,7 @@ update msg model =
                             new_config = {cfg | spez_fragen_segeln = invertBool model.config.spez_fragen_segeln}
                             new_model = {model | config = new_config}
                         in
-                        (new_model, saveConfig (Encode.encode 0 (encodeConfig new_model.config)))
+                        (new_model, Cmd.batch[saveConfig (Encode.encode 0 (encodeConfig new_model.config)), fetchQuestions])
 
                 SaveConfig ->
                         (model, saveConfig (Encode.encode 0 (encodeConfig model.config)))
