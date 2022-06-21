@@ -6,6 +6,7 @@ import lxml.etree as ET
 url = "https://www.elwis.de/DE/Sportschifffahrt/Sportbootfuehrerscheine/Fragenkatalog-Binnen/Basisfragen/Basisfragen-node.html"
 # Spez fragen Binnen
 url = "https://www.elwis.de/DE/Sportschifffahrt/Sportbootfuehrerscheine/Fragenkatalog-Binnen/Spezifische-Fragen-Binnen/Spezifische-Fragen-Binnen-node.html;jsessionid=9C139B4A93F78D24AD0746522F17ED4D.server1t2"
+url = "https://www.elwis.de/DE/Sportschifffahrt/Sportbootfuehrerscheine/Fragenkatalog-Binnen/Spezifische-Fragen-Segeln/Spezifische-Fragen-Segeln-node.html;jsessionid=9C139B4A93F78D24AD0746522F17ED4D.server1t2"
 xp_question = "//div/ol"
 
 
@@ -44,8 +45,8 @@ with urllib.request.urlopen(url) as response:
             for img in images:
                 img_url = "https://elwis.de" + img
                 print(f"Fetch: {img_url}")
-                f = open(f"0000002{i}-{j}.gif", "wb")
-                image_names.append(f"0000002{i}-{j}.gif")
+                f = open(f"0000003{i}-{j}.gif", "wb")
+                image_names.append(f"0000003{i}-{j}.gif")
                 f.write(urllib.request.urlopen(img_url).read())
                 f.close()
                 j += 1
@@ -59,7 +60,7 @@ with urllib.request.urlopen(url) as response:
             answers.append(iter_text(an))
 
         obj = {
-            "ide": {"ide": i, "questionType": 2},
+            "ide": {"ide": i, "questionType": 3},
             "answers": answers,
             "question": question_str,
         }
@@ -70,5 +71,5 @@ with urllib.request.urlopen(url) as response:
         data.append(obj)
         i += 1
 
-    with open("./binnen_data.json", "w") as f:
+    with open("./segeln_data.json", "w") as f:
         f.write(json.dumps(data))

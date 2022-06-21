@@ -6833,7 +6833,7 @@ var $author$project$DataHandler$questionDecoder = A4(
 				$author$project$DataHandler$idDecoder,
 				$elm$json$Json$Decode$succeed($author$project$Messages$Question)))));
 var $author$project$DataHandler$learnDataDecoder = $elm$json$Json$Decode$list($author$project$DataHandler$questionDecoder);
-var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/test_data.json';
+var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/data.json';
 var $author$project$DataHandler$fetchQuestions = $elm$http$Http$get(
 	{
 		expect: A2($elm$http$Http$expectJson, $author$project$Messages$DataReceived, $author$project$DataHandler$learnDataDecoder),
@@ -9688,6 +9688,33 @@ var $author$project$StartUp$startUp = function (model) {
 												_List_fromArray(
 													[
 														$elm$html$Html$text('Der Lernfortschritt wird direkt in Ihrem Browser gespeichert. Keine Daten werden an andere Dienste oder Server übermittelt. Sie können den Lernfortschritt über das Sidepanel resetten.')
+													])),
+												A2(
+												$elm$html$Html$p,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('text-muted')
+													]),
+												_List_fromArray(
+													[
+														A2(
+														$elm$html$Html$small,
+														_List_Nil,
+														_List_fromArray(
+															[
+																$elm$html$Html$text('Die Fragen stammen von '),
+																A2(
+																$elm$html$Html$a,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Attributes$href('https://www.elwis.de/DE/Sportschifffahrt/Sportbootfuehrerscheine/Fragenkatalog-Binnen/Fragenkatalog-Binnen-node.html;jsessionid=F1E4A281E49882CE9F28B7F2275B0F98.server2t2')
+																	]),
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('ELWIS')
+																	])),
+																$elm$html$Html$text('.')
+															]))
 													]))
 											]))
 									]))

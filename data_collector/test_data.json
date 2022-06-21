@@ -1,0 +1,32 @@
+[
+  {
+    "ide": { "ide": 1, "questionType": 1},
+    "answers": [
+      "Der verantwortliche Schiffsführer muss bestimmt werden.",
+      "Der verantwortliche Schiffsführer muss gewählt werden.",
+      "Ein Inhaber eines Sportbootführerscheins muss die Fahrzeugführung übernehmen.",
+      "Ein Inhaber eines Sportbootführerscheins muss die Verantwortung übernehmen."
+    ],
+    "question": "Was ist zu tun, wenn vor Antritt der Fahrt nicht feststeht, wer Schiffsführer ist?"
+  },
+  {
+    "ide": { "ide": 2, "questionType": 1},
+    "answers": [
+      "Wenn man infolge körperlicher oder geistiger Mängel oder infolge des Genusses alkoholischer Getränke oder anderer berauschender Mittel in der sicheren Führung behindert ist oder wenn eine Blutalkoholkonzentration von 0,5 ‰ oder mehr im Körper vorhanden ist.",
+      "Wenn man infolge körperlicher oder geistiger Mängel oder infolge des Genusses alkoholischer Getränke oder anderer berauschender Mittel in der sicheren Führung behindert ist oder wenn eine Blutalkoholkonzentration von 0,8 ‰ oder mehr im Körper vorhanden ist.",
+      "Wenn man infolge körperlicher oder geistiger Mängel oder infolge des Genusses alkoholischer Getränke oder anderer berauschender Mittel in der sicheren Führung behindert ist oder wenn eine Blutalkoholkonzentration von 1,0 ‰ oder mehr im Körper vorhanden ist.",
+      "Wenn man infolge körperlicher oder geistiger Mängel oder infolge des Genusses alkoholischer Getränke oder anderer berauschender Mittel in der sicheren Führung behindert ist oder wenn eine Blutalkoholkonzentration von 0,3 ‰ oder mehr im Körper vorhanden ist."
+    ],
+    "question": "In welchen Fällen darf weder ein Sportboot geführt noch dessen Kurs oder Geschwindigkeit selbstständig bestimmt werden?"
+  },
+  {
+    "ide": { "ide": 3, "questionType": 1},
+    "answers": [
+      "Wenn es weder vor Anker liegt noch an Land festgemacht ist noch auf Grund sitzt.",
+      "Wenn es weder vor Anker liegt noch an Land festgemacht ist noch Fahrt über Grund macht.",
+      "Wenn es weder auf Grund sitzt noch vor Anker liegt noch manövrierbehindert oder manövrierunfähig ist.",
+      "Wenn es weder an Land festgemacht ist noch vor Anker liegt noch Fahrt durchs Wasser macht."
+    ],
+    "question": "Wann ist ein Fahrzeug in Fahrt?"
+  }
+]

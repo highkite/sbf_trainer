@@ -55,8 +55,11 @@ startUp model =
                                         ]
                                 ,p [class "text-muted"] [
                                         small [] [text "Der Lernfortschritt wird direkt in Ihrem Browser gespeichert. Keine Daten werden an andere Dienste oder Server übermittelt. Sie können den Lernfortschritt über das Sidepanel resetten."]
-                                        ]
+                                ,p [class "text-muted"] [
+                                        small [] [text "Die Fragen stammen von ", a [href "https://www.elwis.de/DE/Sportschifffahrt/Sportbootfuehrerscheine/Fragenkatalog-Binnen/Fragenkatalog-Binnen-node.html;jsessionid=F1E4A281E49882CE9F28B7F2275B0F98.server2t2"][text "ELWIS"], text "."]
+                                ]
                         ]
+                ]
                 ]
         ]]
 
