@@ -191,7 +191,8 @@ update msg model =
                         case (decodeString learnProgressDecoder value) of
                                 Ok val ->
                                         let
-                                            populated_model = mergeModel model (Just model.learnData) (Just val)
+                                            new_model = {model | learnProgress = val}
+                                            populated_model = mergeModel new_model (Just model.learnData)
                                         in
                                         (populated_model, Random.generate ShuffleLearnProgress (shuffle populated_model.learnProgress))
                                 Err errMsg ->
@@ -206,7 +207,7 @@ update msg model =
 
                                                 JD.Failure erVal val ->
                                                         let
-                                                            new_model = mergeModel model (Just model.learnData) (Just [])
+                                                            new_model = mergeModel model (Just model.learnData)
                                                         in
                                                         (new_model, Cmd.batch [save (Encode.encode 0 (encodeJSON new_model.learnProgress)), Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress)])
                                                 _ ->

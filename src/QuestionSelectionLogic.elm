@@ -171,31 +171,18 @@ getElement lst ind =
                 Nothing ->
                         Nothing
 
-mergeModel :  Model -> Maybe LearnData -> Maybe LearnProgress -> Model
-mergeModel model ld lst =
+mergeModel :  Model -> Maybe LearnData -> Model
+mergeModel model ld =
     case ld of
         Just ldl ->
-            case lst of
-                Just lstl ->
-                        case head ldl of
-                            Just headel ->
-                                if (isIn (Just lstl) headel.ide) then
-                                    Debug.log "isin"
-                                    mergeModel model (tail ldl) lst
-                                else
-                                    Debug.log "not in"
-                                    Debug.log (String.fromInt headel.ide.ide)
-                                    Debug.log (String.fromInt headel.ide.questionType)
-                                    Debug.log "--"
-                                    mergeModel { model | learnProgress = ({ide = headel.ide, level = 0, timestamp = model.currentDate} :: model.learnProgress) } (tail ldl) lst
-                            Nothing ->
-                                model
+            case head ldl of
+                Just headel ->
+                    if (isIn (Just model.learnProgress) headel.ide) then
+                        mergeModel model (tail ldl)
+                    else
+                        mergeModel { model | learnProgress = ({ide = headel.ide, level = 0, timestamp = model.currentDate} :: model.learnProgress) } (tail ldl)
                 Nothing ->
-                    case head ldl of
-                        Just headel ->
-                            mergeModel { model | learnProgress = ({ide = headel.ide, level = 0, timestamp = model.currentDate} :: model.learnProgress) } (tail ldl) lst
-                        Nothing ->
-                            model
+                    model
         Nothing ->
             model
 
