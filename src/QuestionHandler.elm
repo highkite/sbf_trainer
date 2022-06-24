@@ -32,7 +32,7 @@ questionView model curQ =
                         ]
                         , div[] (answersq (Just cq.randomization) cq cq.question.answers)
                 ]]]]
-                ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", href "/"] [text "Zurück"]]]
+                ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", onClick Home] [text "Zurück"]]]
                 ]]
             Nothing ->
                 div [class "jumbotron d-flex align-items-center min-vh-100"] [
@@ -46,7 +46,7 @@ questionView model curQ =
                                 ]
                             ]
                         ]
-                        ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", href "/"] [text "Zurück"]]]
+                        ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", onClick Home] [text "Zurück"]]]
                     ]
                 ]
 

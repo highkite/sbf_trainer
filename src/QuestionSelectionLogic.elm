@@ -171,35 +171,52 @@ getElement lst ind =
                 Nothing ->
                         Nothing
 
-mergeModel :  Model -> Maybe LearnProgress -> Model
-mergeModel model lst =
-    case lst of
-        Just lstl ->
-            case head model.learnData of
-                Just headel ->
-                    if (isIn (Just lstl) headel.ide) then
-                        mergeModel model (tail lstl)
-                    else
-                        mergeModel { model | learnProgress = ({ide = headel.ide, level = 0, timestamp = model.currentDate} :: model.learnProgress) } (tail lstl)
+mergeModel :  Model -> Maybe LearnData -> Maybe LearnProgress -> Model
+mergeModel model ld lst =
+    case ld of
+        Just ldl ->
+            case lst of
+                Just lstl ->
+                        case head ldl of
+                            Just headel ->
+                                if (isIn (Just lstl) headel.ide) then
+                                    Debug.log "isin"
+                                    mergeModel model (tail ldl) lst
+                                else
+                                    Debug.log "not in"
+                                    Debug.log (String.fromInt headel.ide.ide)
+                                    Debug.log (String.fromInt headel.ide.questionType)
+                                    Debug.log "--"
+                                    mergeModel { model | learnProgress = ({ide = headel.ide, level = 0, timestamp = model.currentDate} :: model.learnProgress) } (tail ldl) lst
+                            Nothing ->
+                                model
                 Nothing ->
-                    model
+                    case head ldl of
+                        Just headel ->
+                            mergeModel { model | learnProgress = ({ide = headel.ide, level = 0, timestamp = model.currentDate} :: model.learnProgress) } (tail ldl) lst
+                        Nothing ->
+                            model
         Nothing ->
             model
 
 isIn : Maybe LearnProgress -> Id -> Bool
-isIn lp lst =
+isIn lp id =
     case lp of
         Just lplst ->
             case head lplst of
                 Just headel ->
-                    if headel.ide.ide == lst.ide && headel.ide.questionType == lst.questionType then
+                    if isEqual headel.ide id then
                         True
                     else
-                        isIn (tail lplst) lst
+                        isIn (tail lplst) id
                 Nothing ->
                     False
         Nothing ->
             False
+
+isEqual : Id -> Id -> Bool
+isEqual one two =
+    one.ide == two.ide && one.questionType == two.questionType
 
 createQuestionLearnProgress : Maybe (List Question) -> Model -> Model
 createQuestionLearnProgress lst model =

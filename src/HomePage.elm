@@ -22,7 +22,7 @@ import Json.Encode as Encode exposing (Value, int, string, object)
 import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
 import DataHandler exposing (fetchQuestions, learnProgressDecoder, configDecoder, fetchSpezBinnen, fetchSpezSegeln)
 
-import QuestionSelectionLogic exposing (mergeModel)
+import QuestionSelectionLogic exposing (mergeModel, takeNextQuestion)
 
 import SideNav exposing (nav)
 
@@ -99,8 +99,16 @@ update msg model =
                 StartUpView ->
                         ({ model | page_state = 0 }, Cmd.none)
 
+                Home ->
+                        ({ model | page_state = 0, currentQuestion = Nothing}, Cmd.none)
+
                 GelloView ->
-                        (model, Cmd.none)
+                        case model.currentQuestion of
+                                Just cquest ->
+                                        ({model | currentQuestion = takeNextQuestion model model.learnProgress cquest.index, page_state = 1}, Cmd.none)
+
+                                Nothing ->
+                                        ({model | currentQuestion = takeNextQuestion model model.learnProgress 0, page_state = 1}, Cmd.none)
 
                 ReadDate time ->
                         ({ model | currentDate = toIsoString time }, Cmd.none)
@@ -183,7 +191,7 @@ update msg model =
                         case (decodeString learnProgressDecoder value) of
                                 Ok val ->
                                         let
-                                            populated_model = mergeModel model (Just val)
+                                            populated_model = mergeModel model (Just model.learnData) (Just val)
                                         in
                                         (populated_model, Random.generate ShuffleLearnProgress (shuffle populated_model.learnProgress))
                                 Err errMsg ->
@@ -198,9 +206,9 @@ update msg model =
 
                                                 JD.Failure erVal val ->
                                                         let
-                                                            new_model = mergeModel model (Just [])
+                                                            new_model = mergeModel model (Just model.learnData) (Just [])
                                                         in
-                                                        (new_model, Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress))
+                                                        (new_model, Cmd.batch [save (Encode.encode 0 (encodeJSON new_model.learnProgress)), Random.generate ShuffleLearnProgress (shuffle new_model.learnProgress)])
                                                 _ ->
                                                         (model, Cmd.none)
 
@@ -209,7 +217,6 @@ update msg model =
                             new_model = { model | learnProgress = lPs }
                         in
                         (new_model, Cmd.none)
-
 
                 RandomizeRandomization lst ->
                         case model.currentQuestion of
@@ -225,8 +232,9 @@ update msg model =
                         case model.currentQuestion of
                                 Just cq ->
                                         let
-                                            new_cq = {cq | correct = NotSet}
-                                            new_model = { model | currentQuestion = Just new_cq }
+                                            --new_cq = {cq | correct = NotSet}
+                                            new_cq = takeNextQuestion model model.learnProgress cq.index
+                                            new_model = { model | currentQuestion = new_cq }
                                         in
                                         (new_model, Cmd.none)
                                 Nothing ->
@@ -239,7 +247,7 @@ update msg model =
                                         if index == 0 then
                                                 -- colorize green
                                                 let
-                                                    new_cq = {cq | correct = Correct}
+                                                    new_cq = {cq | correct = Correct, index = (cq.index + 1)}
                                                     new_learn_progress = increaseLevel (Just model.learnProgress) model cq
                                                 in
                                                 --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
@@ -247,7 +255,7 @@ update msg model =
                                         else
                                                 -- colorize red
                                                 let
-                                                    new_cq = {cq | correct = Incorrect}
+                                                    new_cq = {cq | correct = Incorrect, index = (cq.index + 1)}
                                                     new_learn_progress = resetLevel (Just model.learnProgress) model cq
                                                 in
                                                 --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
@@ -322,7 +330,6 @@ encodeConfig cfg =
 encodeJSON : LearnProgress -> Encode.Value
 encodeJSON lp =
         Encode.list encodeQJSON lp
-
 
 buildErrorMessage : Http.Error -> String
 buildErrorMessage httpError =

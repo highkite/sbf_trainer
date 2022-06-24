@@ -37,6 +37,7 @@ type alias LearnProgress =
 type Msg
         = StartUpView
         | GelloView
+        | Home
         | SendHttpRequest
         | DataReceived (Result Http.Error LearnData)
         | BinnenDataReceived (Result Http.Error LearnData)
