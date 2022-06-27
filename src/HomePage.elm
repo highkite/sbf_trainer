@@ -20,7 +20,7 @@ import StartUp exposing (startUp)
 
 import Json.Encode as Encode exposing (Value, int, string, object)
 import Json.Decode as JD exposing (Decoder, Error(..), decodeString, list, string, int)
-import DataHandler exposing (fetchQuestions, learnProgressDecoder, configDecoder, fetchSpezBinnen, fetchSpezSegeln)
+import DataHandler exposing (learnProgressDecoder, configDecoder, url, urlBinnen, urlSegeln, learnDataDecoder)
 
 import QuestionSelectionLogic exposing (mergeModel, takeNextQuestion)
 
@@ -278,9 +278,9 @@ resetLevel lst model cq =
                                                 let
                                                     new_head_el = {headel | level = 0, timestamp = model.currentDate}
                                                 in
-                                                new_head_el :: (increaseLevel (tail lstl) model cq)
+                                                new_head_el :: (resetLevel (tail lstl) model cq)
                                         else
-                                                headel :: (increaseLevel (tail lstl) model cq)
+                                                headel :: (resetLevel (tail lstl) model cq)
                                 Nothing ->
                                         lstl
 
@@ -349,6 +349,34 @@ buildErrorMessage httpError =
 
         Http.BadBody message ->
             message
+
+fetchQuestions : Cmd Msg
+fetchQuestions =
+    Http.get
+        { url = url
+        , expect = Http.expectJson DataReceived learnDataDecoder
+        }
+
+fetchSpezBinnen : Model -> Cmd Msg
+fetchSpezBinnen model =
+    if model.config.spez_fragen_binnen then
+        Http.get
+            { url = urlBinnen
+            , expect = Http.expectJson BinnenDataReceived learnDataDecoder
+            }
+    else
+        fetchSpezSegeln model
+
+
+fetchSpezSegeln : Model -> Cmd Msg
+fetchSpezSegeln model =
+    if model.config.spez_fragen_segeln then
+        Http.get
+            { url = urlSegeln
+            , expect = Http.expectJson SegelnDataReceived learnDataDecoder
+            }
+    else
+        doload()
 
 subscriptions : Model -> Sub Msg
 subscriptions model = Sub.batch [load Load, loadConfig LoadConfig]

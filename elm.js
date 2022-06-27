@@ -6832,8 +6832,8 @@ var $author$project$DataHandler$questionDecoder = A4(
 				$author$project$DataHandler$idDecoder,
 				$elm$json$Json$Decode$succeed($author$project$Messages$Question)))));
 var $author$project$DataHandler$learnDataDecoder = $elm$json$Json$Decode$list($author$project$DataHandler$questionDecoder);
-var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/data.json';
-var $author$project$DataHandler$fetchQuestions = $elm$http$Http$get(
+var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/test_data.json';
+var $author$project$HomePage$fetchQuestions = $elm$http$Http$get(
 	{
 		expect: A2($elm$http$Http$expectJson, $author$project$Messages$DataReceived, $author$project$DataHandler$learnDataDecoder),
 		url: $author$project$DataHandler$url
@@ -6844,22 +6844,21 @@ var $author$project$Messages$BinnenDataReceived = function (a) {
 var $author$project$Messages$SegelnDataReceived = function (a) {
 	return {$: 'SegelnDataReceived', a: a};
 };
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$DataHandler$urlSegeln = 'http://localhost:8080/data_collector/segeln_data.json';
-var $author$project$DataHandler$fetchSpezSegeln = function (model) {
+var $author$project$HomePage$fetchSpezSegeln = function (model) {
 	return model.config.spez_fragen_segeln ? $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Messages$SegelnDataReceived, $author$project$DataHandler$learnDataDecoder),
 			url: $author$project$DataHandler$urlSegeln
-		}) : $elm$core$Platform$Cmd$none;
+		}) : $author$project$HomePage$doload(_Utils_Tuple0);
 };
 var $author$project$DataHandler$urlBinnen = 'http://localhost:8080/data_collector/binnen_data.json';
-var $author$project$DataHandler$fetchSpezBinnen = function (model) {
+var $author$project$HomePage$fetchSpezBinnen = function (model) {
 	return model.config.spez_fragen_binnen ? $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Messages$BinnenDataReceived, $author$project$DataHandler$learnDataDecoder),
 			url: $author$project$DataHandler$urlBinnen
-		}) : $author$project$DataHandler$fetchSpezSegeln(model);
+		}) : $author$project$HomePage$fetchSpezSegeln(model);
 };
 var $elm$random$Random$Generate = function (a) {
 	return {$: 'Generate', a: a};
@@ -7056,38 +7055,45 @@ var $author$project$QuestionSelectionLogic$isIn = F2(
 	});
 var $author$project$QuestionSelectionLogic$mergeModel = F2(
 	function (model, ld) {
-		if (ld.$ === 'Just') {
-			var ldl = ld.a;
-			var _v1 = $elm$core$List$head(ldl);
-			if (_v1.$ === 'Just') {
-				var headel = _v1.a;
-				return A2(
-					$author$project$QuestionSelectionLogic$isIn,
-					$elm$core$Maybe$Just(model.learnProgress),
-					headel.ide) ? A4(
-					$elm$core$Debug$log,
-					'isin',
-					$author$project$QuestionSelectionLogic$mergeModel,
-					model,
-					$elm$core$List$tail(ldl)) : $elm$core$Debug$log('not in')($elm$core$Debug$log)(
-					$elm$core$String$fromInt(headel.ide.ide))($elm$core$Debug$log)(
-					$elm$core$String$fromInt(headel.ide.questionType))($elm$core$Debug$log)('--')($author$project$QuestionSelectionLogic$mergeModel)(
-					_Utils_update(
-						model,
-						{
-							learnProgress: A2(
-								$elm$core$List$cons,
-								{ide: headel.ide, level: 0, timestamp: model.currentDate},
-								model.learnProgress)
-						}))(
-					$elm$core$List$tail(ldl));
+		mergeModel:
+		while (true) {
+			if (ld.$ === 'Just') {
+				var ldl = ld.a;
+				var _v1 = $elm$core$List$head(ldl);
+				if (_v1.$ === 'Just') {
+					var headel = _v1.a;
+					if (A2(
+						$author$project$QuestionSelectionLogic$isIn,
+						$elm$core$Maybe$Just(model.learnProgress),
+						headel.ide)) {
+						var $temp$model = model,
+							$temp$ld = $elm$core$List$tail(ldl);
+						model = $temp$model;
+						ld = $temp$ld;
+						continue mergeModel;
+					} else {
+						var $temp$model = _Utils_update(
+							model,
+							{
+								learnProgress: A2(
+									$elm$core$List$cons,
+									{ide: headel.ide, level: 0, timestamp: model.currentDate},
+									model.learnProgress)
+							}),
+							$temp$ld = $elm$core$List$tail(ldl);
+						model = $temp$model;
+						ld = $temp$ld;
+						continue mergeModel;
+					}
+				} else {
+					return model;
+				}
 			} else {
 				return model;
 			}
-		} else {
-			return model;
 		}
 	});
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$HomePage$resetLevel = F3(
 	function (lst, model, cq) {
 		if (lst.$ === 'Just') {
@@ -7103,7 +7109,7 @@ var $author$project$HomePage$resetLevel = F3(
 						$elm$core$List$cons,
 						new_head_el,
 						A3(
-							$author$project$HomePage$increaseLevel,
+							$author$project$HomePage$resetLevel,
 							$elm$core$List$tail(lstl),
 							model,
 							cq));
@@ -7112,7 +7118,7 @@ var $author$project$HomePage$resetLevel = F3(
 						$elm$core$List$cons,
 						headel,
 						A3(
-							$author$project$HomePage$increaseLevel,
+							$author$project$HomePage$resetLevel,
 							$elm$core$List$tail(lstl),
 							model,
 							cq));
@@ -9289,7 +9295,7 @@ var $author$project$HomePage$update = F2(
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'SendHttpRequest':
-				return _Utils_Tuple2(model, $author$project$DataHandler$fetchQuestions);
+				return _Utils_Tuple2(model, $author$project$HomePage$fetchQuestions);
 			case 'DataReceived':
 				if (msg.a.$ === 'Ok') {
 					var learningData = msg.a.a;
@@ -9297,7 +9303,7 @@ var $author$project$HomePage$update = F2(
 						_Utils_update(
 							model,
 							{learnData: learningData}),
-						$author$project$DataHandler$fetchSpezBinnen(model));
+						$author$project$HomePage$fetchSpezBinnen(model));
 				} else {
 					var httpError = msg.a.a;
 					return _Utils_Tuple2(
@@ -9318,7 +9324,7 @@ var $author$project$HomePage$update = F2(
 							{
 								learnData: _Utils_ap(model.learnData, learningData)
 							}),
-						$author$project$DataHandler$fetchSpezSegeln(model));
+						$author$project$HomePage$fetchSpezSegeln(model));
 				} else {
 					var httpError = msg.a.a;
 					return _Utils_Tuple2(
@@ -9379,7 +9385,7 @@ var $author$project$HomePage$update = F2(
 									$elm$json$Json$Encode$encode,
 									0,
 									$author$project$HomePage$encodeConfig(new_model.config))),
-								$author$project$DataHandler$fetchQuestions
+								$author$project$HomePage$fetchQuestions
 							])));
 			case 'ToggleSpezSegeln':
 				var cfg = model.config;
@@ -9401,7 +9407,7 @@ var $author$project$HomePage$update = F2(
 									$elm$json$Json$Encode$encode,
 									0,
 									$author$project$HomePage$encodeConfig(new_model.config))),
-								$author$project$DataHandler$fetchQuestions
+								$author$project$HomePage$fetchQuestions
 							])));
 			case 'SaveConfig':
 				return _Utils_Tuple2(
@@ -9428,7 +9434,7 @@ var $author$project$HomePage$update = F2(
 						_Utils_update(
 							model,
 							{config: val}),
-						$author$project$DataHandler$fetchQuestions);
+						$author$project$HomePage$fetchQuestions);
 				} else {
 					var errMsg = _v2.a;
 					switch (errMsg.$) {
@@ -9455,7 +9461,7 @@ var $author$project$HomePage$update = F2(
 									{
 										config: {spez_fragen_binnen: false, spez_fragen_segeln: false}
 									}),
-								$author$project$DataHandler$fetchQuestions);
+								$author$project$HomePage$fetchQuestions);
 						default:
 							return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 					}
