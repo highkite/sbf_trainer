@@ -12,7 +12,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
-import List exposing (head, tail)
+import List exposing (head, tail, length)
 import Random.List exposing (shuffle)
 
 import MenuBar exposing (menuBar)
@@ -232,12 +232,20 @@ update msg model =
                 ShowResultTimeout ->
                         case model.currentQuestion of
                                 Just cq ->
-                                        let
-                                            --new_cq = {cq | correct = NotSet}
-                                            new_cq = takeNextQuestion model model.learnProgress cq.index
-                                            new_model = { model | currentQuestion = new_cq }
-                                        in
-                                        (new_model, Cmd.none)
+                                        if (cq.index + 1) >= length model.learnProgress then
+                                                let
+                                                    --new_cq = {cq | correct = NotSet}
+                                                    new_cq = takeNextQuestion model model.learnProgress 0
+                                                    new_model = { model | currentQuestion = new_cq }
+                                                in
+                                                (new_model, Cmd.none)
+                                        else
+                                                let
+                                                    --new_cq = {cq | correct = NotSet}
+                                                    new_cq = takeNextQuestion model model.learnProgress (cq.index + 1)
+                                                    new_model = { model | currentQuestion = new_cq }
+                                                in
+                                                (new_model, Cmd.none)
                                 Nothing ->
                                         (model, Cmd.none)
 
@@ -248,18 +256,16 @@ update msg model =
                                         if index == 0 then
                                                 -- colorize green
                                                 let
-                                                    new_cq = {cq | correct = Correct, index = (cq.index + 1)}
+                                                    new_cq = {cq | correct = Correct}
                                                     new_learn_progress = increaseLevel (Just model.learnProgress) model cq
                                                 in
-                                                --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
                                                 ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 500 |> Task.perform (always ShowResultTimeout) ] )
                                         else
                                                 -- colorize red
                                                 let
-                                                    new_cq = {cq | correct = Incorrect, index = (cq.index + 1)}
+                                                    new_cq = {cq | correct = Incorrect}
                                                     new_learn_progress = resetLevel (Just model.learnProgress) model cq
                                                 in
-                                                --( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Process.sleep 500 |> Task.perform (always ShowResultTimeout))
                                                 ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 1500 |> Task.perform (always ShowResultTimeout) ])
                                 Nothing ->
                                         (model, Cmd.none)

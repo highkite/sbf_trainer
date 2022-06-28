@@ -9555,11 +9555,21 @@ var $author$project$HomePage$update = F2(
 				var _v7 = model.currentQuestion;
 				if (_v7.$ === 'Just') {
 					var cq = _v7.a;
-					var new_cq = A3($author$project$QuestionSelectionLogic$takeNextQuestion, model, model.learnProgress, cq.index);
-					var new_model = _Utils_update(
-						model,
-						{currentQuestion: new_cq});
-					return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+					if (_Utils_cmp(
+						cq.index + 1,
+						$elm$core$List$length(model.learnProgress)) > -1) {
+						var new_cq = A3($author$project$QuestionSelectionLogic$takeNextQuestion, model, model.learnProgress, 0);
+						var new_model = _Utils_update(
+							model,
+							{currentQuestion: new_cq});
+						return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+					} else {
+						var new_cq = A3($author$project$QuestionSelectionLogic$takeNextQuestion, model, model.learnProgress, cq.index + 1);
+						var new_model = _Utils_update(
+							model,
+							{currentQuestion: new_cq});
+						return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+					}
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
@@ -9576,7 +9586,7 @@ var $author$project$HomePage$update = F2(
 							cq);
 						var new_cq = _Utils_update(
 							cq,
-							{correct: $author$project$Messages$Correct, index: cq.index + 1});
+							{correct: $author$project$Messages$Correct});
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
@@ -9605,7 +9615,7 @@ var $author$project$HomePage$update = F2(
 							cq);
 						var new_cq = _Utils_update(
 							cq,
-							{correct: $author$project$Messages$Incorrect, index: cq.index + 1});
+							{correct: $author$project$Messages$Incorrect});
 						return _Utils_Tuple2(
 							_Utils_update(
 								model,
