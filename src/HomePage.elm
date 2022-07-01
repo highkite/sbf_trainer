@@ -40,7 +40,7 @@ port doloadConfig : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, showWeiterButtonFail = False, showWeiterButtonSucc = False, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, doloadConfig()])
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, showWeiterButtonFail = False, showWeiterButtonSucc = False, currentLearnProgress = {correct = 0, incorrect = 0}, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, doloadConfig()])
 
 view : Model -> Html Msg
 view model =
@@ -257,16 +257,18 @@ update msg model =
                                                 -- colorize green
                                                 let
                                                     new_cq = {cq | correct = Correct}
+                                                    new_current_lp = { correct = model.currentLearnProgress.correct + 1, incorrect = model.currentLearnProgress.incorrect }
                                                     new_learn_progress = increaseLevel (Just model.learnProgress) model cq
                                                 in
-                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress, showWeiterButtonSucc = True}, save (Encode.encode 0 (encodeJSON new_learn_progress)))
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress, showWeiterButtonSucc = True, currentLearnProgress = new_current_lp}, save (Encode.encode 0 (encodeJSON new_learn_progress)))
                                         else
                                                 -- colorize red
                                                 let
                                                     new_cq = {cq | correct = Incorrect}
+                                                    new_current_lp = { correct = model.currentLearnProgress.correct, incorrect = model.currentLearnProgress.incorrect + 1 }
                                                     new_learn_progress = resetLevel (Just model.learnProgress) model cq
                                                 in
-                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress, showWeiterButtonFail = True}, save (Encode.encode 0 (encodeJSON new_learn_progress)))
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress, showWeiterButtonFail = True, currentLearnProgress = new_current_lp}, save (Encode.encode 0 (encodeJSON new_learn_progress)))
                                 Nothing ->
                                         (model, Cmd.none)
 

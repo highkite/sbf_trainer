@@ -5793,6 +5793,7 @@ var $author$project$HomePage$initialModel = function (_v0) {
 		{
 			config: {spez_fragen_binnen: false, spez_fragen_segeln: false},
 			currentDate: '',
+			currentLearnProgress: {correct: 0, incorrect: 0},
 			currentQuestion: $elm$core$Maybe$Nothing,
 			errorMessage: $elm$core$Maybe$Nothing,
 			learnData: _List_Nil,
@@ -9584,6 +9585,7 @@ var $author$project$HomePage$update = F2(
 							$elm$core$Maybe$Just(model.learnProgress),
 							model,
 							cq);
+						var new_current_lp = {correct: model.currentLearnProgress.correct + 1, incorrect: model.currentLearnProgress.incorrect};
 						var new_cq = _Utils_update(
 							cq,
 							{correct: $author$project$Messages$Correct});
@@ -9591,6 +9593,7 @@ var $author$project$HomePage$update = F2(
 							_Utils_update(
 								model,
 								{
+									currentLearnProgress: new_current_lp,
 									currentQuestion: $elm$core$Maybe$Just(new_cq),
 									learnProgress: new_learn_progress,
 									showWeiterButtonSucc: true
@@ -9606,6 +9609,7 @@ var $author$project$HomePage$update = F2(
 							$elm$core$Maybe$Just(model.learnProgress),
 							model,
 							cq);
+						var new_current_lp = {correct: model.currentLearnProgress.correct, incorrect: model.currentLearnProgress.incorrect + 1};
 						var new_cq = _Utils_update(
 							cq,
 							{correct: $author$project$Messages$Incorrect});
@@ -9613,6 +9617,7 @@ var $author$project$HomePage$update = F2(
 							_Utils_update(
 								model,
 								{
+									currentLearnProgress: new_current_lp,
 									currentQuestion: $elm$core$Maybe$Just(new_cq),
 									learnProgress: new_learn_progress,
 									showWeiterButtonFail: true
@@ -10190,7 +10195,26 @@ var $author$project$QuestionHandler$questionView = F2(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('col-12'),
+												$elm$html$Html$Attributes$class('col-6'),
+												A2($elm$html$Html$Attributes$style, 'text-align', 'left'),
+												A2($elm$html$Html$Attributes$style, 'margin-top', '15px')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$p,
+												_List_Nil,
+												_List_fromArray(
+													[
+														$elm$html$Html$text(
+														'Korrekt: ' + ($elm$core$String$fromInt(model.currentLearnProgress.correct) + (' / Inkorrekt: ' + $elm$core$String$fromInt(model.currentLearnProgress.incorrect))))
+													]))
+											])),
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('col-6'),
 												A2($elm$html$Html$Attributes$style, 'text-align', 'right'),
 												A2($elm$html$Html$Attributes$style, 'margin-top', '15px')
 											]),
@@ -15089,7 +15113,9 @@ var $author$project$StartUp$barChart = function (model) {
 			$data_viz_lab$elm_chart_builder$Chart$Bar$hideAxis(
 				A2(
 					$data_viz_lab$elm_chart_builder$Chart$Bar$withYDomain,
-					_Utils_Tuple2(0, 100),
+					_Utils_Tuple2(
+						0,
+						$elm$core$List$length(model.learnData)),
 					A2(
 						$data_viz_lab$elm_chart_builder$Chart$Bar$withColorPalette,
 						$gampleman$elm_visualization$Scale$Color$tableau10,

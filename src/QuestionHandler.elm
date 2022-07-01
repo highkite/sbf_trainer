@@ -40,7 +40,12 @@ questionView model curQ =
                         else
                             text ""
                 ]]]]
-                ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", onClick Home] [text "Zurück"]]]
+                ,div[class "row"] [
+                    div [class "col-6", style "text-align" "left", style "margin-top" "15px"] [
+                        p [] [text ("Korrekt: " ++ (String.fromInt model.currentLearnProgress.correct) ++ " / Inkorrekt: " ++ (String.fromInt model.currentLearnProgress.incorrect))]
+                    ]
+                    ,div [class "col-6", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", onClick Home] [text "Zurück"]]
+                    ]
                 ]]
             Nothing ->
                 div [class "jumbotron d-flex align-items-center min-vh-100"] [

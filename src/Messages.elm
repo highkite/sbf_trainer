@@ -10,6 +10,11 @@ type alias Config = {
         ,spez_fragen_segeln : Bool
         }
 
+type alias CurrentLearnProgress = {
+        correct : Int
+        ,incorrect : Int
+        }
+
 type alias Id = {
         ide : Int
         ,questionType : Int
@@ -82,5 +87,6 @@ type alias Model =
         , showSidePanel : Bool
         , showWeiterButtonFail : Bool
         , showWeiterButtonSucc : Bool
+        , currentLearnProgress : CurrentLearnProgress
         , config : Config
         }

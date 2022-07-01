@@ -124,7 +124,7 @@ barChart model =
             }
             |> Bar.withOrientation Bar.horizontal
             |> Bar.withColorPalette Scale.Color.tableau10
-            |> Bar.withYDomain (0, 100)
+            |> Bar.withYDomain (0, toFloat (length model.learnData))
             |> Bar.hideAxis
             |> Bar.withStackedLayout Bar.diverging
             |> Bar.render ( (data model), accessor )
