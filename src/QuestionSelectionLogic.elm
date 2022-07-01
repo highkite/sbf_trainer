@@ -1,4 +1,4 @@
-module QuestionSelectionLogic exposing (takeNextQuestion, mergeModel, getDueQuestions)
+module QuestionSelectionLogic exposing (takeNextQuestion, mergeModel, getDueQuestions, countLevel0, countLevel1, countLevel2, countLevel3, countLevel4, countLevel5)
 import Date exposing (Unit(..), add, fromIsoString, compare)
 
 import List exposing (head, tail, take, drop, range, length, isEmpty)
@@ -156,6 +156,96 @@ getDueQuestions model lp =
                     []
         Nothing ->
             []
+
+countLevel0 : Maybe LearnProgress -> Float
+countLevel0 lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if headel.level == 0 then
+                        1 + countLevel0 (tail lp_lst)
+                    else
+                        countLevel0 (tail lp_lst)
+                Nothing ->
+                    0
+        Nothing ->
+            0
+
+countLevel1 : Maybe LearnProgress -> Float
+countLevel1 lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if headel.level == 1 then
+                        1 + countLevel1 (tail lp_lst)
+                    else
+                        countLevel1 (tail lp_lst)
+                Nothing ->
+                    0
+        Nothing ->
+            0
+
+countLevel2 : Maybe LearnProgress -> Float
+countLevel2 lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if headel.level == 2 then
+                        1 + countLevel2 (tail lp_lst)
+                    else
+                        countLevel2 (tail lp_lst)
+                Nothing ->
+                    0
+        Nothing ->
+            0
+
+countLevel3 : Maybe LearnProgress -> Float
+countLevel3 lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if headel.level == 3 then
+                        1 + countLevel3 (tail lp_lst)
+                    else
+                        countLevel3 (tail lp_lst)
+                Nothing ->
+                    0
+        Nothing ->
+            0
+
+countLevel4 : Maybe LearnProgress -> Float
+countLevel4 lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if headel.level == 4 then
+                        1 + countLevel4 (tail lp_lst)
+                    else
+                        countLevel4 (tail lp_lst)
+                Nothing ->
+                    0
+        Nothing ->
+            0
+
+countLevel5 : Maybe LearnProgress -> Float
+countLevel5 lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if headel.level == 5 then
+                        1 + countLevel5 (tail lp_lst)
+                    else
+                        countLevel5 (tail lp_lst)
+                Nothing ->
+                    0
+        Nothing ->
+            0
 
 isDue : Model -> QuestionLearnProgress -> Bool
 isDue model lp =

@@ -6832,7 +6832,7 @@ var $author$project$DataHandler$questionDecoder = A4(
 				$author$project$DataHandler$idDecoder,
 				$elm$json$Json$Decode$succeed($author$project$Messages$Question)))));
 var $author$project$DataHandler$learnDataDecoder = $elm$json$Json$Decode$list($author$project$DataHandler$questionDecoder);
-var $author$project$DataHandler$url = 'http://localhost:8080/data_collector/test_data.json';
+var $author$project$DataHandler$url = 'https://highkite.github.io/sbf_trainer/data_collector/data.json';
 var $author$project$HomePage$fetchQuestions = $elm$http$Http$get(
 	{
 		expect: A2($elm$http$Http$expectJson, $author$project$Messages$DataReceived, $author$project$DataHandler$learnDataDecoder),
@@ -10282,6 +10282,3477 @@ var $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute = F2(
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueMax = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuemax');
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueMin = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuemin');
 var $fapian$elm_html_aria$Html$Attributes$Aria$ariaValueNow = $fapian$elm_html_aria$Html$Attributes$Aria$floatAttribute('aria-valuenow');
+var $data_viz_lab$elm_chart_builder$Chart$Bar$Accessor = F3(
+	function (xGroup, xValue, yValue) {
+		return {xGroup: xGroup, xValue: xValue, yValue: yValue};
+	});
+var $author$project$StartUp$accessor = A3(
+	$data_viz_lab$elm_chart_builder$Chart$Bar$Accessor,
+	A2(
+		$elm$core$Basics$composeR,
+		function ($) {
+			return $.groupLabel;
+		},
+		$elm$core$Maybe$Just),
+	function ($) {
+		return $.x;
+	},
+	function ($) {
+		return $.y;
+	});
+var $author$project$QuestionSelectionLogic$countLevel0 = function (lp) {
+	countLevel0:
+	while (true) {
+		if (lp.$ === 'Just') {
+			var lp_lst = lp.a;
+			var _v1 = $elm$core$List$head(lp_lst);
+			if (_v1.$ === 'Just') {
+				var headel = _v1.a;
+				if (!headel.level) {
+					return 1 + $author$project$QuestionSelectionLogic$countLevel0(
+						$elm$core$List$tail(lp_lst));
+				} else {
+					var $temp$lp = $elm$core$List$tail(lp_lst);
+					lp = $temp$lp;
+					continue countLevel0;
+				}
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var $author$project$QuestionSelectionLogic$countLevel1 = function (lp) {
+	countLevel1:
+	while (true) {
+		if (lp.$ === 'Just') {
+			var lp_lst = lp.a;
+			var _v1 = $elm$core$List$head(lp_lst);
+			if (_v1.$ === 'Just') {
+				var headel = _v1.a;
+				if (headel.level === 1) {
+					return 1 + $author$project$QuestionSelectionLogic$countLevel1(
+						$elm$core$List$tail(lp_lst));
+				} else {
+					var $temp$lp = $elm$core$List$tail(lp_lst);
+					lp = $temp$lp;
+					continue countLevel1;
+				}
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var $author$project$QuestionSelectionLogic$countLevel2 = function (lp) {
+	countLevel2:
+	while (true) {
+		if (lp.$ === 'Just') {
+			var lp_lst = lp.a;
+			var _v1 = $elm$core$List$head(lp_lst);
+			if (_v1.$ === 'Just') {
+				var headel = _v1.a;
+				if (headel.level === 2) {
+					return 1 + $author$project$QuestionSelectionLogic$countLevel2(
+						$elm$core$List$tail(lp_lst));
+				} else {
+					var $temp$lp = $elm$core$List$tail(lp_lst);
+					lp = $temp$lp;
+					continue countLevel2;
+				}
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var $author$project$QuestionSelectionLogic$countLevel3 = function (lp) {
+	countLevel3:
+	while (true) {
+		if (lp.$ === 'Just') {
+			var lp_lst = lp.a;
+			var _v1 = $elm$core$List$head(lp_lst);
+			if (_v1.$ === 'Just') {
+				var headel = _v1.a;
+				if (headel.level === 3) {
+					return 1 + $author$project$QuestionSelectionLogic$countLevel3(
+						$elm$core$List$tail(lp_lst));
+				} else {
+					var $temp$lp = $elm$core$List$tail(lp_lst);
+					lp = $temp$lp;
+					continue countLevel3;
+				}
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var $author$project$QuestionSelectionLogic$countLevel4 = function (lp) {
+	countLevel4:
+	while (true) {
+		if (lp.$ === 'Just') {
+			var lp_lst = lp.a;
+			var _v1 = $elm$core$List$head(lp_lst);
+			if (_v1.$ === 'Just') {
+				var headel = _v1.a;
+				if (headel.level === 4) {
+					return 1 + $author$project$QuestionSelectionLogic$countLevel4(
+						$elm$core$List$tail(lp_lst));
+				} else {
+					var $temp$lp = $elm$core$List$tail(lp_lst);
+					lp = $temp$lp;
+					continue countLevel4;
+				}
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var $author$project$QuestionSelectionLogic$countLevel5 = function (lp) {
+	countLevel5:
+	while (true) {
+		if (lp.$ === 'Just') {
+			var lp_lst = lp.a;
+			var _v1 = $elm$core$List$head(lp_lst);
+			if (_v1.$ === 'Just') {
+				var headel = _v1.a;
+				if (headel.level === 5) {
+					return 1 + $author$project$QuestionSelectionLogic$countLevel5(
+						$elm$core$List$tail(lp_lst));
+				} else {
+					var $temp$lp = $elm$core$List$tail(lp_lst);
+					lp = $temp$lp;
+					continue countLevel5;
+				}
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var $author$project$StartUp$data = function (model) {
+	return _List_fromArray(
+		[
+			{
+			groupLabel: 'Level',
+			x: 'Level 0',
+			y: $author$project$QuestionSelectionLogic$countLevel0(
+				$elm$core$Maybe$Just(model.learnProgress))
+		},
+			{
+			groupLabel: 'Level',
+			x: 'Level 1',
+			y: $author$project$QuestionSelectionLogic$countLevel1(
+				$elm$core$Maybe$Just(model.learnProgress))
+		},
+			{
+			groupLabel: 'Level',
+			x: 'Level 2',
+			y: $author$project$QuestionSelectionLogic$countLevel2(
+				$elm$core$Maybe$Just(model.learnProgress))
+		},
+			{
+			groupLabel: 'Level',
+			x: 'Level 3',
+			y: $author$project$QuestionSelectionLogic$countLevel3(
+				$elm$core$Maybe$Just(model.learnProgress))
+		},
+			{
+			groupLabel: 'Level',
+			x: 'Level 4',
+			y: $author$project$QuestionSelectionLogic$countLevel4(
+				$elm$core$Maybe$Just(model.learnProgress))
+		},
+			{
+			groupLabel: 'Level',
+			x: 'Level 5',
+			y: $author$project$QuestionSelectionLogic$countLevel5(
+				$elm$core$Maybe$Just(model.learnProgress))
+		}
+		]);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Diverging = {$: 'Diverging'};
+var $data_viz_lab$elm_chart_builder$Chart$Bar$diverging = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Diverging;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig = function (config) {
+	return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Config(config);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$setXAxis = F2(
+	function (bool, _v0) {
+		var c = _v0.a;
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{showXAxis: bool}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$setYAxis = F2(
+	function (bool, _v0) {
+		var c = _v0.a;
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{showYAxis: bool}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Bar$hideAxis = function (config) {
+	return A2(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$setYAxis,
+		false,
+		A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$setXAxis, false, config));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Horizontal = {$: 'Horizontal'};
+var $data_viz_lab$elm_chart_builder$Chart$Bar$horizontal = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Horizontal;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$AccessibilityTableNoLabels = {$: 'AccessibilityTableNoLabels'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Axis$Bottom = function (a) {
+	return {$: 'Bottom', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ColorNone = {$: 'ColorNone'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainBand = function (a) {
+	return {$: 'DomainBand', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainContinuous = function (a) {
+	return {$: 'DomainContinuous', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainTime = function (a) {
+	return {$: 'DomainTime', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Axis$Left = function (a) {
+	return {$: 'Left', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Line = {$: 'Line'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$LinearScale = {$: 'LinearScale'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$NoColumnTitle = {$: 'NoColumnTitle'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$NoLabel = {$: 'NoLabel'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultHeight = 400;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$GroupedBar = {$: 'GroupedBar'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultLayout = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$GroupedBar;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultMargin = {bottom: 20, left: 30, right: 20, top: 1};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Vertical = {$: 'Vertical'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultOrientation = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Vertical;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultPadding = {bottom: 2, left: 2, right: 0, top: 0};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultWidth = 600;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$initialDomainBandStruct = {bandGroup: $elm$core$Maybe$Nothing, bandSingle: $elm$core$Maybe$Nothing, continuous: $elm$core$Maybe$Nothing};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$initialDomainContinuousStruct = {x: $elm$core$Maybe$Nothing, y: $elm$core$Maybe$Nothing};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$initialDomainTimeStruct = {x: $elm$core$Maybe$Nothing, y: $elm$core$Maybe$Nothing};
+var $folkertdev$one_true_path_experiment$SubPath$Empty = {$: 'Empty'};
+var $folkertdev$one_true_path_experiment$SubPath$empty = $folkertdev$one_true_path_experiment$SubPath$Empty;
+var $folkertdev$one_true_path_experiment$LowLevel$Command$LineTo = function (a) {
+	return {$: 'LineTo', a: a};
+};
+var $folkertdev$one_true_path_experiment$LowLevel$Command$lineTo = $folkertdev$one_true_path_experiment$LowLevel$Command$LineTo;
+var $folkertdev$one_true_path_experiment$LowLevel$Command$MoveTo = function (a) {
+	return {$: 'MoveTo', a: a};
+};
+var $folkertdev$one_true_path_experiment$LowLevel$Command$moveTo = $folkertdev$one_true_path_experiment$LowLevel$Command$MoveTo;
+var $folkertdev$one_true_path_experiment$SubPath$SubPath = function (a) {
+	return {$: 'SubPath', a: a};
+};
+var $folkertdev$elm_deque$Deque$Deque = function (a) {
+	return {$: 'Deque', a: a};
+};
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $folkertdev$elm_deque$Internal$rebalance = function (deque) {
+	var sizeF = deque.sizeF;
+	var sizeR = deque.sizeR;
+	var front = deque.front;
+	var rear = deque.rear;
+	var size1 = ((sizeF + sizeR) / 2) | 0;
+	var size2 = (sizeF + sizeR) - size1;
+	var balanceConstant = 4;
+	if ((sizeF + sizeR) < 2) {
+		return deque;
+	} else {
+		if (_Utils_cmp(sizeF, (balanceConstant * sizeR) + 1) > 0) {
+			var newRear = _Utils_ap(
+				rear,
+				$elm$core$List$reverse(
+					A2($elm$core$List$drop, size1, front)));
+			var newFront = A2($elm$core$List$take, size1, front);
+			return {front: newFront, rear: newRear, sizeF: size1, sizeR: size2};
+		} else {
+			if (_Utils_cmp(sizeR, (balanceConstant * sizeF) + 1) > 0) {
+				var newRear = A2($elm$core$List$take, size1, rear);
+				var newFront = _Utils_ap(
+					front,
+					$elm$core$List$reverse(
+						A2($elm$core$List$drop, size1, rear)));
+				return {front: newFront, rear: newRear, sizeF: size1, sizeR: size2};
+			} else {
+				return deque;
+			}
+		}
+	}
+};
+var $folkertdev$elm_deque$Internal$fromList = function (list) {
+	return $folkertdev$elm_deque$Internal$rebalance(
+		{
+			front: list,
+			rear: _List_Nil,
+			sizeF: $elm$core$List$length(list),
+			sizeR: 0
+		});
+};
+var $folkertdev$elm_deque$Deque$fromList = A2($elm$core$Basics$composeL, $folkertdev$elm_deque$Deque$Deque, $folkertdev$elm_deque$Internal$fromList);
+var $folkertdev$one_true_path_experiment$SubPath$with = F2(
+	function (moveto, drawtos) {
+		return $folkertdev$one_true_path_experiment$SubPath$SubPath(
+			{
+				drawtos: $folkertdev$elm_deque$Deque$fromList(drawtos),
+				moveto: moveto
+			});
+	});
+var $folkertdev$one_true_path_experiment$Curve$linear = function (points) {
+	if (!points.b) {
+		return $folkertdev$one_true_path_experiment$SubPath$empty;
+	} else {
+		var x = points.a;
+		var xs = points.b;
+		return A2(
+			$folkertdev$one_true_path_experiment$SubPath$with,
+			$folkertdev$one_true_path_experiment$LowLevel$Command$moveTo(x),
+			_List_fromArray(
+				[
+					$folkertdev$one_true_path_experiment$LowLevel$Command$lineTo(xs)
+				]));
+	}
+};
+var $gampleman$elm_visualization$Shape$linearCurve = $folkertdev$one_true_path_experiment$Curve$linear;
+var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultConfig = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+	{
+		accessibilityContent: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$AccessibilityTableNoLabels,
+		annotations: _List_Nil,
+		axisXBand: $data_viz_lab$elm_chart_builder$Chart$Internal$Axis$Bottom(_List_Nil),
+		axisXContinuous: $data_viz_lab$elm_chart_builder$Chart$Internal$Axis$Bottom(_List_Nil),
+		axisXTime: $data_viz_lab$elm_chart_builder$Chart$Internal$Axis$Bottom(_List_Nil),
+		axisYContinuous: $data_viz_lab$elm_chart_builder$Chart$Internal$Axis$Left(_List_Nil),
+		colorResource: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ColorNone,
+		coreStyle: _List_Nil,
+		coreStyleFromPointBandX: $elm$core$Basics$always(_List_Nil),
+		curve: function (d) {
+			return $gampleman$elm_visualization$Shape$linearCurve(d);
+		},
+		domainBand: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainBand($data_viz_lab$elm_chart_builder$Chart$Internal$Type$initialDomainBandStruct),
+		domainContinuous: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainContinuous($data_viz_lab$elm_chart_builder$Chart$Internal$Type$initialDomainContinuousStruct),
+		domainTime: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainTime($data_viz_lab$elm_chart_builder$Chart$Internal$Type$initialDomainTimeStruct),
+		events: _List_Nil,
+		height: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultHeight,
+		histogramDomain: $elm$core$Maybe$Nothing,
+		layout: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultLayout,
+		lineDraw: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Line,
+		margin: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultMargin,
+		orientation: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultOrientation,
+		padding: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultPadding,
+		showColumnTitle: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$NoColumnTitle,
+		showDataPoints: false,
+		showGroupLabels: false,
+		showLabels: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$NoLabel,
+		showXAxis: true,
+		showYAxis: true,
+		svgDesc: '',
+		svgTitle: '',
+		symbols: _List_Nil,
+		tableFloatFormat: $elm$core$String$fromFloat,
+		tablePosixFormat: A2($elm$core$Basics$composeR, $elm$time$Time$posixToMillis, $elm$core$String$fromInt),
+		width: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultWidth,
+		yScale: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$LinearScale,
+		zone: $elm$time$Time$utc
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$setDimensions = F2(
+	function (_v0, _v1) {
+		var margin = _v0.margin;
+		var width = _v0.width;
+		var height = _v0.height;
+		var c = _v1.a;
+		var top = margin.top + c.padding.top;
+		var right = margin.right + c.padding.right;
+		var left = margin.left + c.padding.left;
+		var bottom = margin.bottom + c.padding.bottom;
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{height: (height - top) - bottom, margin: margin, width: (width - left) - right}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Bar$init = function (c) {
+	return A2(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$setDimensions,
+		{height: c.height, margin: c.margin, width: c.width},
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$defaultConfig);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DataBand = function (a) {
+	return {$: 'DataBand', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromExternalData = function (_v0) {
+	var data = _v0.a;
+	return data;
+};
+var $elm_community$list_extra$List$Extra$groupWhile = F2(
+	function (isSameGroup, items) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, acc) {
+					if (!acc.b) {
+						return _List_fromArray(
+							[
+								_Utils_Tuple2(x, _List_Nil)
+							]);
+					} else {
+						var _v1 = acc.a;
+						var y = _v1.a;
+						var restOfGroup = _v1.b;
+						var groups = acc.b;
+						return A2(isSameGroup, x, y) ? A2(
+							$elm$core$List$cons,
+							_Utils_Tuple2(
+								x,
+								A2($elm$core$List$cons, y, restOfGroup)),
+							groups) : A2(
+							$elm$core$List$cons,
+							_Utils_Tuple2(x, _List_Nil),
+							acc);
+					}
+				}),
+			_List_Nil,
+			items);
+	});
+var $elm$core$List$sortWith = _List_sortWith;
+var $elm$core$String$toFloat = _String_toFloat;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$sortStrings = F2(
+	function (accessor, strings) {
+		return A2(
+			$elm$core$List$sortWith,
+			F2(
+				function (a_, b_) {
+					var b = accessor(b_);
+					var a = accessor(a_);
+					var _v0 = _Utils_Tuple2(
+						$elm$core$String$toFloat(a),
+						$elm$core$String$toFloat(b));
+					if ((_v0.a.$ === 'Just') && (_v0.b.$ === 'Just')) {
+						var floatA = _v0.a.a;
+						var floatB = _v0.b.a;
+						return A2($elm$core$Basics$compare, floatA, floatB);
+					} else {
+						return A2($elm$core$Basics$compare, a, b);
+					}
+				}),
+			strings);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$externalToDataBand = F2(
+	function (externalData, accessor) {
+		var data = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromExternalData(externalData);
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DataBand(
+			A2(
+				$elm$core$List$map,
+				function (d) {
+					var groupLabel = accessor.xGroup(d.a);
+					var firstPoint = function (p) {
+						return _Utils_Tuple2(
+							accessor.xValue(p),
+							accessor.yValue(p));
+					}(d.a);
+					var points = A2(
+						$elm$core$List$cons,
+						firstPoint,
+						A2(
+							$elm$core$List$map,
+							function (p) {
+								return _Utils_Tuple2(
+									accessor.xValue(p),
+									accessor.yValue(p));
+							},
+							d.b));
+					return {groupLabel: groupLabel, points: points};
+				},
+				A2(
+					$elm_community$list_extra$List$Extra$groupWhile,
+					F2(
+						function (a, b) {
+							return _Utils_eq(
+								accessor.xGroup(a),
+								accessor.xGroup(b));
+						}),
+					A2(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$sortStrings,
+						A2(
+							$elm$core$Basics$composeR,
+							accessor.xGroup,
+							$elm$core$Maybe$withDefault('')),
+						data))));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig = function (_v0) {
+	var config = _v0.a;
+	return config;
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$RenderChart = {$: 'RenderChart'};
+var $elm_community$typed_svg$TypedSvg$Types$Translate = F2(
+	function (a, b) {
+		return {$: 'Translate', a: a, b: b};
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaHidden = A2($elm$html$Html$Attributes$attribute, 'aria-hidden', 'true');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledby = function (label) {
+	return A2($elm$html$Html$Attributes$attribute, 'aria-labelledby', label);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledbyContent = function (c) {
+	var _v0 = c.accessibilityContent;
+	if (_v0.$ === 'AccessibilityNone') {
+		return ((c.svgDesc !== '') && (c.svgTitle !== '')) ? _List_fromArray(
+			[
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledby(c.svgDesc + (' ' + c.svgTitle))
+			]) : ((c.svgDesc !== '') ? _List_fromArray(
+			[
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledby(c.svgDesc)
+			]) : ((c.svgTitle !== '') ? _List_fromArray(
+			[
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledby(c.svgTitle)
+			]) : _List_Nil));
+	} else {
+		return _List_fromArray(
+			[$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaHidden]);
+	}
+};
+var $gampleman$elm_visualization$Scale$Scale = function (a) {
+	return {$: 'Scale', a: a};
+};
+var $gampleman$elm_visualization$Scale$Band$normalizeConfig = function (_v0) {
+	var paddingInner = _v0.paddingInner;
+	var paddingOuter = _v0.paddingOuter;
+	var align = _v0.align;
+	return {
+		align: A3($elm$core$Basics$clamp, 0, 1, align),
+		paddingInner: A3($elm$core$Basics$clamp, 0, 1, paddingInner),
+		paddingOuter: A3($elm$core$Basics$clamp, 0, 1, paddingOuter)
+	};
+};
+var $gampleman$elm_visualization$Scale$Band$bandwidth = F3(
+	function (cfg, domain, _v0) {
+		var d0 = _v0.a;
+		var d1 = _v0.b;
+		var n = $elm$core$List$length(domain);
+		var _v1 = (_Utils_cmp(d0, d1) < 0) ? _Utils_Tuple2(d0, d1) : _Utils_Tuple2(d1, d0);
+		var start = _v1.a;
+		var stop = _v1.b;
+		var _v2 = $gampleman$elm_visualization$Scale$Band$normalizeConfig(cfg);
+		var paddingInner = _v2.paddingInner;
+		var paddingOuter = _v2.paddingOuter;
+		var step = (stop - start) / A2($elm$core$Basics$max, 1, (n - paddingInner) + (paddingOuter * 2));
+		return step * (1 - paddingInner);
+	});
+var $gampleman$elm_visualization$Scale$Band$computePositions = F3(
+	function (cfg, n, _v0) {
+		var start = _v0.a;
+		var stop = _v0.b;
+		var _v1 = $gampleman$elm_visualization$Scale$Band$normalizeConfig(cfg);
+		var paddingInner = _v1.paddingInner;
+		var paddingOuter = _v1.paddingOuter;
+		var align = _v1.align;
+		var step = (stop - start) / A2($elm$core$Basics$max, 1, (n - paddingInner) + (paddingOuter * 2));
+		var start2 = start + (((stop - start) - (step * (n - paddingInner))) * align);
+		return _Utils_Tuple2(start2, step);
+	});
+var $gampleman$elm_visualization$Scale$Band$indexOfHelp = F3(
+	function (index, value, list) {
+		indexOfHelp:
+		while (true) {
+			if (!list.b) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (_Utils_eq(value, x)) {
+					return $elm$core$Maybe$Just(index);
+				} else {
+					var $temp$index = index + 1,
+						$temp$value = value,
+						$temp$list = xs;
+					index = $temp$index;
+					value = $temp$value;
+					list = $temp$list;
+					continue indexOfHelp;
+				}
+			}
+		}
+	});
+var $gampleman$elm_visualization$Scale$Band$indexOf = $gampleman$elm_visualization$Scale$Band$indexOfHelp(0);
+var $gampleman$elm_visualization$Scale$Band$convert = F4(
+	function (cfg, domain, _v0, value) {
+		var start = _v0.a;
+		var stop = _v0.b;
+		var _v1 = A2($gampleman$elm_visualization$Scale$Band$indexOf, value, domain);
+		if (_v1.$ === 'Just') {
+			var index = _v1.a;
+			var n = $elm$core$List$length(domain);
+			if (_Utils_cmp(start, stop) < 0) {
+				var _v2 = A3(
+					$gampleman$elm_visualization$Scale$Band$computePositions,
+					cfg,
+					n,
+					_Utils_Tuple2(start, stop));
+				var start2 = _v2.a;
+				var step = _v2.b;
+				return start2 + (step * index);
+			} else {
+				var _v3 = A3(
+					$gampleman$elm_visualization$Scale$Band$computePositions,
+					cfg,
+					n,
+					_Utils_Tuple2(stop, start));
+				var stop2 = _v3.a;
+				var step = _v3.b;
+				return stop2 + (step * ((n - index) - 1));
+			}
+		} else {
+			return 0 / 0;
+		}
+	});
+var $gampleman$elm_visualization$Scale$band = F3(
+	function (config, range_, domain_) {
+		return $gampleman$elm_visualization$Scale$Scale(
+			{
+				bandwidth: A3($gampleman$elm_visualization$Scale$Band$bandwidth, config, domain_, range_),
+				convert: $gampleman$elm_visualization$Scale$Band$convert(config),
+				domain: domain_,
+				range: range_
+			});
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName = 'ecb-axis';
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisXClassName = 'ecb-axis-x';
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName = 'ecb-axis-y';
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYRightClassName = 'ecb-axis-y-right';
+var $gampleman$elm_visualization$Scale$tickFormat = function (_v0) {
+	var opts = _v0.a;
+	return opts.tickFormat(opts.domain);
+};
+var $gampleman$elm_visualization$Scale$ticks = F2(
+	function (_v0, count) {
+		var scale = _v0.a;
+		return A2(scale.ticks, scale.domain, count);
+	});
+var $gampleman$elm_visualization$Axis$computeOptions = F2(
+	function (attrs, scale) {
+		var _v0 = A3(
+			$elm$core$List$foldl,
+			F2(
+				function (attr, _v1) {
+					var babyOpts = _v1.a;
+					var post = _v1.b;
+					switch (attr.$) {
+						case 'TickCount':
+							var val = attr.a;
+							return _Utils_Tuple2(
+								_Utils_update(
+									babyOpts,
+									{tickCount: val}),
+								post);
+						case 'TickSizeInner':
+							var val = attr.a;
+							return _Utils_Tuple2(
+								_Utils_update(
+									babyOpts,
+									{tickSizeInner: val}),
+								post);
+						case 'TickSizeOuter':
+							var val = attr.a;
+							return _Utils_Tuple2(
+								_Utils_update(
+									babyOpts,
+									{tickSizeOuter: val}),
+								post);
+						case 'TickPadding':
+							var val = attr.a;
+							return _Utils_Tuple2(
+								_Utils_update(
+									babyOpts,
+									{tickPadding: val}),
+								post);
+						default:
+							return _Utils_Tuple2(
+								babyOpts,
+								A2($elm$core$List$cons, attr, post));
+					}
+				}),
+			_Utils_Tuple2(
+				{tickCount: 10, tickPadding: 3, tickSizeInner: 6, tickSizeOuter: 6},
+				_List_Nil),
+			attrs);
+		var opts = _v0.a;
+		var postList = _v0.b;
+		return A3(
+			$elm$core$List$foldl,
+			F2(
+				function (attr, options) {
+					switch (attr.$) {
+						case 'Ticks':
+							var val = attr.a;
+							return _Utils_update(
+								options,
+								{ticks: val});
+						case 'TickFormat':
+							var val = attr.a;
+							return _Utils_update(
+								options,
+								{tickFormat: val});
+						default:
+							return options;
+					}
+				}),
+			{
+				tickCount: opts.tickCount,
+				tickFormat: A2($gampleman$elm_visualization$Scale$tickFormat, scale, opts.tickCount),
+				tickPadding: opts.tickPadding,
+				tickSizeInner: opts.tickSizeInner,
+				tickSizeOuter: opts.tickSizeOuter,
+				ticks: A2($gampleman$elm_visualization$Scale$ticks, scale, opts.tickCount)
+			},
+			postList);
+	});
+var $gampleman$elm_visualization$Scale$convert = F2(
+	function (_v0, value) {
+		var scale = _v0.a;
+		return A3(scale.convert, scale.domain, scale.range, value);
+	});
+var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
+var $elm$svg$Svg$Attributes$dy = _VirtualDom_attribute('dy');
+var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var $elm$svg$Svg$Attributes$fontFamily = _VirtualDom_attribute('font-family');
+var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
+var $elm$svg$Svg$g = $elm$svg$Svg$trustedNode('g');
+var $elm$svg$Svg$line = $elm$svg$Svg$trustedNode('line');
+var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
+var $gampleman$elm_visualization$Scale$rangeExtent = function (_v0) {
+	var options = _v0.a;
+	return A2(options.rangeExtent, options.domain, options.range);
+};
+var $elm$svg$Svg$Attributes$stroke = _VirtualDom_attribute('stroke');
+var $elm$svg$Svg$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$svg$Svg$Attributes$textAnchor = _VirtualDom_attribute('text-anchor');
+var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
+var $elm$svg$Svg$Attributes$transform = _VirtualDom_attribute('transform');
+var $gampleman$elm_visualization$Axis$element = F4(
+	function (_v0, k, displacement, textAnchorPosition) {
+		var x = _v0.x;
+		var y = _v0.y;
+		var x1 = _v0.x1;
+		var x2 = _v0.x2;
+		var y1 = _v0.y1;
+		var y2 = _v0.y2;
+		var translate = _v0.translate;
+		var horizontal = _v0.horizontal;
+		return F2(
+			function (attrs, scale) {
+				var rangeExtent = $gampleman$elm_visualization$Scale$rangeExtent(scale);
+				var range1 = rangeExtent.b + 0.5;
+				var range0 = rangeExtent.a + 0.5;
+				var position = $gampleman$elm_visualization$Scale$convert(scale);
+				var opts = A2($gampleman$elm_visualization$Axis$computeOptions, attrs, scale);
+				var spacing = A2($elm$core$Basics$max, opts.tickSizeInner, 0) + opts.tickPadding;
+				var drawTick = function (tick) {
+					return A2(
+						$elm$svg$Svg$g,
+						_List_fromArray(
+							[
+								$elm$svg$Svg$Attributes$class('tick'),
+								$elm$svg$Svg$Attributes$transform(
+								translate(
+									position(tick)))
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$svg$Svg$line,
+								_List_fromArray(
+									[
+										$elm$svg$Svg$Attributes$stroke('#000'),
+										x2(k * opts.tickSizeInner),
+										y1(0.5),
+										y2(0.5)
+									]),
+								_List_Nil),
+								A2(
+								$elm$svg$Svg$text_,
+								_List_fromArray(
+									[
+										$elm$svg$Svg$Attributes$fill('#000'),
+										x(k * spacing),
+										y(0.5),
+										$elm$svg$Svg$Attributes$dy(displacement)
+									]),
+								_List_fromArray(
+									[
+										$elm$svg$Svg$text(
+										opts.tickFormat(tick))
+									]))
+							]));
+				};
+				var domainLine = horizontal ? ('M' + ($elm$core$String$fromFloat(k * opts.tickSizeOuter) + (',' + ($elm$core$String$fromFloat(range0) + ('H0.5V' + ($elm$core$String$fromFloat(range1) + ('H' + $elm$core$String$fromFloat(k * opts.tickSizeOuter)))))))) : ('M' + ($elm$core$String$fromFloat(range0) + (',' + ($elm$core$String$fromFloat(k * opts.tickSizeOuter) + ('V0.5H' + ($elm$core$String$fromFloat(range1) + ('V' + $elm$core$String$fromFloat(k * opts.tickSizeOuter))))))));
+				return A2(
+					$elm$svg$Svg$g,
+					_List_fromArray(
+						[
+							$elm$svg$Svg$Attributes$fill('none'),
+							$elm$svg$Svg$Attributes$fontSize('10'),
+							$elm$svg$Svg$Attributes$fontFamily('sans-serif'),
+							$elm$svg$Svg$Attributes$textAnchor(textAnchorPosition)
+						]),
+					A2(
+						$elm$core$List$cons,
+						A2(
+							$elm$svg$Svg$path,
+							_List_fromArray(
+								[
+									$elm$svg$Svg$Attributes$class('domain'),
+									$elm$svg$Svg$Attributes$stroke('#000'),
+									$elm$svg$Svg$Attributes$d(domainLine)
+								]),
+							_List_Nil),
+						A2($elm$core$List$map, drawTick, opts.ticks)));
+			});
+	});
+var $elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
+var $elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
+var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
+var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
+var $gampleman$elm_visualization$Axis$verticalAttrs = {
+	horizontal: false,
+	translate: function (x) {
+		return 'translate(' + ($elm$core$String$fromFloat(x) + ', 0)');
+	},
+	x: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y, $elm$core$String$fromFloat),
+	x1: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y1, $elm$core$String$fromFloat),
+	x2: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y2, $elm$core$String$fromFloat),
+	y: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$x, $elm$core$String$fromFloat),
+	y1: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$x1, $elm$core$String$fromFloat),
+	y2: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$x2, $elm$core$String$fromFloat)
+};
+var $gampleman$elm_visualization$Axis$bottom = A4($gampleman$elm_visualization$Axis$element, $gampleman$elm_visualization$Axis$verticalAttrs, 1, '0.71em', 'middle');
+var $elm_community$typed_svg$TypedSvg$Core$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm_community$typed_svg$TypedSvg$Attributes$class = function (names) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'class',
+		A2($elm$core$String$join, ' ', names));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName = 'ecb-component';
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$floorFloat = function (f) {
+	return $elm$core$Basics$floor(f);
+};
+var $elm$virtual_dom$VirtualDom$nodeNS = F2(
+	function (namespace, tag) {
+		return A2(
+			_VirtualDom_nodeNS,
+			namespace,
+			_VirtualDom_noScript(tag));
+	});
+var $elm_community$typed_svg$TypedSvg$Core$node = $elm$virtual_dom$VirtualDom$nodeNS('http://www.w3.org/2000/svg');
+var $elm_community$typed_svg$TypedSvg$g = $elm_community$typed_svg$TypedSvg$Core$node('g');
+var $gampleman$elm_visualization$Axis$horizontalAttrs = {
+	horizontal: true,
+	translate: function (y) {
+		return 'translate(0, ' + ($elm$core$String$fromFloat(y) + ')');
+	},
+	x: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$x, $elm$core$String$fromFloat),
+	x1: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$x1, $elm$core$String$fromFloat),
+	x2: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$x2, $elm$core$String$fromFloat),
+	y: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y, $elm$core$String$fromFloat),
+	y1: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y1, $elm$core$String$fromFloat),
+	y2: A2($elm$core$Basics$composeL, $elm$svg$Svg$Attributes$y2, $elm$core$String$fromFloat)
+};
+var $gampleman$elm_visualization$Axis$left = A4($gampleman$elm_visualization$Axis$element, $gampleman$elm_visualization$Axis$horizontalAttrs, -1, '0.32em', 'end');
+var $gampleman$elm_visualization$Axis$right = A4($gampleman$elm_visualization$Axis$element, $gampleman$elm_visualization$Axis$horizontalAttrs, 1, '0.32em', 'start');
+var $gampleman$elm_visualization$Axis$TickPadding = function (a) {
+	return {$: 'TickPadding', a: a};
+};
+var $gampleman$elm_visualization$Axis$tickPadding = $gampleman$elm_visualization$Axis$TickPadding;
+var $gampleman$elm_visualization$Axis$TickSizeInner = function (a) {
+	return {$: 'TickSizeInner', a: a};
+};
+var $gampleman$elm_visualization$Axis$tickSizeInner = $gampleman$elm_visualization$Axis$TickSizeInner;
+var $gampleman$elm_visualization$Axis$TickSizeOuter = function (a) {
+	return {$: 'TickSizeOuter', a: a};
+};
+var $gampleman$elm_visualization$Axis$tickSizeOuter = $gampleman$elm_visualization$Axis$TickSizeOuter;
+var $elm$core$String$concat = function (strings) {
+	return A2($elm$core$String$join, '', strings);
+};
+var $elm_community$typed_svg$TypedSvg$TypesToStrings$transformToString = function (xform) {
+	var tr = F2(
+		function (name, args) {
+			return $elm$core$String$concat(
+				_List_fromArray(
+					[
+						name,
+						'(',
+						A2(
+						$elm$core$String$join,
+						' ',
+						A2($elm$core$List$map, $elm$core$String$fromFloat, args)),
+						')'
+					]));
+		});
+	switch (xform.$) {
+		case 'Matrix':
+			var a = xform.a;
+			var b = xform.b;
+			var c = xform.c;
+			var d = xform.d;
+			var e = xform.e;
+			var f = xform.f;
+			return A2(
+				tr,
+				'matrix',
+				_List_fromArray(
+					[a, b, c, d, e, f]));
+		case 'Rotate':
+			var a = xform.a;
+			var x = xform.b;
+			var y = xform.c;
+			return A2(
+				tr,
+				'rotate',
+				_List_fromArray(
+					[a, x, y]));
+		case 'Scale':
+			var x = xform.a;
+			var y = xform.b;
+			return A2(
+				tr,
+				'scale',
+				_List_fromArray(
+					[x, y]));
+		case 'SkewX':
+			var x = xform.a;
+			return A2(
+				tr,
+				'skewX',
+				_List_fromArray(
+					[x]));
+		case 'SkewY':
+			var y = xform.a;
+			return A2(
+				tr,
+				'skewY',
+				_List_fromArray(
+					[y]));
+		default:
+			var x = xform.a;
+			var y = xform.b;
+			return A2(
+				tr,
+				'translate',
+				_List_fromArray(
+					[x, y]));
+	}
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$transform = function (transforms) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'transform',
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2($elm$core$List$map, $elm_community$typed_svg$TypedSvg$TypesToStrings$transformToString, transforms)));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$bandGroupedYAxis = F3(
+	function (c, iconOffset, continuousScale) {
+		var p = c.padding;
+		var m = c.margin;
+		if (c.showYAxis) {
+			var _v0 = _Utils_Tuple2(c.orientation, c.axisYContinuous);
+			if (_v0.a.$ === 'Vertical') {
+				switch (_v0.b.$) {
+					case 'Left':
+						var _v1 = _v0.a;
+						var attributes = _v0.b.a;
+						return _List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2(
+												$elm_community$typed_svg$TypedSvg$Types$Translate,
+												$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$floorFloat(m.left),
+												iconOffset + m.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$left, attributes, continuousScale)
+									]))
+							]);
+					case 'Right':
+						var _v2 = _v0.a;
+						var attributes = _v0.b.a;
+						return _List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, (c.width + c.margin.left) + c.padding.left, iconOffset + c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$right, attributes, continuousScale)
+									]))
+							]);
+					default:
+						var _v3 = _v0.a;
+						var attributes = _v0.b.a;
+						var rightAttrs = _Utils_ap(
+							attributes,
+							_List_fromArray(
+								[
+									$gampleman$elm_visualization$Axis$tickSizeInner(c.width),
+									$gampleman$elm_visualization$Axis$tickPadding(c.margin.right + c.margin.left),
+									$gampleman$elm_visualization$Axis$tickSizeOuter(0)
+								]));
+						var leftAttrs = _Utils_ap(
+							attributes,
+							_List_fromArray(
+								[
+									$gampleman$elm_visualization$Axis$tickSizeInner(0)
+								]));
+						return _List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, c.margin.left - c.padding.left, iconOffset + c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$left, leftAttrs, continuousScale)
+									])),
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, c.margin.left - c.padding.left, c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYRightClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$right, rightAttrs, continuousScale)
+									]))
+							]);
+				}
+			} else {
+				switch (_v0.b.$) {
+					case 'Left':
+						var _v4 = _v0.a;
+						var attributes = _v0.b.a;
+						return _List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, c.margin.left, (c.height + c.padding.bottom) + c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisXClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$bottom, attributes, continuousScale)
+									]))
+							]);
+					case 'Right':
+						var _v5 = _v0.a;
+						var attributes = _v0.b.a;
+						return _List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, c.margin.left, (c.height + c.padding.bottom) + c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisXClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$bottom, attributes, continuousScale)
+									]))
+							]);
+					default:
+						var _v6 = _v0.a;
+						var attributes = _v0.b.a;
+						var topAttrs = _Utils_ap(
+							attributes,
+							_List_fromArray(
+								[
+									$gampleman$elm_visualization$Axis$tickSizeInner(c.height),
+									$gampleman$elm_visualization$Axis$tickSizeOuter(0),
+									$gampleman$elm_visualization$Axis$tickPadding(c.margin.top + c.margin.bottom)
+								]));
+						var bottomAttrs = _Utils_ap(
+							attributes,
+							_List_fromArray(
+								[
+									$gampleman$elm_visualization$Axis$tickSizeInner(0)
+								]));
+						return _List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, c.margin.left, (c.height + c.padding.bottom) + c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisXClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$bottom, bottomAttrs, continuousScale)
+									])),
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, c.margin.left, c.margin.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYRightClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								_List_fromArray(
+									[
+										A2($gampleman$elm_visualization$Axis$bottom, topAttrs, continuousScale)
+									]))
+							]);
+				}
+			}
+		} else {
+			return _List_Nil;
+		}
+	});
+var $gampleman$elm_visualization$Scale$toRenderable = F2(
+	function (toString, _v0) {
+		var scale = _v0.a;
+		return $gampleman$elm_visualization$Scale$Scale(
+			{
+				convert: F3(
+					function (dmn, rng, value) {
+						return A3(scale.convert, dmn, rng, value) + (A2($elm$core$Basics$max, scale.bandwidth - 1, 0) / 2);
+					}),
+				domain: scale.domain,
+				range: scale.range,
+				rangeExtent: F2(
+					function (_v1, rng) {
+						return rng;
+					}),
+				tickFormat: F2(
+					function (_v2, _v3) {
+						return toString;
+					}),
+				ticks: F2(
+					function (dmn, _v4) {
+						return dmn;
+					})
+			});
+	});
+var $gampleman$elm_visualization$Axis$top = A4($gampleman$elm_visualization$Axis$element, $gampleman$elm_visualization$Axis$verticalAttrs, -1, '0em', 'middle');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$bandXAxis = F2(
+	function (c, bandScale) {
+		var p = c.padding;
+		var m = c.margin;
+		if (c.showXAxis) {
+			var _v0 = _Utils_Tuple2(c.orientation, c.axisXBand);
+			if (_v0.a.$ === 'Vertical') {
+				if (_v0.b.$ === 'Bottom') {
+					var _v1 = _v0.a;
+					var attributes = _v0.b.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, m.left + p.left, ((m.top + p.top) + c.height) + p.bottom)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisXClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$gampleman$elm_visualization$Axis$bottom,
+									attributes,
+									A2($gampleman$elm_visualization$Scale$toRenderable, $elm$core$Basics$identity, bandScale))
+								]))
+						]);
+				} else {
+					var _v2 = _v0.a;
+					var attributes = _v0.b.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, m.left + p.left, m.top)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisXClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$gampleman$elm_visualization$Axis$top,
+									attributes,
+									A2($gampleman$elm_visualization$Scale$toRenderable, $elm$core$Basics$identity, bandScale))
+								]))
+						]);
+				}
+			} else {
+				if (_v0.b.$ === 'Bottom') {
+					var _v3 = _v0.a;
+					var attributes = _v0.b.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, m.left - p.left, m.top)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$gampleman$elm_visualization$Axis$left,
+									attributes,
+									A2($gampleman$elm_visualization$Scale$toRenderable, $elm$core$Basics$identity, bandScale))
+								]))
+						]);
+				} else {
+					var _v4 = _v0.a;
+					var attributes = _v0.b.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, m.left - p.left, m.top)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$axisYClassName, $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$gampleman$elm_visualization$Axis$right,
+									attributes,
+									A2($gampleman$elm_visualization$Scale$toRenderable, $elm$core$Basics$identity, bandScale))
+								]))
+						]);
+				}
+			}
+		} else {
+			return _List_Nil;
+		}
+	});
+var $gampleman$elm_visualization$Scale$bandwidth = function (_v0) {
+	var scale = _v0.a;
+	return scale.bandwidth;
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$barClassName = 'ecb-bar';
+var $gampleman$elm_visualization$Scale$clamp = function (_v0) {
+	var scale = _v0.a;
+	var convert_ = F3(
+		function (_v1, range_, value) {
+			var mi = _v1.a;
+			var ma = _v1.b;
+			return A3(
+				scale.convert,
+				_Utils_Tuple2(mi, ma),
+				range_,
+				A3(
+					$elm$core$Basics$clamp,
+					A2($elm$core$Basics$min, mi, ma),
+					A2($elm$core$Basics$max, mi, ma),
+					value));
+		});
+	return $gampleman$elm_visualization$Scale$Scale(
+		_Utils_update(
+			scale,
+			{convert: convert_}));
+};
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$html$Html$Attributes$classList = function (classes) {
+	return $elm$html$Html$Attributes$class(
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2(
+				$elm$core$List$map,
+				$elm$core$Tuple$first,
+				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName = 'ecb-column';
+var $elm_community$typed_svg$TypedSvg$Types$RenderCrispEdges = {$: 'RenderCrispEdges'};
+var $elm$core$Basics$round = _Basics_round;
+var $avh4$elm_color$Color$toCssString = function (_v0) {
+	var r = _v0.a;
+	var g = _v0.b;
+	var b = _v0.c;
+	var a = _v0.d;
+	var roundTo = function (x) {
+		return $elm$core$Basics$round(x * 1000) / 1000;
+	};
+	var pct = function (x) {
+		return $elm$core$Basics$round(x * 10000) / 100;
+	};
+	return $elm$core$String$concat(
+		_List_fromArray(
+			[
+				'rgba(',
+				$elm$core$String$fromFloat(
+				pct(r)),
+				'%,',
+				$elm$core$String$fromFloat(
+				pct(g)),
+				'%,',
+				$elm$core$String$fromFloat(
+				pct(b)),
+				'%,',
+				$elm$core$String$fromFloat(
+				roundTo(a)),
+				')'
+			]));
+};
+var $avh4$elm_color$Color$RgbaSpace = F4(
+	function (a, b, c, d) {
+		return {$: 'RgbaSpace', a: a, b: b, c: c, d: d};
+	});
+var $avh4$elm_color$Color$white = A4($avh4$elm_color$Color$RgbaSpace, 255 / 255, 255 / 255, 255 / 255, 1.0);
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$colorPaletteToColor = F2(
+	function (palette, idx) {
+		var moduleIndex = A2(
+			$elm$core$Basics$modBy,
+			$elm$core$List$length(palette),
+			idx);
+		return $avh4$elm_color$Color$toCssString(
+			A2(
+				$elm$core$Maybe$withDefault,
+				$avh4$elm_color$Color$white,
+				$elm$core$List$head(
+					A2($elm$core$List$drop, moduleIndex, palette))));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$colorStyle = F3(
+	function (c, idx, interpolatorInput) {
+		var _v0 = _Utils_Tuple3(c.colorResource, idx, interpolatorInput);
+		_v0$3:
+		while (true) {
+			switch (_v0.a.$) {
+				case 'ColorPalette':
+					if (_v0.b.$ === 'Just') {
+						var colors = _v0.a.a;
+						var i = _v0.b.a;
+						return 'fill: ' + (A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$colorPaletteToColor, colors, i) + (';stroke: ' + A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$colorPaletteToColor, colors, i)));
+					} else {
+						break _v0$3;
+					}
+				case 'ColorInterpolator':
+					if (_v0.c.$ === 'Just') {
+						var interpolator = _v0.a.a;
+						var i = _v0.c.a;
+						return 'fill: ' + ($avh4$elm_color$Color$toCssString(
+							interpolator(i)) + (';stroke: ' + $avh4$elm_color$Color$toCssString(
+							interpolator(i))));
+					} else {
+						break _v0$3;
+					}
+				case 'Color':
+					if ((_v0.b.$ === 'Nothing') && (_v0.c.$ === 'Nothing')) {
+						var color = _v0.a.a;
+						var _v1 = _v0.b;
+						var _v2 = _v0.c;
+						return 'fill: ' + ($avh4$elm_color$Color$toCssString(color) + (';stroke: ' + $avh4$elm_color$Color$toCssString(color)));
+					} else {
+						break _v0$3;
+					}
+				default:
+					break _v0$3;
+			}
+		}
+		return 'stroke:grey';
+	});
+var $elm_community$typed_svg$TypedSvg$Core$text = $elm$virtual_dom$VirtualDom$text;
+var $elm_community$typed_svg$TypedSvg$title = $elm_community$typed_svg$TypedSvg$Core$node('title');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$columnTitleText = F2(
+	function (config, point) {
+		var _v0 = point;
+		var xVal = _v0.a;
+		var yVal = _v0.b;
+		var _v1 = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).showColumnTitle;
+		switch (_v1.$) {
+			case 'YColumnTitle':
+				var formatter = _v1.a;
+				return _List_fromArray(
+					[
+						A2(
+						$elm_community$typed_svg$TypedSvg$title,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								formatter(yVal))
+							]))
+					]);
+			case 'XOrdinalColumnTitle':
+				return _List_fromArray(
+					[
+						A2(
+						$elm_community$typed_svg$TypedSvg$title,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(xVal)
+							]))
+					]);
+			default:
+				return _List_Nil;
+		}
+	});
+var $elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString = function (length) {
+	switch (length.$) {
+		case 'Cm':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'cm';
+		case 'Em':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'em';
+		case 'Ex':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'ex';
+		case 'In':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'in';
+		case 'Mm':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'mm';
+		case 'Num':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x);
+		case 'Pc':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'pc';
+		case 'Percent':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + '%';
+		case 'Pt':
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'pt';
+		default:
+			var x = length.a;
+			return $elm$core$String$fromFloat(x) + 'px';
+	}
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$height = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'height',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Types$Px = function (a) {
+	return {$: 'Px', a: a};
+};
+var $elm_community$typed_svg$TypedSvg$Types$px = $elm_community$typed_svg$TypedSvg$Types$Px;
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$height = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$height(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $elm_community$typed_svg$TypedSvg$Types$AnchorStart = {$: 'AnchorStart'};
+var $elm_community$typed_svg$TypedSvg$Types$DominantBaselineMiddle = {$: 'DominantBaselineMiddle'};
+var $elm_community$typed_svg$TypedSvg$TypesToStrings$dominantBaselineToString = function (dominantBaseline) {
+	switch (dominantBaseline.$) {
+		case 'DominantBaselineAuto':
+			return 'auto';
+		case 'DominantBaselineUseScript':
+			return 'use-script';
+		case 'DominantBaselineNoChange':
+			return 'no-change';
+		case 'DominantBaselineResetSize':
+			return 'reset-size';
+		case 'DominantBaselineIdeographic':
+			return 'ideographic';
+		case 'DominantBaselineAlphabetic':
+			return 'alphabetic';
+		case 'DominantBaselineHanging':
+			return 'hanging';
+		case 'DominantBaselineMathematical':
+			return 'mathematical';
+		case 'DominantBaselineCentral':
+			return 'central';
+		case 'DominantBaselineMiddle':
+			return 'middle';
+		case 'DominantBaselineTextAfterEdge':
+			return 'text-after-edge';
+		case 'DominantBaselineTextBeforeEdge':
+			return 'text-before-edge';
+		default:
+			return 'inherit';
+	}
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$dominantBaseline = function (baseline) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'dominant-baseline',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$dominantBaselineToString(baseline));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$labelClassName = 'ecb-label';
+var $elm_community$typed_svg$TypedSvg$TypesToStrings$anchorAlignmentToString = function (anchorAlignment) {
+	switch (anchorAlignment.$) {
+		case 'AnchorInherit':
+			return 'inherit';
+		case 'AnchorStart':
+			return 'start';
+		case 'AnchorMiddle':
+			return 'middle';
+		default:
+			return 'end';
+	}
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$textAnchor = function (anchorAlignment) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'text-anchor',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$anchorAlignmentToString(anchorAlignment));
+};
+var $elm_community$typed_svg$TypedSvg$text_ = $elm_community$typed_svg$TypedSvg$Core$node('text');
+var $elm_community$typed_svg$TypedSvg$Attributes$x = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'x',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$x = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$x(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$y = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'y',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$y = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$y(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalLabel = F4(
+	function (config, xPos, yPos, point) {
+		var txt = $elm_community$typed_svg$TypedSvg$text_(
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(yPos),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(xPos),
+					$elm_community$typed_svg$TypedSvg$Attributes$textAnchor($elm_community$typed_svg$TypedSvg$Types$AnchorStart),
+					$elm_community$typed_svg$TypedSvg$Attributes$dominantBaseline($elm_community$typed_svg$TypedSvg$Types$DominantBaselineMiddle),
+					$elm_community$typed_svg$TypedSvg$Attributes$class(
+					_List_fromArray(
+						[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$labelClassName]))
+				]));
+		var _v0 = point;
+		var xVal = _v0.a;
+		var yVal = _v0.b;
+		var _v1 = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).showLabels;
+		switch (_v1.$) {
+			case 'YLabel':
+				var formatter = _v1.a;
+				return _List_fromArray(
+					[
+						txt(
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								formatter(yVal))
+							]))
+					]);
+			case 'XOrdinalLabel':
+				return _List_fromArray(
+					[
+						txt(
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(xVal)
+							]))
+					]);
+			default:
+				return _List_Nil;
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$NoSymbol = {$: 'NoSymbol'};
+var $elm_community$list_extra$List$Extra$getAt = F2(
+	function (idx, xs) {
+		return (idx < 0) ? $elm$core$Maybe$Nothing : $elm$core$List$head(
+			A2($elm$core$List$drop, idx, xs));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$getSymbolByIndex = F2(
+	function (all, idx) {
+		return ($elm$core$List$length(all) > 0) ? A2(
+			$elm$core$Maybe$withDefault,
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$NoSymbol,
+			A2(
+				$elm_community$list_extra$List$Extra$getAt,
+				A2(
+					$elm$core$Basics$modBy,
+					$elm$core$List$length(all),
+					idx),
+				all)) : $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$NoSymbol;
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles = F2(
+	function (_new, existing) {
+		return A2(
+			$elm$core$String$join,
+			';',
+			A3(
+				$elm$core$List$foldl,
+				F2(
+					function (newTuple, existingStrings) {
+						var newString = newTuple.a + (':' + newTuple.b);
+						var existingString = A2($elm$core$String$join, ';', existingStrings);
+						return A2($elm$core$String$contains, newTuple.a, existingString) ? A2(
+							$elm$core$List$cons,
+							newString,
+							A2(
+								$elm$core$List$filter,
+								function (s) {
+									return function (v) {
+										return !_Utils_eq(v, newTuple.a);
+									}(
+										A2(
+											$elm$core$Maybe$withDefault,
+											'',
+											$elm$core$List$head(
+												A2($elm$core$String$split, ':', s))));
+								},
+								existingStrings)) : A2($elm$core$List$cons, newString, existingStrings);
+					}),
+				A2($elm$core$String$split, ';', existing),
+				_new));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$showIcons = function (_v0) {
+	var c = _v0.a;
+	return function (l) {
+		return l > 0;
+	}(
+		$elm$core$List$length(c.symbols));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$style = function (value) {
+	return A2($elm_community$typed_svg$TypedSvg$Core$attribute, 'style', value);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName = 'ecb-symbol';
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap = 2.0;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolToId = function (symbol) {
+	switch (symbol.$) {
+		case 'Circle':
+			var identifier = symbol.a.identifier;
+			return identifier;
+		case 'Custom':
+			var identifier = symbol.a.identifier;
+			return identifier;
+		case 'Corner':
+			var identifier = symbol.a.identifier;
+			return identifier;
+		case 'Triangle':
+			var identifier = symbol.a.identifier;
+			return identifier;
+		default:
+			return '';
+	}
+};
+var $elm_community$typed_svg$TypedSvg$use = $elm_community$typed_svg$TypedSvg$Core$node('use');
+var $elm$virtual_dom$VirtualDom$attributeNS = F3(
+	function (namespace, key, value) {
+		return A3(
+			_VirtualDom_attributeNS,
+			namespace,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm_community$typed_svg$TypedSvg$Core$attributeNS = $elm$virtual_dom$VirtualDom$attributeNS;
+var $elm_community$typed_svg$TypedSvg$Attributes$xlinkHref = A2($elm_community$typed_svg$TypedSvg$Core$attributeNS, 'http://www.w3.org/1999/xlink', 'xlink:href');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalSymbol = F2(
+	function (config, _v0) {
+		var idx = _v0.idx;
+		var w = _v0.w;
+		var y_ = _v0.y_;
+		var styleStr = _v0.styleStr;
+		var symbol = A2(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$getSymbolByIndex,
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).symbols,
+			idx);
+		var symbolRef = _List_fromArray(
+			[
+				A2(
+				$elm_community$typed_svg$TypedSvg$use,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$xlinkHref(
+						'#' + $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolToId(symbol))
+					]),
+				_List_Nil)
+			]);
+		var st = function (styles) {
+			return $elm_community$typed_svg$TypedSvg$Attributes$style(
+				A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles, styles, styleStr));
+		};
+		if ($data_viz_lab$elm_chart_builder$Chart$Internal$Type$showIcons(config)) {
+			switch (symbol.$) {
+				case 'Triangle':
+					var c = symbol.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, w + $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap, y_)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				case 'Circle':
+					var c = symbol.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, w + $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap, y_)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				case 'Corner':
+					var c = symbol.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, w + $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap, y_)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				case 'Custom':
+					var c = symbol.a;
+					var gap = c.useGap ? $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap : 0;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, w + gap, y_)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				default:
+					return _List_Nil;
+			}
+		} else {
+			return _List_Nil;
+		}
+	});
+var $elm$core$List$isEmpty = function (xs) {
+	if (!xs.b) {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$labelGap = 2;
+var $elm_community$typed_svg$TypedSvg$rect = $elm_community$typed_svg$TypedSvg$Core$node('rect');
+var $elm_community$typed_svg$TypedSvg$TypesToStrings$shapeRenderingToString = function (shapeRendering) {
+	switch (shapeRendering.$) {
+		case 'RenderAuto':
+			return 'auto';
+		case 'RenderOptimizeSpeed':
+			return 'optimizeSpeed';
+		case 'RenderCrispEdges':
+			return 'crispEdges';
+		case 'RenderGeometricPrecision':
+			return 'geometricPrecision';
+		default:
+			return 'inherit';
+	}
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$shapeRendering = function (rendering) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'shape-rendering',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$shapeRenderingToString(rendering));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$width = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'width',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$width = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$width(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalRect = F6(
+	function (config, bandSingleScale, continuousScale, colorScale, idx, point) {
+		var h = $gampleman$elm_visualization$Scale$bandwidth(bandSingleScale);
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		var labelOffset = $elm$core$List$isEmpty(c.symbols) ? 0 : h;
+		var _v0 = point;
+		var x__ = _v0.a;
+		var y__ = _v0.b;
+		var coreStyleFromX = c.coreStyleFromPointBandX(x__);
+		var y_ = A2($gampleman$elm_visualization$Scale$convert, bandSingleScale, x__);
+		var colorStyles = A3(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$colorStyle,
+			c,
+			$elm$core$Maybe$Just(idx),
+			$elm$core$Maybe$Just(
+				A2($gampleman$elm_visualization$Scale$convert, colorScale, y__)));
+		var coreStyle = $elm_community$typed_svg$TypedSvg$Attributes$style(
+			A2(
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles,
+				coreStyleFromX,
+				A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles, c.coreStyle, colorStyles)));
+		var w = A2($gampleman$elm_visualization$Scale$convert, continuousScale, y__);
+		var label = A4($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalLabel, config, (w + $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$labelGap) + labelOffset, y_ + (h / 2), point);
+		var rect_ = A2(
+			$elm_community$typed_svg$TypedSvg$rect,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(0),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(y_),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$width(w),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$height(h),
+					$elm_community$typed_svg$TypedSvg$Attributes$shapeRendering($elm_community$typed_svg$TypedSvg$Types$RenderCrispEdges),
+					coreStyle
+				]),
+			A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$columnTitleText, config, point));
+		var symbol = A2(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalSymbol,
+			config,
+			{h: h, idx: idx, styleStr: colorStyles, w: w, y_: y_});
+		return A2(
+			$elm$core$List$cons,
+			rect_,
+			_Utils_ap(symbol, label));
+	});
+var $elm_community$typed_svg$TypedSvg$Types$AnchorMiddle = {$: 'AnchorMiddle'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalLabel = F4(
+	function (config, xPos, yPos, point) {
+		var txt = $elm_community$typed_svg$TypedSvg$text_(
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(xPos),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(yPos),
+					$elm_community$typed_svg$TypedSvg$Attributes$textAnchor($elm_community$typed_svg$TypedSvg$Types$AnchorMiddle),
+					$elm_community$typed_svg$TypedSvg$Attributes$class(
+					_List_fromArray(
+						[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$labelClassName]))
+				]));
+		var _v0 = point;
+		var xVal = _v0.a;
+		var yVal = _v0.b;
+		var _v1 = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).showLabels;
+		switch (_v1.$) {
+			case 'YLabel':
+				var formatter = _v1.a;
+				return _List_fromArray(
+					[
+						txt(
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								formatter(yVal))
+							]))
+					]);
+			case 'XOrdinalLabel':
+				return _List_fromArray(
+					[
+						txt(
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(xVal)
+							]))
+					]);
+			default:
+				return _List_Nil;
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolCustomSpace = F3(
+	function (orientation, localDimension, conf) {
+		if (orientation.$ === 'Horizontal') {
+			var scalingFactor = localDimension / conf.viewBoxHeight;
+			return scalingFactor * conf.viewBoxWidth;
+		} else {
+			var scalingFactor = localDimension / conf.viewBoxWidth;
+			return scalingFactor * conf.viewBoxHeight;
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalSymbol = F2(
+	function (config, _v0) {
+		var idx = _v0.idx;
+		var w = _v0.w;
+		var y_ = _v0.y_;
+		var x_ = _v0.x_;
+		var styleStr = _v0.styleStr;
+		var symbol = A2(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$getSymbolByIndex,
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).symbols,
+			idx);
+		var symbolRef = _List_fromArray(
+			[
+				A2(
+				$elm_community$typed_svg$TypedSvg$use,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$xlinkHref(
+						'#' + $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolToId(symbol))
+					]),
+				_List_Nil)
+			]);
+		var st = function (styles) {
+			return $elm_community$typed_svg$TypedSvg$Attributes$style(
+				A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles, styles, styleStr));
+		};
+		if ($data_viz_lab$elm_chart_builder$Chart$Internal$Type$showIcons(config)) {
+			switch (symbol.$) {
+				case 'Triangle':
+					var c = symbol.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, x_, (y_ - w) - $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				case 'Circle':
+					var c = symbol.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, x_, (y_ - w) - $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				case 'Corner':
+					var c = symbol.a;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, x_, (y_ - w) - $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				case 'Custom':
+					var c = symbol.a;
+					var space = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolCustomSpace, $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Vertical, w, c);
+					var gap = c.useGap ? $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap : 0;
+					return _List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A2($elm_community$typed_svg$TypedSvg$Types$Translate, x_, (y_ - space) - gap)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$symbolClassName])),
+									st(c.styles)
+								]),
+							symbolRef)
+						]);
+				default:
+					return _List_Nil;
+			}
+		} else {
+			return _List_Nil;
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalRect = F7(
+	function (config, iconOffset, bandSingleScale, continuousScale, colorScale, idx, point) {
+		var w = $gampleman$elm_visualization$Scale$bandwidth(bandSingleScale);
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		var labelOffset = $elm$core$List$isEmpty(c.symbols) ? 0 : w;
+		var _v0 = point;
+		var x__ = _v0.a;
+		var y__ = _v0.b;
+		var coreStyleFromX = c.coreStyleFromPointBandX(x__);
+		var x_ = A2($gampleman$elm_visualization$Scale$convert, bandSingleScale, x__);
+		var colorStyles = A3(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$colorStyle,
+			c,
+			$elm$core$Maybe$Just(idx),
+			$elm$core$Maybe$Just(
+				A2($gampleman$elm_visualization$Scale$convert, colorScale, y__)));
+		var coreStyle = $elm_community$typed_svg$TypedSvg$Attributes$style(
+			A2(
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles,
+				coreStyleFromX,
+				A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles, c.coreStyle, colorStyles)));
+		var h = (c.height - A2($gampleman$elm_visualization$Scale$convert, continuousScale, y__)) - iconOffset;
+		var y_ = A2($gampleman$elm_visualization$Scale$convert, continuousScale, y__) + iconOffset;
+		var label = A4($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalLabel, config, x_ + (w / 2), (y_ - $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$labelGap) - labelOffset, point);
+		var rect_ = A2(
+			$elm_community$typed_svg$TypedSvg$rect,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(x_),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(y_),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$width(w),
+					$elm_community$typed_svg$TypedSvg$Attributes$InPx$height(h),
+					$elm_community$typed_svg$TypedSvg$Attributes$shapeRendering($elm_community$typed_svg$TypedSvg$Types$RenderCrispEdges),
+					coreStyle
+				]),
+			A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$columnTitleText, config, point));
+		var symbol = A2(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalSymbol,
+			config,
+			{idx: idx, styleStr: colorStyles, w: w, x_: x_, y_: y_});
+		return A2(
+			$elm$core$List$cons,
+			rect_,
+			_Utils_ap(symbol, label));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$column = F7(
+	function (config, iconOffset, bandSingleScale, continuousScale, colorScale, idx, point) {
+		var rectangle = function () {
+			var _v0 = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).orientation;
+			if (_v0.$ === 'Vertical') {
+				return A7($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalRect, config, iconOffset, bandSingleScale, continuousScale, colorScale, idx, point);
+			} else {
+				return A6($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalRect, config, bandSingleScale, continuousScale, colorScale, idx, point);
+			}
+		}();
+		return A2(
+			$elm_community$typed_svg$TypedSvg$g,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$class(
+					_List_fromArray(
+						[
+							$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName,
+							$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName + ('-' + $elm$core$String$fromInt(idx))
+						]))
+				]),
+			rectangle);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$dataGroupClassName = 'ecb-data-group';
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$dataGroupTranslation = F2(
+	function (bandGroupScale, dataGroup) {
+		var _v0 = dataGroup.groupLabel;
+		if (_v0.$ === 'Nothing') {
+			return 0;
+		} else {
+			var l = _v0.a;
+			return A2($gampleman$elm_visualization$Scale$convert, bandGroupScale, l);
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$columns = F7(
+	function (config, iconOffset, bandGroupScale, bandSingleScale, continuousScale, colorScale, dataGroup) {
+		var tr = function () {
+			var _v0 = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).orientation;
+			if (_v0.$ === 'Vertical') {
+				return A2(
+					$elm_community$typed_svg$TypedSvg$Types$Translate,
+					A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$dataGroupTranslation, bandGroupScale, dataGroup),
+					0);
+			} else {
+				return A2(
+					$elm_community$typed_svg$TypedSvg$Types$Translate,
+					0,
+					A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$dataGroupTranslation, bandGroupScale, dataGroup));
+			}
+		}();
+		return A2(
+			$elm_community$typed_svg$TypedSvg$g,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$transform(
+					_List_fromArray(
+						[tr])),
+					$elm_community$typed_svg$TypedSvg$Attributes$class(
+					_List_fromArray(
+						[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$dataGroupClassName]))
+				]),
+			A2(
+				$elm$core$List$indexedMap,
+				A5($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$column, config, iconOffset, bandSingleScale, continuousScale, colorScale),
+				dataGroup.points));
+	});
+var $gampleman$elm_visualization$Scale$defaultBandConfig = {align: 0.5, paddingInner: 0.0, paddingOuter: 0.0};
+var $elm_community$typed_svg$TypedSvg$desc = $elm_community$typed_svg$TypedSvg$Core$node('desc');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$descAndTitle = function (c) {
+	return A3(
+		$elm$core$List$foldr,
+		F2(
+			function (_v0, acc) {
+				var el = _v0.a;
+				var str = _v0.b;
+				return (str === '') ? acc : A2(
+					$elm$core$List$cons,
+					el(
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(str)
+							])),
+					acc);
+			}),
+		_List_Nil,
+		_List_fromArray(
+			[
+				_Utils_Tuple2(
+				$elm_community$typed_svg$TypedSvg$title(_List_Nil),
+				c.svgTitle),
+				_Utils_Tuple2(
+				$elm_community$typed_svg$TypedSvg$desc(_List_Nil),
+				c.svgDesc)
+			]));
+};
+var $elm$html$Html$figure = _VirtualDom_node('figure');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand = function (_v0) {
+	var d = _v0.a;
+	return d;
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getBandGroupRange = F3(
+	function (config, width, height) {
+		var orientation = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).orientation;
+		if (orientation.$ === 'Horizontal') {
+			return _Utils_Tuple2(height, 0);
+		} else {
+			return _Utils_Tuple2(0, width);
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getBandSingleRange = F2(
+	function (config, value) {
+		var orientation = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).orientation;
+		if (orientation.$ === 'Horizontal') {
+			return _Utils_Tuple2(
+				$elm$core$Basics$floor(value),
+				0);
+		} else {
+			return _Utils_Tuple2(
+				0,
+				$elm$core$Basics$floor(value));
+		}
+	});
+var $elm$core$List$maximum = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(
+			A3($elm$core$List$foldl, $elm$core$Basics$max, x, xs));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolSpace = F3(
+	function (orientation, bandSingleScale, symbols) {
+		var localDimension = $elm$core$Basics$floor(
+			$gampleman$elm_visualization$Scale$bandwidth(bandSingleScale));
+		return $elm$core$Basics$floor(
+			A2(
+				$elm$core$Maybe$withDefault,
+				0,
+				$elm$core$List$maximum(
+					A2(
+						$elm$core$List$map,
+						function (symbol) {
+							switch (symbol.$) {
+								case 'Circle':
+									return localDimension / 2;
+								case 'Custom':
+									var conf = symbol.a;
+									return A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolCustomSpace, orientation, localDimension, conf);
+								case 'Corner':
+									return localDimension;
+								case 'Triangle':
+									return localDimension;
+								default:
+									return 0;
+							}
+						},
+						symbols))));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getContinuousRange = F5(
+	function (config, renderContext, width, height, bandScale) {
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		var layout = c.layout;
+		var orientation = c.orientation;
+		if (orientation.$ === 'Horizontal') {
+			if (layout.$ === 'GroupedBar') {
+				return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$showIcons(config) ? _Utils_Tuple2(
+					0,
+					(width - $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap) - A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolSpace, c.orientation, bandScale, c.symbols)) : _Utils_Tuple2(0, width);
+			} else {
+				if (renderContext.$ === 'RenderChart') {
+					return _Utils_Tuple2(width, 0);
+				} else {
+					return _Utils_Tuple2(0, width);
+				}
+			}
+		} else {
+			if (layout.$ === 'GroupedBar') {
+				return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$showIcons(config) ? _Utils_Tuple2(
+					(height - $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap) - A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolSpace, c.orientation, bandScale, c.symbols),
+					0) : _Utils_Tuple2(height, 0);
+			} else {
+				return _Utils_Tuple2(height, 0);
+			}
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDataBandDepth = function (data) {
+	return $elm$core$List$length(
+		A2(
+			$elm$core$Maybe$withDefault,
+			_List_Nil,
+			$elm$core$List$head(
+				A2(
+					$elm$core$List$map,
+					function ($) {
+						return $.points;
+					},
+					$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data)))));
+};
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDomainBand = function (_v0) {
+	var d = _v0.a;
+	return d;
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDomainBand = function (config) {
+	return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDomainBand(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).domainBand);
+};
+var $elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var $elm$core$List$member = F2(
+	function (x, xs) {
+		return A2(
+			$elm$core$List$any,
+			function (a) {
+				return _Utils_eq(a, x);
+			},
+			xs);
+	});
+var $elm$core$List$minimum = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(
+			A3($elm$core$List$foldl, $elm$core$Basics$min, x, xs));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDomainBandFromData = F2(
+	function (data, config) {
+		var domain = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDomainBand(config);
+		var d = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data);
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDomainBand(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainBand(
+				{
+					bandGroup: function () {
+						var _v0 = domain.bandGroup;
+						if (_v0.$ === 'Just') {
+							var bandGroup = _v0.a;
+							return $elm$core$Maybe$Just(bandGroup);
+						} else {
+							return $elm$core$Maybe$Just(
+								A2(
+									$elm$core$List$indexedMap,
+									F2(
+										function (i, g) {
+											return A2(
+												$elm$core$Maybe$withDefault,
+												$elm$core$String$fromInt(i),
+												g);
+										}),
+									A2(
+										$elm$core$List$map,
+										function ($) {
+											return $.groupLabel;
+										},
+										d)));
+						}
+					}(),
+					bandSingle: function () {
+						var _v1 = domain.bandSingle;
+						if (_v1.$ === 'Just') {
+							var bandSingle = _v1.a;
+							return $elm$core$Maybe$Just(bandSingle);
+						} else {
+							return $elm$core$Maybe$Just(
+								A3(
+									$elm$core$List$foldr,
+									F2(
+										function (x, acc) {
+											return A2($elm$core$List$member, x, acc) ? acc : A2($elm$core$List$cons, x, acc);
+										}),
+									_List_Nil,
+									A2(
+										$elm$core$List$map,
+										$elm$core$Tuple$first,
+										$elm$core$List$concat(
+											A2(
+												$elm$core$List$map,
+												function ($) {
+													return $.points;
+												},
+												d)))));
+						}
+					}(),
+					continuous: function () {
+						var _v2 = domain.continuous;
+						if (_v2.$ === 'Just') {
+							var continuous = _v2.a;
+							return $elm$core$Maybe$Just(continuous);
+						} else {
+							return $elm$core$Maybe$Just(
+								function (dd) {
+									var _v3 = c.layout;
+									if ((_v3.$ === 'StackedBar') && (_v3.a.$ === 'Diverging')) {
+										var _v4 = _v3.a;
+										return _Utils_Tuple2(
+											A2(
+												$elm$core$Maybe$withDefault,
+												0,
+												$elm$core$List$minimum(dd)),
+											A2(
+												$elm$core$Maybe$withDefault,
+												0,
+												$elm$core$List$maximum(dd)));
+									} else {
+										return _Utils_Tuple2(
+											0,
+											A2(
+												$elm$core$Maybe$withDefault,
+												0,
+												$elm$core$List$maximum(dd)));
+									}
+								}(
+									A2(
+										$elm$core$List$map,
+										$elm$core$Tuple$second,
+										$elm$core$List$concat(
+											A2(
+												$elm$core$List$map,
+												function ($) {
+													return $.points;
+												},
+												d)))));
+						}
+					}()
+				}));
+	});
+var $elm$core$Basics$isNaN = _Basics_isNaN;
+var $gampleman$elm_visualization$Scale$Continuous$normalize = F2(
+	function (a, b) {
+		var c = b - a;
+		return (!c) ? $elm$core$Basics$always(0.5) : ($elm$core$Basics$isNaN(c) ? $elm$core$Basics$always(0 / 0) : function (x) {
+			return (x - a) / c;
+		});
+	});
+var $gampleman$elm_visualization$Scale$Continuous$bimap = F3(
+	function (_v0, _v1, interpolate) {
+		var d0 = _v0.a;
+		var d1 = _v0.b;
+		var r0 = _v1.a;
+		var r1 = _v1.b;
+		var _v2 = (_Utils_cmp(d1, d0) < 0) ? _Utils_Tuple2(
+			A2($gampleman$elm_visualization$Scale$Continuous$normalize, d1, d0),
+			A2(interpolate, r1, r0)) : _Utils_Tuple2(
+			A2($gampleman$elm_visualization$Scale$Continuous$normalize, d0, d1),
+			A2(interpolate, r0, r1));
+		var de = _v2.a;
+		var re = _v2.b;
+		return A2($elm$core$Basics$composeL, re, de);
+	});
+var $gampleman$elm_visualization$Scale$Continuous$convertTransform = F4(
+	function (transform, interpolate, _v0, range) {
+		var d0 = _v0.a;
+		var d1 = _v0.b;
+		return A2(
+			$elm$core$Basics$composeR,
+			transform,
+			A3(
+				$gampleman$elm_visualization$Scale$Continuous$bimap,
+				_Utils_Tuple2(
+					transform(d0),
+					transform(d1)),
+				range,
+				interpolate));
+	});
+var $gampleman$elm_visualization$Interpolation$float = F2(
+	function (a, to) {
+		var b = to - a;
+		return function (t) {
+			return a + (b * t);
+		};
+	});
+var $gampleman$elm_visualization$Scale$Continuous$invertTransform = F4(
+	function (transform, untransform, _v0, range) {
+		var d0 = _v0.a;
+		var d1 = _v0.b;
+		return A2(
+			$elm$core$Basics$composeR,
+			A3(
+				$gampleman$elm_visualization$Scale$Continuous$bimap,
+				range,
+				_Utils_Tuple2(
+					transform(d0),
+					transform(d1)),
+				$gampleman$elm_visualization$Interpolation$float),
+			untransform);
+	});
+var $gampleman$elm_visualization$Scale$Continuous$fixPoint = F3(
+	function (maxIterations, initialInput, fn) {
+		var helper = F2(
+			function (iters, _v0) {
+				helper:
+				while (true) {
+					var a = _v0.a;
+					var b = _v0.b;
+					if (_Utils_cmp(iters + 1, maxIterations) > -1) {
+						return b;
+					} else {
+						var _v1 = fn(b);
+						var outA = _v1.a;
+						var outB = _v1.b;
+						if (_Utils_eq(outA, a)) {
+							return b;
+						} else {
+							if (!outA) {
+								return b;
+							} else {
+								var $temp$iters = iters + 1,
+									$temp$_v0 = _Utils_Tuple2(outA, outB);
+								iters = $temp$iters;
+								_v0 = $temp$_v0;
+								continue helper;
+							}
+						}
+					}
+				}
+			});
+		return A2(
+			helper,
+			1,
+			fn(initialInput));
+	});
+var $elm$core$Basics$e = _Basics_e;
+var $elm$core$Basics$sqrt = _Basics_sqrt;
+var $gampleman$elm_visualization$Scale$Continuous$e10 = $elm$core$Basics$sqrt(50);
+var $gampleman$elm_visualization$Scale$Continuous$e2 = $elm$core$Basics$sqrt(2);
+var $gampleman$elm_visualization$Scale$Continuous$e5 = $elm$core$Basics$sqrt(10);
+var $gampleman$elm_visualization$Scale$Continuous$ln10 = A2($elm$core$Basics$logBase, $elm$core$Basics$e, 10);
+var $elm$core$Basics$pow = _Basics_pow;
+var $gampleman$elm_visualization$Scale$Continuous$tickIncrement = F3(
+	function (start, stop, count) {
+		var step = (stop - start) / A2($elm$core$Basics$max, 0, count);
+		var powr = $elm$core$Basics$floor(
+			A2($elm$core$Basics$logBase, $elm$core$Basics$e, step) / $gampleman$elm_visualization$Scale$Continuous$ln10);
+		var error = step / A2($elm$core$Basics$pow, 10, powr);
+		var order = (_Utils_cmp(error, $gampleman$elm_visualization$Scale$Continuous$e10) > -1) ? 10 : ((_Utils_cmp(error, $gampleman$elm_visualization$Scale$Continuous$e5) > -1) ? 5 : ((_Utils_cmp(error, $gampleman$elm_visualization$Scale$Continuous$e2) > -1) ? 2 : 1));
+		return (powr >= 0) ? (order * A2($elm$core$Basics$pow, 10, powr)) : ((-A2($elm$core$Basics$pow, 10, -powr)) / order);
+	});
+var $gampleman$elm_visualization$Scale$Continuous$withNormalizedDomain = F2(
+	function (fn, _v0) {
+		var a = _v0.a;
+		var b = _v0.b;
+		if (_Utils_cmp(a, b) < 0) {
+			return fn(
+				_Utils_Tuple2(a, b));
+		} else {
+			var _v1 = fn(
+				_Utils_Tuple2(b, a));
+			var d = _v1.a;
+			var c = _v1.b;
+			return _Utils_Tuple2(c, d);
+		}
+	});
+var $gampleman$elm_visualization$Scale$Continuous$nice = F2(
+	function (domain, count) {
+		var computation = function (_v0) {
+			var start = _v0.a;
+			var stop = _v0.b;
+			var step = A3($gampleman$elm_visualization$Scale$Continuous$tickIncrement, start, stop, count);
+			return _Utils_Tuple2(
+				step,
+				(step > 0) ? _Utils_Tuple2(
+					$elm$core$Basics$floor(start / step) * step,
+					$elm$core$Basics$ceiling(stop / step) * step) : ((step < 0) ? _Utils_Tuple2(
+					$elm$core$Basics$ceiling(start * step) / step,
+					$elm$core$Basics$floor(stop * step) / step) : _Utils_Tuple2(start, stop)));
+		};
+		return A2(
+			$gampleman$elm_visualization$Scale$Continuous$withNormalizedDomain,
+			function (dmn) {
+				return A3($gampleman$elm_visualization$Scale$Continuous$fixPoint, 10, dmn, computation);
+			},
+			domain);
+	});
+var $gampleman$elm_visualization$Scale$Continuous$exponent = function (x) {
+	return (!x) ? 0 : ((x < 1) ? (1 + $gampleman$elm_visualization$Scale$Continuous$exponent(x * 10)) : 0);
+};
+var $gampleman$elm_visualization$Scale$Continuous$precisionFixed = function (step) {
+	return A2(
+		$elm$core$Basics$max,
+		0,
+		$gampleman$elm_visualization$Scale$Continuous$exponent(
+			$elm$core$Basics$abs(step)));
+};
+var $gampleman$elm_visualization$Statistics$tickStep = F3(
+	function (start, stop, count) {
+		var step0 = $elm$core$Basics$abs(stop - start) / A2($elm$core$Basics$max, 0, count);
+		var step1 = A2(
+			$elm$core$Basics$pow,
+			10,
+			$elm$core$Basics$floor(
+				A2($elm$core$Basics$logBase, $elm$core$Basics$e, step0) / A2($elm$core$Basics$logBase, $elm$core$Basics$e, 10)));
+		var error = step0 / step1;
+		var step2 = (_Utils_cmp(
+			error,
+			$elm$core$Basics$sqrt(50)) > -1) ? (step1 * 10) : ((_Utils_cmp(
+			error,
+			$elm$core$Basics$sqrt(10)) > -1) ? (step1 * 5) : ((_Utils_cmp(
+			error,
+			$elm$core$Basics$sqrt(2)) > -1) ? (step1 * 2) : step1));
+		return (_Utils_cmp(stop, start) < 0) ? (-step2) : step2;
+	});
+var $elm$core$String$padRight = F3(
+	function (n, _char, string) {
+		return _Utils_ap(
+			string,
+			A2(
+				$elm$core$String$repeat,
+				n - $elm$core$String$length(string),
+				$elm$core$String$fromChar(_char)));
+	});
+var $gampleman$elm_visualization$Scale$Continuous$toFixed = F2(
+	function (precision, value) {
+		var power_ = A2($elm$core$Basics$pow, 10, precision);
+		var pad = function (num) {
+			_v0$2:
+			while (true) {
+				if (num.b) {
+					if (num.b.b) {
+						if (!num.b.b.b) {
+							var x = num.a;
+							var _v1 = num.b;
+							var y = _v1.a;
+							return _List_fromArray(
+								[
+									x,
+									A3(
+									$elm$core$String$padRight,
+									precision,
+									_Utils_chr('0'),
+									y)
+								]);
+						} else {
+							break _v0$2;
+						}
+					} else {
+						var val = num.a;
+						return (precision > 0) ? _List_fromArray(
+							[
+								val,
+								A3(
+								$elm$core$String$padRight,
+								precision,
+								_Utils_chr('0'),
+								'')
+							]) : _List_fromArray(
+							[val]);
+					}
+				} else {
+					break _v0$2;
+				}
+			}
+			var val = num;
+			return val;
+		};
+		return A2(
+			$elm$core$String$join,
+			'.',
+			pad(
+				A2(
+					$elm$core$String$split,
+					'.',
+					$elm$core$String$fromFloat(
+						$elm$core$Basics$round(value * power_) / power_))));
+	});
+var $gampleman$elm_visualization$Scale$Continuous$tickFormat = F2(
+	function (_v0, count) {
+		var start = _v0.a;
+		var stop = _v0.b;
+		return $gampleman$elm_visualization$Scale$Continuous$toFixed(
+			$gampleman$elm_visualization$Scale$Continuous$precisionFixed(
+				A3($gampleman$elm_visualization$Statistics$tickStep, start, stop, count)));
+	});
+var $gampleman$elm_visualization$Statistics$range = F3(
+	function (start, stop, step) {
+		var n = A2(
+			$elm$core$Basics$max,
+			0,
+			0 | $elm$core$Basics$ceiling((stop - start) / step));
+		var helper = F2(
+			function (i, list) {
+				return (i >= 0) ? A2(
+					helper,
+					i - 1,
+					A2($elm$core$List$cons, start + (step * i), list)) : list;
+			});
+		return A2(helper, n - 1, _List_Nil);
+	});
+var $gampleman$elm_visualization$Statistics$ticks = F3(
+	function (start, stop, count) {
+		var step = A3($gampleman$elm_visualization$Statistics$tickStep, start, stop, count);
+		var end = ($elm$core$Basics$floor(stop / step) * step) + (step / 2);
+		var beg = $elm$core$Basics$ceiling(start / step) * step;
+		return A3($gampleman$elm_visualization$Statistics$range, beg, end, step);
+	});
+var $gampleman$elm_visualization$Scale$Continuous$ticks = F2(
+	function (_v0, count) {
+		var start = _v0.a;
+		var end = _v0.b;
+		return A3($gampleman$elm_visualization$Statistics$ticks, start, end, count);
+	});
+var $gampleman$elm_visualization$Scale$Continuous$scaleWithTransform = F4(
+	function (transform, untransform, range_, domain_) {
+		return {
+			convert: A2($gampleman$elm_visualization$Scale$Continuous$convertTransform, transform, $gampleman$elm_visualization$Interpolation$float),
+			domain: domain_,
+			invert: A2($gampleman$elm_visualization$Scale$Continuous$invertTransform, transform, untransform),
+			nice: $gampleman$elm_visualization$Scale$Continuous$nice,
+			range: range_,
+			rangeExtent: F2(
+				function (_v0, r) {
+					return r;
+				}),
+			tickFormat: $gampleman$elm_visualization$Scale$Continuous$tickFormat,
+			ticks: $gampleman$elm_visualization$Scale$Continuous$ticks
+		};
+	});
+var $gampleman$elm_visualization$Scale$Continuous$linear = A2($gampleman$elm_visualization$Scale$Continuous$scaleWithTransform, $elm$core$Basics$identity, $elm$core$Basics$identity);
+var $gampleman$elm_visualization$Scale$linear = F2(
+	function (range_, domain_) {
+		return $gampleman$elm_visualization$Scale$Scale(
+			A2($gampleman$elm_visualization$Scale$Continuous$linear, range_, domain_));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$outerHeight = F3(
+	function (height, margin, padding) {
+		return (((height + margin.top) + margin.bottom) + padding.top) + padding.bottom;
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$outerWidth = F3(
+	function (width, margin, padding) {
+		return (((width + margin.left) + margin.right) + padding.left) + padding.right;
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$role = function (name) {
+	return A2($elm$html$Html$Attributes$attribute, 'role', name);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Constants$rootClassName = 'ecb';
+var $elm_community$typed_svg$TypedSvg$svg = $elm_community$typed_svg$TypedSvg$Core$node('svg');
+var $elm_community$typed_svg$TypedSvg$circle = $elm_community$typed_svg$TypedSvg$Core$node('circle');
+var $elm_community$typed_svg$TypedSvg$Attributes$cx = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'cx',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$cx = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$cx(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$cy = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'cy',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$cy = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$cy(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$r = function (length) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'r',
+		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$InPx$r = function (value) {
+	return $elm_community$typed_svg$TypedSvg$Attributes$r(
+		$elm_community$typed_svg$TypedSvg$Types$px(value));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$circle_ = function (size) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$circle,
+		_List_fromArray(
+			[
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$cx(size / 2),
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$cy(size / 2),
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$r(size / 2)
+			]),
+		_List_Nil);
+};
+var $elm_community$typed_svg$TypedSvg$Attributes$points = function (pts) {
+	var pointToString = function (_v0) {
+		var xx = _v0.a;
+		var yy = _v0.b;
+		return $elm$core$String$fromFloat(xx) + (', ' + $elm$core$String$fromFloat(yy));
+	};
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'points',
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2($elm$core$List$map, pointToString, pts)));
+};
+var $elm_community$typed_svg$TypedSvg$polygon = $elm_community$typed_svg$TypedSvg$Core$node('polygon');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$corner = function (size) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$polygon,
+		_List_fromArray(
+			[
+				$elm_community$typed_svg$TypedSvg$Attributes$points(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(0.0, 0.0),
+						_Utils_Tuple2(size, 0.0),
+						_Utils_Tuple2(size, size)
+					]))
+			]),
+		_List_Nil);
+};
+var $elm_community$typed_svg$TypedSvg$Types$Scale = F2(
+	function (a, b) {
+		return {$: 'Scale', a: a, b: b};
+	});
+var $elm_community$typed_svg$TypedSvg$Attributes$d = $elm_community$typed_svg$TypedSvg$Core$attribute('d');
+var $elm_community$typed_svg$TypedSvg$path = $elm_community$typed_svg$TypedSvg$Core$node('path');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$custom = F2(
+	function (scaleFactor, conf) {
+		return A2(
+			$elm_community$typed_svg$TypedSvg$g,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$transform(
+					_List_fromArray(
+						[
+							A2($elm_community$typed_svg$TypedSvg$Types$Scale, scaleFactor, scaleFactor)
+						]))
+				]),
+			A2(
+				$elm$core$List$map,
+				function (d_) {
+					return A2(
+						$elm_community$typed_svg$TypedSvg$path,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Attributes$d(d_)
+							]),
+						_List_Nil);
+				},
+				conf.paths));
+	});
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm_community$typed_svg$TypedSvg$symbol = $elm_community$typed_svg$TypedSvg$Core$node('symbol');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$triangle = function (size) {
+	return A2(
+		$elm_community$typed_svg$TypedSvg$polygon,
+		_List_fromArray(
+			[
+				$elm_community$typed_svg$TypedSvg$Attributes$points(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(size / 2, 0.0),
+						_Utils_Tuple2(size, size),
+						_Utils_Tuple2(0.0, size)
+					]))
+			]),
+		_List_Nil);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$symbolsToSymbolElements = F3(
+	function (orientation, bandSingleScale, symbols) {
+		var localDimension = $gampleman$elm_visualization$Scale$bandwidth(bandSingleScale);
+		return A2(
+			$elm$core$List$map,
+			function (symbol) {
+				var s = $elm_community$typed_svg$TypedSvg$symbol(
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$id(
+							$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolToId(symbol))
+						]));
+				switch (symbol.$) {
+					case 'Circle':
+						var conf = symbol.a;
+						return s(
+							_List_fromArray(
+								[
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$circle_(
+									A2($elm$core$Maybe$withDefault, localDimension, conf.size))
+								]));
+					case 'Custom':
+						var conf = symbol.a;
+						var scaleFactor = function () {
+							if (orientation.$ === 'Vertical') {
+								return localDimension / conf.viewBoxWidth;
+							} else {
+								return localDimension / conf.viewBoxHeight;
+							}
+						}();
+						return s(
+							_List_fromArray(
+								[
+									A2($data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$custom, scaleFactor, conf)
+								]));
+					case 'Corner':
+						var conf = symbol.a;
+						return s(
+							_List_fromArray(
+								[
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$corner(
+									A2($elm$core$Maybe$withDefault, localDimension, conf.size))
+								]));
+					case 'Triangle':
+						var conf = symbol.a;
+						return s(
+							_List_fromArray(
+								[
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$triangle(
+									A2($elm$core$Maybe$withDefault, localDimension, conf.size))
+								]));
+					default:
+						return s(_List_Nil);
+				}
+			},
+			symbols);
+	});
+var $elm$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (n <= 0) {
+				return result;
+			} else {
+				var $temp$result = A2($elm$core$List$cons, value, result),
+					$temp$n = n - 1,
+					$temp$value = value;
+				result = $temp$result;
+				n = $temp$n;
+				value = $temp$value;
+				continue repeatHelp;
+			}
+		}
+	});
+var $elm$core$List$repeat = F2(
+	function (n, value) {
+		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
+	});
+var $elm_community$list_extra$List$Extra$rowsLength = function (listOfLists) {
+	if (!listOfLists.b) {
+		return 0;
+	} else {
+		var x = listOfLists.a;
+		return $elm$core$List$length(x);
+	}
+};
+var $elm_community$list_extra$List$Extra$transpose = function (listOfLists) {
+	return A3(
+		$elm$core$List$foldr,
+		$elm$core$List$map2($elm$core$List$cons),
+		A2(
+			$elm$core$List$repeat,
+			$elm_community$list_extra$List$Extra$rowsLength(listOfLists),
+			_List_Nil),
+		listOfLists);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$dataBandToTableData = F2(
+	function (_v0, data) {
+		var tableFloatFormat = _v0.tableFloatFormat;
+		return A2(
+			$elm$core$List$map,
+			function (points) {
+				return $elm$core$List$concat(
+					A2(
+						$elm$core$List$map,
+						function (p) {
+							return _List_fromArray(
+								[
+									p.a,
+									tableFloatFormat(p.b)
+								]);
+						},
+						points));
+			},
+			$elm_community$list_extra$List$Extra$transpose(
+				A2(
+					$elm$core$List$map,
+					function ($) {
+						return $.points;
+					},
+					$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data))));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ComplexHeadings = function (a) {
+	return {$: 'ComplexHeadings', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$HeadingAndSubHeadings = F2(
+	function (a, b) {
+		return {$: 'HeadingAndSubHeadings', a: a, b: b};
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$Headings = function (a) {
+	return {$: 'Headings', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$getLabelsFromContent = function (content) {
+	if (content.$ === 'AccessibilityTable') {
+		var _v1 = content.a;
+		var xLabel = _v1.a;
+		var yLabel = _v1.b;
+		return _List_fromArray(
+			[xLabel, yLabel]);
+	} else {
+		return _List_fromArray(
+			['x', 'y']);
+	}
+};
+var $elm$core$List$all = F2(
+	function (isOkay, list) {
+		return !A2(
+			$elm$core$List$any,
+			A2($elm$core$Basics$composeL, $elm$core$Basics$not, isOkay),
+			list);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$noGroups = function (data) {
+	return A2(
+		$elm$core$List$all,
+		function (d) {
+			return _Utils_eq(d, $elm$core$Maybe$Nothing);
+		},
+		A2(
+			$elm$core$List$map,
+			function ($) {
+				return $.groupLabel;
+			},
+			data));
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$dataBandToTableHeadings = F2(
+	function (data, content) {
+		return function (dataBand) {
+			return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$noGroups(dataBand) ? A2(
+				$elm$core$Basics$always,
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Table$Headings(
+					$data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$getLabelsFromContent(content)),
+				dataBand) : $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ComplexHeadings(
+				A2(
+					$elm$core$List$map,
+					function (d) {
+						return A2(
+							$data_viz_lab$elm_chart_builder$Chart$Internal$Table$HeadingAndSubHeadings,
+							A2($elm$core$Maybe$withDefault, '', d.groupLabel),
+							$data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$getLabelsFromContent(content));
+					},
+					dataBand));
+		}(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$errorToString = function (error) {
+	switch (error.$) {
+		case 'NoData':
+			return 'No Data';
+		case 'RowLengthsDoNotMatch':
+			var rowNumber = error.a;
+			return 'Every line of data should be equal in length, but row ' + ($elm$core$String$fromInt(rowNumber) + ' has a different number of data points');
+		default:
+			return 'The number of column headings does not match the number of data points in each row. ';
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$Cell = function (a) {
+	return {$: 'Cell', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeading = function (a) {
+	return {$: 'ColumnHeading', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingSingle = function (a) {
+	return {$: 'ColumnHeadingSingle', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingsSimple = function (a) {
+	return {$: 'ColumnHeadingsSimple', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowHeading = function (a) {
+	return {$: 'RowHeading', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowHeadingSingle = function (a) {
+	return {$: 'RowHeadingSingle', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowHeadingsSimple = function (a) {
+	return {$: 'RowHeadingsSimple', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$TableConfiguration = function (a) {
+	return {$: 'TableConfiguration', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowLengthsDoNotMatch = function (a) {
+	return {$: 'RowLengthsDoNotMatch', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$allRowsEqualLengthHelper = F3(
+	function (rowLength, rowNumber, remainingRows) {
+		allRowsEqualLengthHelper:
+		while (true) {
+			if (!remainingRows.b) {
+				return $elm$core$Result$Ok(rowLength);
+			} else {
+				var thisRow = remainingRows.a;
+				var rest = remainingRows.b;
+				if (_Utils_eq(
+					$elm$core$List$length(thisRow),
+					rowLength)) {
+					var $temp$rowLength = rowLength,
+						$temp$rowNumber = rowNumber + 1,
+						$temp$remainingRows = rest;
+					rowLength = $temp$rowLength;
+					rowNumber = $temp$rowNumber;
+					remainingRows = $temp$remainingRows;
+					continue allRowsEqualLengthHelper;
+				} else {
+					return $elm$core$Result$Err(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowLengthsDoNotMatch(rowNumber));
+				}
+			}
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$allRowsEqualLength = function (data) {
+	if (!data.b) {
+		return $elm$core$Result$Ok(0);
+	} else {
+		var row1 = data.a;
+		var remainingRows = data.b;
+		return A3(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Table$allRowsEqualLengthHelper,
+			$elm$core$List$length(row1),
+			2,
+			remainingRows);
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$generate = function (data) {
+	var _v0 = $data_viz_lab$elm_chart_builder$Chart$Internal$Table$allRowsEqualLength(data);
+	if (_v0.$ === 'Ok') {
+		var noOfCols = _v0.a;
+		return $elm$core$Result$Ok(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Table$TableConfiguration(
+				{
+					attributes: _List_Nil,
+					caption: $elm$core$Maybe$Nothing,
+					cells: A2(
+						$elm$core$List$map,
+						function (row) {
+							return A2(
+								$elm$core$List$map,
+								function (v) {
+									return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$Cell(
+										{
+											attributes: _List_Nil,
+											value: $elm$html$Html$text(v)
+										});
+								},
+								row);
+						},
+						data),
+					columnHeadings: $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingsSimple(
+						A2(
+							$elm$core$List$map,
+							function (colNo) {
+								return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingSingle(
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeading(
+										{
+											attributes: _List_Nil,
+											label: $elm$html$Html$text(
+												'Column ' + $elm$core$String$fromInt(colNo))
+										}));
+							},
+							A2($elm$core$List$range, 1, noOfCols))),
+					columnHeadingsShown: true,
+					rowHeadings: $data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowHeadingsSimple(
+						A2(
+							$elm$core$List$map,
+							function (rowNo) {
+								return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowHeadingSingle(
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Table$RowHeading(
+										{
+											attributes: _List_Nil,
+											label: $elm$html$Html$text(
+												'Row ' + $elm$core$String$fromInt(rowNo))
+										}));
+							},
+							A2(
+								$elm$core$List$range,
+								1,
+								$elm$core$List$length(data)))),
+					rowHeadingsShown: true,
+					summary: $elm$core$Maybe$Nothing
+				}));
+	} else {
+		var error = _v0.a;
+		return $elm$core$Result$Err(error);
+	}
+};
+var $elm$html$Html$figcaption = _VirtualDom_node('figcaption');
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$invisibleFigcaption = function (content) {
+	return A2(
+		$elm$html$Html$figcaption,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'border', '0'),
+				A2($elm$html$Html$Attributes$style, 'clip', 'rect(0 0 0 0)'),
+				A2($elm$html$Html$Attributes$style, 'height', '1px'),
+				A2($elm$html$Html$Attributes$style, 'margin', '-1px'),
+				A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
+				A2($elm$html$Html$Attributes$style, 'padding', '0'),
+				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+				A2($elm$html$Html$Attributes$style, 'width', '1px')
+			]),
+		content);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingGroup = F2(
+	function (a, b) {
+		return {$: 'ColumnHeadingGroup', a: a, b: b};
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingMismatch = {$: 'ColumnHeadingMismatch'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingsComplex = function (a) {
+	return {$: 'ColumnHeadingsComplex', a: a};
+};
+var $elm$core$Result$andThen = F2(
+	function (callback, result) {
+		if (result.$ === 'Ok') {
+			var value = result.a;
+			return callback(value);
+		} else {
+			var msg = result.a;
+			return $elm$core$Result$Err(msg);
+		}
+	});
+var $elm$core$Result$map = F2(
+	function (func, ra) {
+		if (ra.$ === 'Ok') {
+			var a = ra.a;
+			return $elm$core$Result$Ok(
+				func(a));
+		} else {
+			var e = ra.a;
+			return $elm$core$Result$Err(e);
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$noOfComplexHeadings = function (complexHeadings) {
+	var addHeaders = F2(
+		function (header, acc) {
+			if (!header.b.b) {
+				return acc + 1;
+			} else {
+				var subHeadings = header.b;
+				return acc + $elm$core$List$length(subHeadings);
+			}
+		});
+	return A3($elm$core$List$foldl, addHeaders, 0, complexHeadings);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$setColumnHeadings = F2(
+	function (headings_, resultConfig) {
+		if (headings_.$ === 'Headings') {
+			var headings = headings_.a;
+			return A2(
+				$elm$core$Result$andThen,
+				function (_v2) {
+					var tableConfig = _v2.a;
+					return _Utils_eq(
+						$elm$core$List$length(headings),
+						$elm$core$List$length(
+							A2(
+								$elm$core$Maybe$withDefault,
+								_List_Nil,
+								$elm$core$List$head(tableConfig.cells)))) ? $elm$core$Result$Ok(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Table$TableConfiguration(tableConfig)) : $elm$core$Result$Err($data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingMismatch);
+				},
+				A2(
+					$elm$core$Result$map,
+					function (_v1) {
+						var tableConfig = _v1.a;
+						return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$TableConfiguration(
+							_Utils_update(
+								tableConfig,
+								{
+									columnHeadings: $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingsSimple(
+										A2(
+											$elm$core$List$map,
+											function (label) {
+												return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingSingle(
+													$data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeading(
+														{
+															attributes: _List_Nil,
+															label: $elm$html$Html$text(label)
+														}));
+											},
+											headings))
+								}));
+					},
+					resultConfig));
+		} else {
+			var complexHeadings = headings_.a;
+			return A2(
+				$elm$core$Result$andThen,
+				function (_v5) {
+					var tableConfig = _v5.a;
+					return _Utils_eq(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Table$noOfComplexHeadings(complexHeadings),
+						$elm$core$List$length(
+							A2(
+								$elm$core$Maybe$withDefault,
+								_List_Nil,
+								$elm$core$List$head(tableConfig.cells)))) ? $elm$core$Result$Ok(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Table$TableConfiguration(tableConfig)) : $elm$core$Result$Err($data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingMismatch);
+				},
+				A2(
+					$elm$core$Result$map,
+					function (_v3) {
+						var tableConfig = _v3.a;
+						return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$TableConfiguration(
+							_Utils_update(
+								tableConfig,
+								{
+									columnHeadings: $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingsComplex(
+										A2(
+											$elm$core$List$map,
+											function (_v4) {
+												var mainHeading = _v4.a;
+												var subHeadings = _v4.b;
+												return A2(
+													$data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeadingGroup,
+													$data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeading(
+														{
+															attributes: _List_Nil,
+															label: $elm$html$Html$text(mainHeading)
+														}),
+													A2(
+														$elm$core$List$map,
+														function (subHeading) {
+															return $data_viz_lab$elm_chart_builder$Chart$Internal$Table$ColumnHeading(
+																{
+																	attributes: _List_Nil,
+																	label: $elm$html$Html$text(subHeading)
+																});
+														},
+														subHeadings));
+											},
+											complexHeadings))
+								}));
+					},
+					resultConfig));
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$NoData = {$: 'NoData'};
+var $elm$html$Html$col = _VirtualDom_node('col');
+var $elm$html$Html$colgroup = _VirtualDom_node('colgroup');
+var $elm$html$Html$Attributes$colspan = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'colspan',
+		$elm$core$String$fromInt(n));
+};
 var $elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
 		return A2(
@@ -10289,6 +13760,1300 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 			key,
 			$elm$json$Json$Encode$bool(bool));
 	});
+var $elm$html$Html$Attributes$hidden = $elm$html$Html$Attributes$boolProperty('hidden');
+var $elm$html$Html$Attributes$rowspan = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'rowspan',
+		$elm$core$String$fromInt(n));
+};
+var $elm$html$Html$Attributes$scope = $elm$html$Html$Attributes$stringProperty('scope');
+var $elm$html$Html$table = _VirtualDom_node('table');
+var $elm$html$Html$tbody = _VirtualDom_node('tbody');
+var $elm$html$Html$td = _VirtualDom_node('td');
+var $elm$html$Html$th = _VirtualDom_node('th');
+var $elm$html$Html$thead = _VirtualDom_node('thead');
+var $elm$html$Html$tr = _VirtualDom_node('tr');
+var $elm_community$list_extra$List$Extra$zip = $elm$core$List$map2($elm$core$Tuple$pair);
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Table$view = function (config) {
+	if (config.$ === 'Ok') {
+		var tableConfig = config.a.a;
+		var columnHeadings = function () {
+			var _v6 = tableConfig.columnHeadings;
+			if (_v6.$ === 'ColumnHeadingsSimple') {
+				if (!_v6.a.b) {
+					return _List_Nil;
+				} else {
+					var cols = _v6.a;
+					var spacer = tableConfig.rowHeadingsShown ? _List_fromArray(
+						[
+							A2($elm$html$Html$td, _List_Nil, _List_Nil)
+						]) : _List_Nil;
+					return _List_fromArray(
+						[
+							A2(
+							$elm$html$Html$thead,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$tr,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$hidden(!tableConfig.columnHeadingsShown)
+										]),
+									_Utils_ap(
+										spacer,
+										A2(
+											$elm$core$List$map,
+											function (_v7) {
+												var colInfo = _v7.a.a;
+												return A2(
+													$elm$html$Html$th,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$scope('col')
+														]),
+													_List_fromArray(
+														[colInfo.label]));
+											},
+											cols)))
+								]))
+						]);
+				}
+			} else {
+				if (!_v6.a.b) {
+					return _List_Nil;
+				} else {
+					var complexHeadings = _v6.a;
+					var subHeadings = $elm$core$List$concat(
+						A2(
+							$elm$core$List$map,
+							function (_v10) {
+								var subHeads = _v10.b;
+								return A2(
+									$elm$core$List$map,
+									function (_v11) {
+										var colInfo = _v11.a;
+										return A2(
+											$elm$html$Html$th,
+											_List_fromArray(
+												[
+													$elm$html$Html$Attributes$scope('col')
+												]),
+											_List_fromArray(
+												[colInfo.label]));
+									},
+									subHeads);
+							},
+							complexHeadings));
+					var spacer = tableConfig.rowHeadingsShown ? _List_fromArray(
+						[
+							A2(
+							$elm$html$Html$td,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$rowspan(2)
+								]),
+							_List_Nil)
+						]) : _List_Nil;
+					var mainHeadings = function () {
+						var cols = function (n) {
+							return (!n) ? _List_fromArray(
+								[
+									$elm$html$Html$Attributes$scope('col'),
+									$elm$html$Html$Attributes$rowspan(2)
+								]) : _List_fromArray(
+								[
+									$elm$html$Html$Attributes$scope('colgroup'),
+									$elm$html$Html$Attributes$colspan(n)
+								]);
+						};
+						return A2(
+							$elm$core$List$map,
+							function (_v9) {
+								var colInfo = _v9.a.a;
+								var subHeads = _v9.b;
+								return A2(
+									$elm$html$Html$th,
+									cols(
+										$elm$core$List$length(subHeads)),
+									_List_fromArray(
+										[colInfo.label]));
+							},
+							complexHeadings);
+					}();
+					var colStructure = function () {
+						var colgroup_ = function (n) {
+							return (!n) ? A2($elm$html$Html$col, _List_Nil, _List_Nil) : A2(
+								$elm$html$Html$colgroup,
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$Attributes$attribute,
+										'span',
+										$elm$core$String$fromInt(n))
+									]),
+								_List_Nil);
+						};
+						var colSpacer = tableConfig.rowHeadingsShown ? _List_fromArray(
+							[
+								A2($elm$html$Html$col, _List_Nil, _List_Nil)
+							]) : _List_Nil;
+						return _Utils_ap(
+							colSpacer,
+							A2(
+								$elm$core$List$map,
+								function (_v8) {
+									var subHeads = _v8.b;
+									return colgroup_(
+										$elm$core$List$length(subHeads));
+								},
+								complexHeadings));
+					}();
+					return _Utils_ap(
+						colStructure,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$thead,
+								_List_Nil,
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$tr,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$hidden(!tableConfig.columnHeadingsShown)
+											]),
+										_Utils_ap(spacer, mainHeadings)),
+										A2(
+										$elm$html$Html$tr,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$hidden(!tableConfig.columnHeadingsShown)
+											]),
+										subHeadings)
+									]))
+							]));
+				}
+			}
+		}();
+		var body = function () {
+			var _v2 = tableConfig.cells;
+			if (!_v2.b) {
+				return _List_Nil;
+			} else {
+				var _v3 = tableConfig.rowHeadings;
+				var rowHeadings = _v3.a;
+				return _List_fromArray(
+					[
+						A2(
+						$elm$html$Html$tbody,
+						_List_Nil,
+						A2(
+							$elm$core$List$map,
+							function (_v4) {
+								var rowDataInfo = _v4.a;
+								var rowHeadingInfo = _v4.b.a.a;
+								return A2(
+									$elm$html$Html$tr,
+									_List_Nil,
+									_Utils_ap(
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$th,
+												_Utils_ap(
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$scope('row'),
+															$elm$html$Html$Attributes$hidden(!tableConfig.rowHeadingsShown)
+														]),
+													rowHeadingInfo.attributes),
+												_List_fromArray(
+													[rowHeadingInfo.label]))
+											]),
+										A2(
+											$elm$core$List$map,
+											function (_v5) {
+												var cell = _v5.a;
+												return A2(
+													$elm$html$Html$td,
+													cell.attributes,
+													_List_fromArray(
+														[cell.value]));
+											},
+											rowDataInfo)));
+							},
+							A2($elm_community$list_extra$List$Extra$zip, tableConfig.cells, rowHeadings)))
+					]);
+			}
+		}();
+		if (!body.b) {
+			return $elm$core$Result$Err($data_viz_lab$elm_chart_builder$Chart$Internal$Table$NoData);
+		} else {
+			return $elm$core$Result$Ok(
+				A2(
+					$elm$html$Html$table,
+					_List_Nil,
+					_Utils_ap(columnHeadings, body)));
+		}
+	} else {
+		var error = config.a;
+		return $elm$core$Result$Err(error);
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$tableElement = F2(
+	function (config, data) {
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		var tableData = A2($data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$dataBandToTableData, c, data);
+		var tableHeadings = A2($data_viz_lab$elm_chart_builder$Chart$Internal$TableHelpers$dataBandToTableHeadings, data, c.accessibilityContent);
+		var table = $data_viz_lab$elm_chart_builder$Chart$Internal$Table$view(
+			A2(
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Table$setColumnHeadings,
+				tableHeadings,
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Table$generate(tableData)));
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$invisibleFigcaption(
+			_List_fromArray(
+				[
+					function () {
+					if (table.$ === 'Ok') {
+						var table_ = table.a;
+						return A2(
+							$elm$html$Html$div,
+							_List_Nil,
+							_List_fromArray(
+								[table_]));
+					} else {
+						var error = table.a;
+						return $elm$html$Html$text(
+							$data_viz_lab$elm_chart_builder$Chart$Internal$Table$errorToString(error));
+					}
+				}()
+				]));
+	});
+var $elm_community$typed_svg$TypedSvg$Attributes$viewBox = F4(
+	function (minX, minY, vWidth, vHeight) {
+		return A2(
+			$elm_community$typed_svg$TypedSvg$Core$attribute,
+			'viewBox',
+			A2(
+				$elm$core$String$join,
+				' ',
+				A2(
+					$elm$core$List$map,
+					$elm$core$String$fromFloat,
+					_List_fromArray(
+						[minX, minY, vWidth, vHeight]))));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$renderBandGrouped = function (_v0) {
+	var data = _v0.a;
+	var config = _v0.b;
+	var paddingInner = A2(
+		$gampleman$elm_visualization$Scale$convert,
+		$gampleman$elm_visualization$Scale$clamp(
+			A2(
+				$gampleman$elm_visualization$Scale$linear,
+				_Utils_Tuple2(0.2, 0.999),
+				_Utils_Tuple2(0, 500))),
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDataBandDepth(data));
+	var domain = A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDomainBandFromData, data, config);
+	var dataLength = $elm$core$List$length(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data));
+	var paddingInnerGroup = (dataLength === 1) ? 0 : 0.1;
+	var colorScale = A2(
+		$gampleman$elm_visualization$Scale$linear,
+		_Utils_Tuple2(0, 1),
+		A2(
+			$elm$core$Maybe$withDefault,
+			_Utils_Tuple2(0, 0),
+			domain.continuous));
+	var classNames = $elm$html$Html$Attributes$classList(
+		_List_fromArray(
+			[
+				_Utils_Tuple2($data_viz_lab$elm_chart_builder$Chart$Internal$Constants$rootClassName, true),
+				_Utils_Tuple2($data_viz_lab$elm_chart_builder$Chart$Internal$Constants$barClassName, true)
+			]));
+	var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+	var h = c.height;
+	var m = c.margin;
+	var p = c.padding;
+	var outerH = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$outerHeight, h, m, p);
+	var w = c.width;
+	var outerW = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$outerWidth, w, m, p);
+	var svgElAttrs = _Utils_ap(
+		_List_fromArray(
+			[
+				A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, outerW, outerH),
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$width(outerW),
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$height(outerH),
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$role('img'),
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaHidden
+			]),
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledbyContent(c));
+	var bandGroupRange = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getBandGroupRange, config, w, h);
+	var bandGroupScale = A3(
+		$gampleman$elm_visualization$Scale$band,
+		_Utils_update(
+			$gampleman$elm_visualization$Scale$defaultBandConfig,
+			{paddingInner: paddingInnerGroup, paddingOuter: paddingInnerGroup}),
+		bandGroupRange,
+		A2($elm$core$Maybe$withDefault, _List_Nil, domain.bandGroup));
+	var bandSingleRange = A2(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$getBandSingleRange,
+		config,
+		$gampleman$elm_visualization$Scale$bandwidth(bandGroupScale));
+	var bandSingleScale = A3(
+		$gampleman$elm_visualization$Scale$band,
+		_Utils_update(
+			$gampleman$elm_visualization$Scale$defaultBandConfig,
+			{paddingInner: paddingInner, paddingOuter: paddingInner / 2}),
+		bandSingleRange,
+		A2($elm$core$Maybe$withDefault, _List_Nil, domain.bandSingle));
+	var continuousRange = A5($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getContinuousRange, config, $data_viz_lab$elm_chart_builder$Chart$Internal$Type$RenderChart, w, h, bandSingleScale);
+	var continuousScale = A2(
+		$gampleman$elm_visualization$Scale$linear,
+		continuousRange,
+		A2(
+			$elm$core$Maybe$withDefault,
+			_Utils_Tuple2(0, 0),
+			domain.continuous));
+	var iconOffset = $elm$core$List$isEmpty(c.symbols) ? 0 : (A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$symbolSpace, $data_viz_lab$elm_chart_builder$Chart$Internal$Type$Vertical, bandSingleScale, c.symbols) + $data_viz_lab$elm_chart_builder$Chart$Internal$Symbol$symbolGap);
+	var symbolElements = function () {
+		var _v2 = c.layout;
+		if (_v2.$ === 'GroupedBar') {
+			return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$showIcons(config) ? A3($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$symbolsToSymbolElements, c.orientation, bandSingleScale, c.symbols) : _List_Nil;
+		} else {
+			return _List_Nil;
+		}
+	}();
+	var axisBandScale = ($elm$core$List$length(
+		A2($elm$core$Maybe$withDefault, _List_Nil, domain.bandGroup)) > 1) ? bandGroupScale : bandSingleScale;
+	var svgEl = A2(
+		$elm_community$typed_svg$TypedSvg$svg,
+		svgElAttrs,
+		_Utils_ap(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$descAndTitle(c),
+			_Utils_ap(
+				A3($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$bandGroupedYAxis, c, iconOffset, continuousScale),
+				_Utils_ap(
+					A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$bandXAxis, c, axisBandScale),
+					_Utils_ap(
+						_List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$g,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$transform(
+										_List_fromArray(
+											[
+												A2($elm_community$typed_svg$TypedSvg$Types$Translate, m.left + p.left, m.top + p.top)
+											])),
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+									]),
+								A2(
+									$elm$core$List$map,
+									A6($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$columns, config, iconOffset, bandGroupScale, bandSingleScale, continuousScale, colorScale),
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data)))
+							]),
+						symbolElements)))));
+	var _v1 = c.accessibilityContent;
+	if (_v1.$ === 'AccessibilityNone') {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[classNames]),
+			_List_fromArray(
+				[svgEl]));
+	} else {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[classNames]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$figure,
+					_List_Nil,
+					_List_fromArray(
+						[
+							svgEl,
+							A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$tableElement, config, data)
+						]))
+				]));
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$RenderAxis = {$: 'RenderAxis'};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$adjustContinuousRange = F3(
+	function (config, stackedDepth, _v0) {
+		var a = _v0.a;
+		var b = _v0.b;
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		var layout = c.layout;
+		var orientation = c.orientation;
+		if (orientation.$ === 'Horizontal') {
+			if (layout.$ === 'GroupedBar') {
+				return _Utils_Tuple2(a, b);
+			} else {
+				return _Utils_Tuple2(a + stackedDepth, b);
+			}
+		} else {
+			return _Utils_Tuple2(a - stackedDepth, b);
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$dataBandToDataStacked = F2(
+	function (config, data) {
+		var seed = A2(
+			$elm$core$List$map,
+			function (d) {
+				return _Utils_Tuple2(d, _List_Nil);
+			},
+			A2(
+				$elm$core$Maybe$withDefault,
+				_List_Nil,
+				A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDomainBandFromData, data, config).bandSingle));
+		return A3(
+			$elm$core$List$foldl,
+			F2(
+				function (d, acc) {
+					return A2(
+						$elm$core$List$map,
+						function (a) {
+							return _Utils_eq(d.a, a.a) ? _Utils_Tuple2(
+								a.a,
+								A2($elm$core$List$cons, d.b, a.b)) : a;
+						},
+						acc);
+				}),
+			seed,
+			$elm$core$List$concat(
+				A2(
+					$elm$core$List$map,
+					function ($) {
+						return $.points;
+					},
+					$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data))));
+	});
+var $elm$core$Set$foldr = F3(
+	function (func, initialState, _v0) {
+		var dict = _v0.a;
+		return A3(
+			$elm$core$Dict$foldr,
+			F3(
+				function (key, _v1, state) {
+					return A2(func, key, state);
+				}),
+			initialState,
+			dict);
+	});
+var $elm$core$Set$Set_elm_builtin = function (a) {
+	return {$: 'Set_elm_builtin', a: a};
+};
+var $elm$core$Set$empty = $elm$core$Set$Set_elm_builtin($elm$core$Dict$empty);
+var $elm$core$Set$insert = F2(
+	function (key, _v0) {
+		var dict = _v0.a;
+		return $elm$core$Set$Set_elm_builtin(
+			A3($elm$core$Dict$insert, key, _Utils_Tuple0, dict));
+	});
+var $elm$core$Set$fromList = function (list) {
+	return A3($elm$core$List$foldl, $elm$core$Set$insert, $elm$core$Set$empty, list);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toDataBand = function (dataBand) {
+	return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DataBand(dataBand);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fillGapsForStack = function (data) {
+	var d = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data);
+	var allStrings = $elm$core$Set$fromList(
+		$elm$core$List$concat(
+			A2(
+				$elm$core$List$map,
+				A2(
+					$elm$core$Basics$composeR,
+					function ($) {
+						return $.points;
+					},
+					$elm$core$List$map($elm$core$Tuple$first)),
+				d)));
+	var fillGaps = function (dataGroupBand) {
+		var points = A2($elm$core$List$map, $elm$core$Tuple$first, dataGroupBand.points);
+		var newPoints = A2(
+			$elm$core$List$sortBy,
+			$elm$core$Tuple$first,
+			A2(
+				$elm$core$List$append,
+				dataGroupBand.points,
+				A3(
+					$elm$core$Set$foldr,
+					F2(
+						function (s, acc) {
+							return A2($elm$core$List$member, s, points) ? acc : A2(
+								$elm$core$List$cons,
+								_Utils_Tuple2(s, 0),
+								acc);
+						}),
+					_List_Nil,
+					allStrings)));
+		return _Utils_update(
+			dataGroupBand,
+			{points: newPoints});
+	};
+	return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toDataBand(
+		A2($elm$core$List$map, fillGaps, d));
+};
+var $gampleman$elm_visualization$Shape$Stack$offsetDiverging = function (series) {
+	var folder = F2(
+		function (_v1, _v2) {
+			var x = _v1.a;
+			var y = _v1.b;
+			var yp = _v2.a;
+			var yn = _v2.b;
+			var accum = _v2.c;
+			var dy = y - x;
+			return (dy >= 0) ? _Utils_Tuple3(
+				yp + dy,
+				yn,
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(yp, yp + dy),
+					accum)) : ((dy < 0) ? _Utils_Tuple3(
+				yp,
+				yn + dy,
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(yn + dy, yn),
+					accum)) : _Utils_Tuple3(
+				yp,
+				yn,
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(yp, y),
+					accum)));
+		});
+	var modifyColumn = function (column) {
+		return $elm$core$List$reverse(
+			function (_v0) {
+				var newColumn = _v0.c;
+				return newColumn;
+			}(
+				A3(
+					$elm$core$List$foldl,
+					folder,
+					_Utils_Tuple3(0, 0, _List_Nil),
+					column)));
+	};
+	return $elm_community$list_extra$List$Extra$transpose(
+		A2(
+			$elm$core$List$map,
+			modifyColumn,
+			$elm_community$list_extra$List$Extra$transpose(series)));
+};
+var $gampleman$elm_visualization$Shape$stackOffsetDiverging = $gampleman$elm_visualization$Shape$Stack$offsetDiverging;
+var $gampleman$elm_visualization$Shape$Stack$offsetNone = function (series) {
+	if (!series.b) {
+		return _List_Nil;
+	} else {
+		var x = series.a;
+		var xs = series.b;
+		var weirdAdd = F2(
+			function (_v3, _v4) {
+				var s11 = _v3.b;
+				var s00 = _v4.a;
+				var s01 = _v4.b;
+				return $elm$core$Basics$isNaN(s01) ? _Utils_Tuple2(s00, s11 + s00) : _Utils_Tuple2(s01, s11 + s01);
+			});
+		var helper = F2(
+			function (s1, _v2) {
+				var s0 = _v2.a;
+				var accum = _v2.b;
+				return _Utils_Tuple2(
+					A3($elm$core$List$map2, weirdAdd, s1, s0),
+					A2($elm$core$List$cons, s0, accum));
+			});
+		return $elm$core$List$reverse(
+			function (_v1) {
+				var a = _v1.a;
+				var b = _v1.b;
+				return A2($elm$core$List$cons, a, b);
+			}(
+				A3(
+					$elm$core$List$foldl,
+					helper,
+					_Utils_Tuple2(x, _List_Nil),
+					xs)));
+	}
+};
+var $gampleman$elm_visualization$Shape$stackOffsetNone = $gampleman$elm_visualization$Shape$Stack$offsetNone;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getOffset = function (config) {
+	var _v0 = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config).layout;
+	if (_v0.$ === 'StackedBar') {
+		var direction = _v0.a;
+		if (direction.$ === 'Diverging') {
+			return $gampleman$elm_visualization$Shape$stackOffsetDiverging;
+		} else {
+			return $gampleman$elm_visualization$Shape$stackOffsetNone;
+		}
+	} else {
+		return $gampleman$elm_visualization$Shape$stackOffsetNone;
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getStackedValuesAndGroupes = F2(
+	function (values, data) {
+		var m = $elm$core$List$map2(
+			F2(
+				function (d, v) {
+					return A3(
+						$elm$core$List$map2,
+						F2(
+							function (stackedValue, rawValue) {
+								return {rawValue: rawValue.b, stackedValue: stackedValue};
+							}),
+						v,
+						d.points);
+				}));
+		return _Utils_Tuple2(
+			A2(
+				m,
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data),
+				$elm$core$List$reverse(
+					$elm_community$list_extra$List$Extra$transpose(values))),
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (idx, s) {
+						return A2(
+							$elm$core$Maybe$withDefault,
+							$elm$core$String$fromInt(idx),
+							s.groupLabel);
+					}),
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDataBand(data)));
+	});
+var $gampleman$elm_visualization$Shape$Stack$calculateExtremes = function (coords) {
+	var folder = F2(
+		function (_v2, _v3) {
+			var y1 = _v2.a;
+			var y2 = _v2.b;
+			var accmin = _v3.a;
+			var accmax = _v3.b;
+			return _Utils_Tuple2(
+				A2(
+					$elm$core$Basics$min,
+					accmin,
+					A2($elm$core$Basics$min, y1, y2)),
+				A2(
+					$elm$core$Basics$max,
+					accmax,
+					A2($elm$core$Basics$max, y1, y2)));
+		});
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, _v1) {
+				var mi = _v0.a;
+				var ma = _v0.b;
+				var accmin = _v1.a;
+				var accmax = _v1.b;
+				return _Utils_Tuple2(
+					A2($elm$core$Basics$min, mi, accmin),
+					A2($elm$core$Basics$max, ma, accmax));
+			}),
+		_Utils_Tuple2(0, 0),
+		A2(
+			$elm$core$List$map,
+			A2(
+				$elm$core$List$foldl,
+				folder,
+				_Utils_Tuple2(0, 0)),
+			coords));
+};
+var $elm$core$List$unzip = function (pairs) {
+	var step = F2(
+		function (_v0, _v1) {
+			var x = _v0.a;
+			var y = _v0.b;
+			var xs = _v1.a;
+			var ys = _v1.b;
+			return _Utils_Tuple2(
+				A2($elm$core$List$cons, x, xs),
+				A2($elm$core$List$cons, y, ys));
+		});
+	return A3(
+		$elm$core$List$foldr,
+		step,
+		_Utils_Tuple2(_List_Nil, _List_Nil),
+		pairs);
+};
+var $gampleman$elm_visualization$Shape$Stack$computeStack = function (_v0) {
+	var offset = _v0.offset;
+	var order = _v0.order;
+	var data = _v0.data;
+	var _v1 = $elm$core$List$unzip(
+		order(data));
+	var labels = _v1.a;
+	var values = _v1.b;
+	var stacked = offset(
+		A2(
+			$elm$core$List$map,
+			$elm$core$List$map(
+				function (e) {
+					return _Utils_Tuple2(0, e);
+				}),
+			values));
+	return {
+		extent: $gampleman$elm_visualization$Shape$Stack$calculateExtremes(stacked),
+		labels: labels,
+		values: stacked
+	};
+};
+var $gampleman$elm_visualization$Shape$stack = $gampleman$elm_visualization$Shape$Stack$computeStack;
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$colorCategoricalStyle = F2(
+	function (c, idx) {
+		var _v0 = c.colorResource;
+		if (_v0.$ === 'ColorPalette') {
+			var colors = _v0.a;
+			return 'fill: ' + A2($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$colorPaletteToColor, colors, idx);
+		} else {
+			return '';
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$getStackedLabel = F2(
+	function (idx, l) {
+		return A2(
+			$elm$core$Maybe$withDefault,
+			'',
+			A2($elm_community$list_extra$List$Extra$getAt, idx, l));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedColumnTitleText = F4(
+	function (c, idx, labels, value) {
+		var ordinalValue = A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$getStackedLabel, idx, labels);
+		var _v0 = c.showColumnTitle;
+		switch (_v0.$) {
+			case 'StackedColumnTitle':
+				var formatter = _v0.a;
+				return _List_fromArray(
+					[
+						A2(
+						$elm_community$typed_svg$TypedSvg$title,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								ordinalValue + (': ' + formatter(value)))
+							]))
+					]);
+			case 'YColumnTitle':
+				var formatter = _v0.a;
+				return _List_fromArray(
+					[
+						A2(
+						$elm_community$typed_svg$TypedSvg$title,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(
+								formatter(value))
+							]))
+					]);
+			case 'XOrdinalColumnTitle':
+				return _List_fromArray(
+					[
+						A2(
+						$elm_community$typed_svg$TypedSvg$title,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Core$text(ordinalValue)
+							]))
+					]);
+			default:
+				return _List_Nil;
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$stackedValuesInverse = F2(
+	function (width, values) {
+		return A2(
+			$elm$core$List$map,
+			function (v) {
+				var _v0 = v.stackedValue;
+				var left = _v0.a;
+				var right = _v0.b;
+				return _Utils_update(
+					v,
+					{
+						stackedValue: _Utils_Tuple2(
+							$elm$core$Basics$abs(left - width),
+							$elm$core$Basics$abs(right - width))
+					});
+			},
+			values);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalRectsStacked = F3(
+	function (c, bandGroupScale, _v0) {
+		var group = _v0.a;
+		var values = _v0.b;
+		var labels = _v0.c;
+		var block = F2(
+			function (idx, _v2) {
+				var rawValue = _v2.rawValue;
+				var stackedValue = _v2.stackedValue;
+				var coreStyle = $elm_community$typed_svg$TypedSvg$Attributes$style(
+					A2(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles,
+						c.coreStyle,
+						A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$colorCategoricalStyle, c, idx)));
+				var _v1 = stackedValue;
+				var lower = _v1.a;
+				var upper = _v1.b;
+				var rect_ = A2(
+					$elm_community$typed_svg$TypedSvg$rect,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(
+							A2($gampleman$elm_visualization$Scale$convert, bandGroupScale, group)),
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(lower + idx),
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$height(
+							$gampleman$elm_visualization$Scale$bandwidth(bandGroupScale)),
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$width(
+							$elm$core$Basics$abs(upper - lower)),
+							$elm_community$typed_svg$TypedSvg$Attributes$shapeRendering($elm_community$typed_svg$TypedSvg$Types$RenderCrispEdges),
+							coreStyle
+						]),
+					A4($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedColumnTitleText, c, idx, labels, rawValue));
+				return A2(
+					$elm_community$typed_svg$TypedSvg$g,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$class(
+							_List_fromArray(
+								[
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName,
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName + ('-' + $elm$core$String$fromInt(idx))
+								]))
+						]),
+					_List_fromArray(
+						[rect_]));
+			});
+		return A2(
+			$elm$core$List$indexedMap,
+			function (idx) {
+				return block(idx);
+			},
+			A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$stackedValuesInverse, c.width, values));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalRectsStacked = F3(
+	function (c, bandGroupScale, _v0) {
+		var group = _v0.a;
+		var values = _v0.b;
+		var labels = _v0.c;
+		var bandValue = A2($gampleman$elm_visualization$Scale$convert, bandGroupScale, group);
+		var block = F2(
+			function (idx, _v2) {
+				var rawValue = _v2.rawValue;
+				var stackedValue = _v2.stackedValue;
+				var coreStyleFromX = c.coreStyleFromPointBandX(
+					A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$getStackedLabel, idx, labels));
+				var coreStyle = $elm_community$typed_svg$TypedSvg$Attributes$style(
+					A2(
+						$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles,
+						coreStyleFromX,
+						A2(
+							$data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$mergeStyles,
+							c.coreStyle,
+							A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$colorCategoricalStyle, c, idx))));
+				var _v1 = stackedValue;
+				var upper = _v1.a;
+				var lower = _v1.b;
+				var rect_ = A2(
+					$elm_community$typed_svg$TypedSvg$rect,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$x(bandValue),
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$y(lower - idx),
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$width(
+							$gampleman$elm_visualization$Scale$bandwidth(bandGroupScale)),
+							$elm_community$typed_svg$TypedSvg$Attributes$InPx$height(
+							$elm$core$Basics$abs(upper - lower)),
+							$elm_community$typed_svg$TypedSvg$Attributes$shapeRendering($elm_community$typed_svg$TypedSvg$Types$RenderCrispEdges),
+							coreStyle
+						]),
+					A4($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedColumnTitleText, c, idx, labels, rawValue));
+				return A2(
+					$elm_community$typed_svg$TypedSvg$g,
+					_List_fromArray(
+						[
+							$elm_community$typed_svg$TypedSvg$Attributes$class(
+							_List_fromArray(
+								[
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName,
+									$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName + ('-' + $elm$core$String$fromInt(idx))
+								]))
+						]),
+					_List_fromArray(
+						[rect_]));
+			});
+		return A2(
+			$elm$core$List$indexedMap,
+			function (idx) {
+				return block(idx);
+			},
+			values);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedColumns = F3(
+	function (config, bandGroupScale, payload) {
+		var rects = function () {
+			var _v0 = config.orientation;
+			if (_v0.$ === 'Vertical') {
+				return A3($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$verticalRectsStacked, config, bandGroupScale, payload);
+			} else {
+				return A3($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$horizontalRectsStacked, config, bandGroupScale, payload);
+			}
+		}();
+		return A2(
+			$elm_community$typed_svg$TypedSvg$g,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$class(
+					_List_fromArray(
+						[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$columnClassName]))
+				]),
+			rects);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedContainerTranslate = F3(
+	function (config, a, b) {
+		var orientation = config.orientation;
+		if (orientation.$ === 'Horizontal') {
+			return A2($elm_community$typed_svg$TypedSvg$Types$Translate, a, b);
+		} else {
+			return A2($elm_community$typed_svg$TypedSvg$Types$Translate, a, b);
+		}
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$renderBandStacked = function (_v0) {
+	var data = _v0.a;
+	var config = _v0.b;
+	var noGapsData = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fillGapsForStack(data);
+	var stackDepth = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDataBandDepth(noGapsData);
+	var domain = A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getDomainBandFromData, data, config);
+	var dataStacked = A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$dataBandToDataStacked, config, noGapsData);
+	var stackedConfig = {
+		data: dataStacked,
+		offset: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$getOffset(config),
+		order: $elm$core$Basics$identity
+	};
+	var continuousDomain = domain.continuous;
+	var classNames = $elm$html$Html$Attributes$classList(
+		_List_fromArray(
+			[
+				_Utils_Tuple2($data_viz_lab$elm_chart_builder$Chart$Internal$Constants$rootClassName, true),
+				_Utils_Tuple2($data_viz_lab$elm_chart_builder$Chart$Internal$Constants$barClassName, true)
+			]));
+	var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+	var h = c.height;
+	var m = c.margin;
+	var p = c.padding;
+	var outerH = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$outerHeight, h, m, p);
+	var w = c.width;
+	var outerW = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Helpers$outerWidth, w, m, p);
+	var svgElAttrs = _Utils_ap(
+		_List_fromArray(
+			[
+				A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, outerW, outerH),
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$width(outerW),
+				$elm_community$typed_svg$TypedSvg$Attributes$InPx$height(outerH),
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$role('img'),
+				$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaHidden
+			]),
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ariaLabelledbyContent(c));
+	var bandGroupRange = A3($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getBandGroupRange, config, w, h);
+	var bandGroupScale = A3(
+		$gampleman$elm_visualization$Scale$band,
+		_Utils_update(
+			$gampleman$elm_visualization$Scale$defaultBandConfig,
+			{paddingInner: 0.1, paddingOuter: 0.05}),
+		bandGroupRange,
+		A2($elm$core$Maybe$withDefault, _List_Nil, domain.bandGroup));
+	var bandSingleRange = A2(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$getBandSingleRange,
+		config,
+		$gampleman$elm_visualization$Scale$bandwidth(bandGroupScale));
+	var bandSingleScale = A3(
+		$gampleman$elm_visualization$Scale$band,
+		$gampleman$elm_visualization$Scale$defaultBandConfig,
+		bandSingleRange,
+		A2($elm$core$Maybe$withDefault, _List_Nil, domain.bandSingle));
+	var continuousRange = A3(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$adjustContinuousRange,
+		config,
+		stackDepth,
+		A5($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getContinuousRange, config, $data_viz_lab$elm_chart_builder$Chart$Internal$Type$RenderChart, w, h, bandSingleScale));
+	var continuousRangeAxis = A3(
+		$data_viz_lab$elm_chart_builder$Chart$Internal$Type$adjustContinuousRange,
+		config,
+		stackDepth,
+		A5($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getContinuousRange, config, $data_viz_lab$elm_chart_builder$Chart$Internal$Type$RenderAxis, w, h, bandSingleScale));
+	var axisBandScale = bandGroupScale;
+	var _v1 = $gampleman$elm_visualization$Shape$stack(stackedConfig);
+	var values = _v1.values;
+	var labels = _v1.labels;
+	var extent = _v1.extent;
+	var continuousExtent = function () {
+		if (continuousDomain.$ === 'Just') {
+			var ld = continuousDomain.a;
+			var _v6 = c.layout;
+			if (_v6.$ === 'StackedBar') {
+				var direction = _v6.a;
+				if (direction.$ === 'Diverging') {
+					return A2(
+						$elm$core$Maybe$withDefault,
+						_Utils_Tuple2(0, 0),
+						A2(
+							$elm$core$Maybe$map,
+							function (max) {
+								return _Utils_Tuple2(max * (-1), max);
+							},
+							$elm$core$List$maximum(
+								_List_fromArray(
+									[
+										$elm$core$Basics$abs(ld.a),
+										$elm$core$Basics$abs(ld.b)
+									]))));
+				} else {
+					return extent;
+				}
+			} else {
+				return extent;
+			}
+		} else {
+			return extent;
+		}
+	}();
+	var continuousScale = A2($gampleman$elm_visualization$Scale$linear, continuousRange, continuousExtent);
+	var continuousScaleAxis = A2($gampleman$elm_visualization$Scale$linear, continuousRangeAxis, continuousExtent);
+	var _v2 = A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$getStackedValuesAndGroupes, values, noGapsData);
+	var columnValues = _v2.a;
+	var columnGroupes = _v2.b;
+	var scaledValues = A2(
+		$elm$core$List$map,
+		$elm$core$List$map(
+			function (vals) {
+				var _v4 = vals.stackedValue;
+				var a1 = _v4.a;
+				var a2 = _v4.b;
+				return _Utils_update(
+					vals,
+					{
+						stackedValue: _Utils_Tuple2(
+							A2($gampleman$elm_visualization$Scale$convert, continuousScale, a1),
+							A2($gampleman$elm_visualization$Scale$convert, continuousScale, a2))
+					});
+			}),
+		columnValues);
+	var svgEl = A2(
+		$elm_community$typed_svg$TypedSvg$svg,
+		svgElAttrs,
+		_Utils_ap(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$descAndTitle(c),
+			_Utils_ap(
+				A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$bandXAxis, c, axisBandScale),
+				_Utils_ap(
+					A3($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$bandGroupedYAxis, c, 0, continuousScaleAxis),
+					_List_fromArray(
+						[
+							A2(
+							$elm_community$typed_svg$TypedSvg$g,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$transform(
+									_List_fromArray(
+										[
+											A3($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedContainerTranslate, c, m.left, m.top)
+										])),
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										[$data_viz_lab$elm_chart_builder$Chart$Internal$Constants$componentClassName]))
+								]),
+							A2(
+								$elm$core$List$map,
+								A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$stackedColumns, c, bandGroupScale),
+								A3(
+									$elm$core$List$map2,
+									F2(
+										function (a, b) {
+											return _Utils_Tuple3(a, b, labels);
+										}),
+									columnGroupes,
+									scaledValues)))
+						])))));
+	var _v3 = c.accessibilityContent;
+	if (_v3.$ === 'AccessibilityNone') {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[classNames]),
+			_List_fromArray(
+				[svgEl]));
+	} else {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[classNames]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$figure,
+					_List_Nil,
+					_List_fromArray(
+						[
+							svgEl,
+							A2($data_viz_lab$elm_chart_builder$Chart$Internal$Bar$tableElement, config, noGapsData)
+						]))
+				]));
+	}
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ExternalData = function (a) {
+	return {$: 'ExternalData', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toExternalData = function (data) {
+	return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ExternalData(data);
+};
+var $data_viz_lab$elm_chart_builder$Chart$Bar$render = F2(
+	function (_v0, config) {
+		var externalData = _v0.a;
+		var accessor = _v0.b;
+		var data = A2(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$externalToDataBand,
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$toExternalData(externalData),
+			accessor);
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		var _v1 = c.layout;
+		switch (_v1.$) {
+			case 'GroupedBar':
+				return $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$renderBandGrouped(
+					_Utils_Tuple2(data, config));
+			case 'StackedBar':
+				return $data_viz_lab$elm_chart_builder$Chart$Internal$Bar$renderBandStacked(
+					_Utils_Tuple2(data, config));
+			default:
+				return $elm$html$Html$text('');
+		}
+	});
+var $avh4$elm_color$Color$scaleFrom255 = function (c) {
+	return c / 255;
+};
+var $avh4$elm_color$Color$rgb255 = F3(
+	function (r, g, b) {
+		return A4(
+			$avh4$elm_color$Color$RgbaSpace,
+			$avh4$elm_color$Color$scaleFrom255(r),
+			$avh4$elm_color$Color$scaleFrom255(g),
+			$avh4$elm_color$Color$scaleFrom255(b),
+			1.0);
+	});
+var $gampleman$elm_visualization$Scale$Color$tableau10 = _List_fromArray(
+	[
+		A3($avh4$elm_color$Color$rgb255, 78, 121, 167),
+		A3($avh4$elm_color$Color$rgb255, 242, 142, 44),
+		A3($avh4$elm_color$Color$rgb255, 225, 87, 89),
+		A3($avh4$elm_color$Color$rgb255, 118, 183, 178),
+		A3($avh4$elm_color$Color$rgb255, 89, 161, 79),
+		A3($avh4$elm_color$Color$rgb255, 237, 201, 73),
+		A3($avh4$elm_color$Color$rgb255, 175, 122, 161),
+		A3($avh4$elm_color$Color$rgb255, 255, 157, 167),
+		A3($avh4$elm_color$Color$rgb255, 156, 117, 95),
+		A3($avh4$elm_color$Color$rgb255, 186, 176, 171)
+	]);
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$ColorPalette = function (a) {
+	return {$: 'ColorPalette', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$setColorResource = F2(
+	function (resource, _v0) {
+		var c = _v0.a;
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{colorResource: resource}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Bar$withColorPalette = F2(
+	function (palette, config) {
+		return A2(
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$setColorResource,
+			$data_viz_lab$elm_chart_builder$Chart$Internal$Type$ColorPalette(palette),
+			config);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$setOrientation = F2(
+	function (orientation, _v0) {
+		var c = _v0.a;
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{orientation: orientation}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Bar$withOrientation = F2(
+	function (value, config) {
+		return A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$setOrientation, value, config);
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$StackedBar = function (a) {
+	return {$: 'StackedBar', a: a};
+};
+var $data_viz_lab$elm_chart_builder$Chart$Bar$withStackedLayout = F2(
+	function (direction, config) {
+		var c = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromConfig(config);
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{
+					layout: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$StackedBar(direction)
+				}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Internal$Type$setDomainBandContinuous = F2(
+	function (continuousDomain, _v0) {
+		var c = _v0.a;
+		var domain = $data_viz_lab$elm_chart_builder$Chart$Internal$Type$fromDomainBand(c.domainBand);
+		var newDomain = _Utils_update(
+			domain,
+			{
+				continuous: $elm$core$Maybe$Just(continuousDomain)
+			});
+		return $data_viz_lab$elm_chart_builder$Chart$Internal$Type$toConfig(
+			_Utils_update(
+				c,
+				{
+					domainBand: $data_viz_lab$elm_chart_builder$Chart$Internal$Type$DomainBand(newDomain)
+				}));
+	});
+var $data_viz_lab$elm_chart_builder$Chart$Bar$withYDomain = F2(
+	function (value, config) {
+		return A2($data_viz_lab$elm_chart_builder$Chart$Internal$Type$setDomainBandContinuous, value, config);
+	});
+var $author$project$StartUp$barChart = function (model) {
+	return A2(
+		$data_viz_lab$elm_chart_builder$Chart$Bar$render,
+		_Utils_Tuple2(
+			$author$project$StartUp$data(model),
+			$author$project$StartUp$accessor),
+		A2(
+			$data_viz_lab$elm_chart_builder$Chart$Bar$withStackedLayout,
+			$data_viz_lab$elm_chart_builder$Chart$Bar$diverging,
+			$data_viz_lab$elm_chart_builder$Chart$Bar$hideAxis(
+				A2(
+					$data_viz_lab$elm_chart_builder$Chart$Bar$withYDomain,
+					_Utils_Tuple2(0, 100),
+					A2(
+						$data_viz_lab$elm_chart_builder$Chart$Bar$withColorPalette,
+						$gampleman$elm_visualization$Scale$Color$tableau10,
+						A2(
+							$data_viz_lab$elm_chart_builder$Chart$Bar$withOrientation,
+							$data_viz_lab$elm_chart_builder$Chart$Bar$horizontal,
+							$data_viz_lab$elm_chart_builder$Chart$Bar$init(
+								{
+									height: 50,
+									margin: {bottom: 30, left: -500, right: 10, top: 10},
+									width: 500
+								})))))));
+};
 var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
 var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
 var $author$project$QuestionSelectionLogic$getDueQuestions = F2(
@@ -10323,7 +15088,6 @@ var $author$project$QuestionSelectionLogic$getDueQuestions = F2(
 			}
 		}
 	});
-var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $author$project$StartUp$procentualLearnProgress = function (lst) {
@@ -10527,11 +15291,14 @@ var $author$project$StartUp$startUp = function (model) {
 																					$elm$core$Maybe$Just(model.learnProgress)))))
 																	])),
 																A2(
-																$elm$html$Html$p,
-																_List_Nil,
+																$elm$html$Html$div,
 																_List_fromArray(
 																	[
-																		$elm$html$Html$text('Starte jetzt dein Training')
+																		A2($elm$html$Html$Attributes$style, 'width', '100%')
+																	]),
+																_List_fromArray(
+																	[
+																		$author$project$StartUp$barChart(model)
 																	])),
 																A2(
 																$elm$html$Html$div,
@@ -10559,6 +15326,13 @@ var $author$project$StartUp$startUp = function (model) {
 																				$elm$html$Html$text(
 																				$elm$core$String$fromFloat(float_progress) + '%')
 																			]))
+																	])),
+																A2(
+																$elm$html$Html$p,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text('Starte jetzt dein Training')
 																	]))
 															])),
 														A2(

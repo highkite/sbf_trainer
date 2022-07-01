@@ -5,8 +5,11 @@ import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Html.Attributes.Aria exposing (..)
 
+import Chart.Bar as Bar
+import Scale.Color
+
 import Messages exposing (Msg(..), Model, LearnProgress)
-import QuestionSelectionLogic exposing (getDueQuestions)
+import QuestionSelectionLogic exposing (getDueQuestions, countLevel0, countLevel1, countLevel2, countLevel3, countLevel4, countLevel5)
 import List exposing (length, tail, head)
 
 startUp : Model -> Html Msg
@@ -39,13 +42,16 @@ startUp model =
                         ,p [] [
                                 text ("Heute fällige Fragen: " ++ String.fromInt (length (getDueQuestions model (Just model.learnProgress))))
                         ]
-                        ,p [] [
-                                text "Starte jetzt dein Training"
+                        ,div [style "width" "100%"] [
+                                (barChart model)
                         ]
                         ,div[class "progress"][
                                 div [class "progress-bar", style "width" (String.fromInt(int_progress) ++ "%"), ariaValueNow (toFloat int_progress), ariaValueMin 0, ariaValueMax 100][
                                         text (String.fromFloat(float_progress) ++ "%")
                                 ]
+                        ]
+                        ,p [] [
+                                text "Starte jetzt dein Training"
                         ]
                 ]
                 ,a [class "btn btn-primary", onClick GelloView][
@@ -66,6 +72,62 @@ startUp model =
                 ]
                 ]
         ]]
+
+data : Model ->
+    List
+        { groupLabel : String
+        , x : String
+        , y : Float
+        }
+
+data model =
+    [ { groupLabel = "Level"
+      , x = "Level 0"
+      , y = countLevel0 (Just model.learnProgress)
+      }
+    , { groupLabel = "Level"
+      , x = "Level 1"
+      , y = countLevel1 (Just model.learnProgress)
+      }
+    , { groupLabel = "Level"
+      , x = "Level 2"
+      , y = countLevel2 (Just model.learnProgress)
+      }
+    , { groupLabel = "Level"
+      , x = "Level 3"
+      , y = countLevel3 (Just model.learnProgress)
+      }
+    , { groupLabel = "Level"
+      , x = "Level 4"
+      , y = countLevel4 (Just model.learnProgress)
+      }
+    , { groupLabel = "Level"
+      , x = "Level 5"
+      , y = countLevel5 (Just model.learnProgress)
+      }
+    ]
+
+accessor =
+    Bar.Accessor (.groupLabel >> Just) .x .y
+
+barChart : Model -> Html msg
+barChart model =
+        Bar.init
+            { margin =
+                { top = 10
+                , right = 10
+                , bottom = 30
+                , left = -500
+                }
+            , width = 500
+            , height = 50
+            }
+            |> Bar.withOrientation Bar.horizontal
+            |> Bar.withColorPalette Scale.Color.tableau10
+            |> Bar.withYDomain (0, 100)
+            |> Bar.hideAxis
+            |> Bar.withStackedLayout Bar.diverging
+            |> Bar.render ( (data model), accessor )
 
 procentualLearnProgress : Maybe LearnProgress -> Int
 procentualLearnProgress lst =

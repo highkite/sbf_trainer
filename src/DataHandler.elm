@@ -43,9 +43,9 @@ configDecoder =
 
 url : String
 url =
-    "http://localhost:8080/data_collector/test_data.json"
+    --"http://localhost:8080/data_collector/test_data.json"
     --"http://localhost:8080/data_collector/data.json"
-    --"https://highkite.github.io/sbf_trainer/data_collector/data.json"
+    "https://highkite.github.io/sbf_trainer/data_collector/data.json"
 
 urlBinnen : String
 urlBinnen =
