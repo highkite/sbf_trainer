@@ -80,5 +80,7 @@ type alias Model =
         , currentDate : String
         , currentQuestion : Maybe CurQuest
         , showSidePanel : Bool
+        , showWeiterButtonFail : Bool
+        , showWeiterButtonSucc : Bool
         , config : Config
         }

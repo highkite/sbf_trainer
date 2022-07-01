@@ -40,7 +40,7 @@ port doloadConfig : () -> Cmd msg
 
 initialModel : () -> (Model, Cmd Msg)
 initialModel _ =
-        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, doloadConfig()])
+        ({ page_state = 0, learnData = [], learnProgress = [], errorMessage = Nothing, currentDate = "", currentQuestion = Nothing, showSidePanel = False, showWeiterButtonFail = False, showWeiterButtonSucc = False, config = {spez_fragen_binnen = False, spez_fragen_segeln = False}}, Cmd.batch [today |> Task.perform ReadDate, doloadConfig()])
 
 view : Model -> Html Msg
 view model =
@@ -236,14 +236,14 @@ update msg model =
                                                 let
                                                     --new_cq = {cq | correct = NotSet}
                                                     new_cq = takeNextQuestion model model.learnProgress 0
-                                                    new_model = { model | currentQuestion = new_cq }
+                                                    new_model = { model | currentQuestion = new_cq, showWeiterButtonSucc = False, showWeiterButtonFail = False }
                                                 in
                                                 (new_model, Cmd.none)
                                         else
                                                 let
                                                     --new_cq = {cq | correct = NotSet}
                                                     new_cq = takeNextQuestion model model.learnProgress (cq.index + 1)
-                                                    new_model = { model | currentQuestion = new_cq }
+                                                    new_model = { model | currentQuestion = new_cq, showWeiterButtonSucc = False, showWeiterButtonFail = False }
                                                 in
                                                 (new_model, Cmd.none)
                                 Nothing ->
@@ -259,14 +259,14 @@ update msg model =
                                                     new_cq = {cq | correct = Correct}
                                                     new_learn_progress = increaseLevel (Just model.learnProgress) model cq
                                                 in
-                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 500 |> Task.perform (always ShowResultTimeout) ] )
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress, showWeiterButtonSucc = True}, save (Encode.encode 0 (encodeJSON new_learn_progress)))
                                         else
                                                 -- colorize red
                                                 let
                                                     new_cq = {cq | correct = Incorrect}
                                                     new_learn_progress = resetLevel (Just model.learnProgress) model cq
                                                 in
-                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress}, Cmd.batch [save (Encode.encode 0 (encodeJSON new_learn_progress)), Process.sleep 1500 |> Task.perform (always ShowResultTimeout) ])
+                                                ( { model | currentQuestion = Just new_cq, learnProgress = new_learn_progress, showWeiterButtonFail = True}, save (Encode.encode 0 (encodeJSON new_learn_progress)))
                                 Nothing ->
                                         (model, Cmd.none)
 

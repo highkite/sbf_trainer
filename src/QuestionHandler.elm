@@ -31,6 +31,14 @@ questionView model curQ =
                                 text "Wähle unter den folgenden Antworten aus:"
                         ]
                         , div[] (answersq (Just cq.randomization) cq cq.question.answers)
+                        ,if model.showWeiterButtonFail then
+                            div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-danger", onClick ShowResultTimeout] [text "Weiter"]]]
+                        else
+                            text ""
+                        ,if model.showWeiterButtonSucc then
+                            div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-success", onClick ShowResultTimeout] [text "Weiter"]]]
+                        else
+                            text ""
                 ]]]]
                 ,div[class "row"] [div [class "col-12", style "text-align" "right", style "margin-top" "15px"] [a [class "btn btn-secondary", onClick Home] [text "Zurück"]]]
                 ]]

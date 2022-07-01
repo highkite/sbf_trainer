@@ -5798,7 +5798,9 @@ var $author$project$HomePage$initialModel = function (_v0) {
 			learnData: _List_Nil,
 			learnProgress: _List_Nil,
 			page_state: 0,
-			showSidePanel: false
+			showSidePanel: false,
+			showWeiterButtonFail: false,
+			showWeiterButtonSucc: false
 		},
 		$elm$core$Platform$Cmd$batch(
 			_List_fromArray(
@@ -5827,14 +5829,9 @@ var $author$project$HomePage$subscriptions = function (model) {
 };
 var $author$project$Messages$Correct = {$: 'Correct'};
 var $author$project$Messages$Incorrect = {$: 'Incorrect'};
-var $author$project$Messages$ShowResultTimeout = {$: 'ShowResultTimeout'};
 var $author$project$Messages$ShuffleLearnProgress = function (a) {
 	return {$: 'ShuffleLearnProgress', a: a};
 };
-var $elm$core$Basics$always = F2(
-	function (a, _v0) {
-		return a;
-	});
 var $author$project$HomePage$buildErrorMessage = function (httpError) {
 	switch (httpError.$) {
 		case 'BadUrl':
@@ -7245,7 +7242,6 @@ var $elm_community$random_extra$Random$List$shuffle = function (list) {
 		},
 		$elm$random$Random$independentSeed);
 };
-var $elm$core$Process$sleep = _Process_sleep;
 var $author$project$Messages$NotSet = {$: 'NotSet'};
 var $elm$core$List$drop = F2(
 	function (n, list) {
@@ -7441,6 +7437,10 @@ var $justinmimbs$date$Date$compare = F2(
 		var a = _v0.a;
 		var b = _v1.a;
 		return A2($elm$core$Basics$compare, a, b);
+	});
+var $elm$core$Basics$always = F2(
+	function (a, _v0) {
+		return a;
 	});
 var $elm$parser$Parser$Advanced$Bad = F2(
 	function (a, b) {
@@ -9561,13 +9561,13 @@ var $author$project$HomePage$update = F2(
 						var new_cq = A3($author$project$QuestionSelectionLogic$takeNextQuestion, model, model.learnProgress, 0);
 						var new_model = _Utils_update(
 							model,
-							{currentQuestion: new_cq});
+							{currentQuestion: new_cq, showWeiterButtonFail: false, showWeiterButtonSucc: false});
 						return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
 					} else {
 						var new_cq = A3($author$project$QuestionSelectionLogic$takeNextQuestion, model, model.learnProgress, cq.index + 1);
 						var new_model = _Utils_update(
 							model,
-							{currentQuestion: new_cq});
+							{currentQuestion: new_cq, showWeiterButtonFail: false, showWeiterButtonSucc: false});
 						return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
 					}
 				} else {
@@ -9592,21 +9592,14 @@ var $author$project$HomePage$update = F2(
 								model,
 								{
 									currentQuestion: $elm$core$Maybe$Just(new_cq),
-									learnProgress: new_learn_progress
+									learnProgress: new_learn_progress,
+									showWeiterButtonSucc: true
 								}),
-							$elm$core$Platform$Cmd$batch(
-								_List_fromArray(
-									[
-										$author$project$HomePage$save(
-										A2(
-											$elm$json$Json$Encode$encode,
-											0,
-											$author$project$HomePage$encodeJSON(new_learn_progress))),
-										A2(
-										$elm$core$Task$perform,
-										$elm$core$Basics$always($author$project$Messages$ShowResultTimeout),
-										$elm$core$Process$sleep(500))
-									])));
+							$author$project$HomePage$save(
+								A2(
+									$elm$json$Json$Encode$encode,
+									0,
+									$author$project$HomePage$encodeJSON(new_learn_progress))));
 					} else {
 						var new_learn_progress = A3(
 							$author$project$HomePage$resetLevel,
@@ -9621,21 +9614,14 @@ var $author$project$HomePage$update = F2(
 								model,
 								{
 									currentQuestion: $elm$core$Maybe$Just(new_cq),
-									learnProgress: new_learn_progress
+									learnProgress: new_learn_progress,
+									showWeiterButtonFail: true
 								}),
-							$elm$core$Platform$Cmd$batch(
-								_List_fromArray(
-									[
-										$author$project$HomePage$save(
-										A2(
-											$elm$json$Json$Encode$encode,
-											0,
-											$author$project$HomePage$encodeJSON(new_learn_progress))),
-										A2(
-										$elm$core$Task$perform,
-										$elm$core$Basics$always($author$project$Messages$ShowResultTimeout),
-										$elm$core$Process$sleep(1500))
-									])));
+							$author$project$HomePage$save(
+								A2(
+									$elm$json$Json$Encode$encode,
+									0,
+									$author$project$HomePage$encodeJSON(new_learn_progress))));
 					}
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
@@ -9842,6 +9828,7 @@ var $author$project$SideNav$nav = function (model) {
 			]));
 };
 var $author$project$Messages$Home = {$: 'Home'};
+var $author$project$Messages$ShowResultTimeout = {$: 'ShowResultTimeout'};
 var $author$project$Messages$SelectAnswer = function (a) {
 	return {$: 'SelectAnswer', a: a};
 };
@@ -10124,7 +10111,69 @@ var $author$project$QuestionHandler$questionView = F2(
 																	$author$project$QuestionHandler$answersq,
 																	$elm$core$Maybe$Just(cq.randomization),
 																	cq,
-																	cq.question.answers))
+																	cq.question.answers)),
+																model.showWeiterButtonFail ? A2(
+																$elm$html$Html$div,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Attributes$class('row')
+																	]),
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$div,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$class('col-12'),
+																				A2($elm$html$Html$Attributes$style, 'text-align', 'right'),
+																				A2($elm$html$Html$Attributes$style, 'margin-top', '15px')
+																			]),
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$class('btn btn-danger'),
+																						$elm$html$Html$Events$onClick($author$project$Messages$ShowResultTimeout)
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Weiter')
+																					]))
+																			]))
+																	])) : $elm$html$Html$text(''),
+																model.showWeiterButtonSucc ? A2(
+																$elm$html$Html$div,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$Attributes$class('row')
+																	]),
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$div,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$Attributes$class('col-12'),
+																				A2($elm$html$Html$Attributes$style, 'text-align', 'right'),
+																				A2($elm$html$Html$Attributes$style, 'margin-top', '15px')
+																			]),
+																		_List_fromArray(
+																			[
+																				A2(
+																				$elm$html$Html$a,
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$Attributes$class('btn btn-success'),
+																						$elm$html$Html$Events$onClick($author$project$Messages$ShowResultTimeout)
+																					]),
+																				_List_fromArray(
+																					[
+																						$elm$html$Html$text('Weiter')
+																					]))
+																			]))
+																	])) : $elm$html$Html$text('')
 															]))
 													]))
 											]))
