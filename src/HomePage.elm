@@ -238,14 +238,22 @@ update msg model =
                                                     new_cq = takeNextQuestion model model.learnProgress 0
                                                     new_model = { model | currentQuestion = new_cq, showWeiterButtonSucc = False, showWeiterButtonFail = False }
                                                 in
-                                                (new_model, Cmd.none)
+                                                case new_cq of
+                                                        Just new_cq_el ->
+                                                                (new_model, Random.generate RandomizeRandomization (shuffle new_cq_el.randomization))
+                                                        Nothing ->
+                                                                (new_model, Cmd.none)
                                         else
                                                 let
                                                     --new_cq = {cq | correct = NotSet}
                                                     new_cq = takeNextQuestion model model.learnProgress (cq.index + 1)
                                                     new_model = { model | currentQuestion = new_cq, showWeiterButtonSucc = False, showWeiterButtonFail = False }
                                                 in
-                                                (new_model, Cmd.none)
+                                                case new_cq of
+                                                        Just new_cq_el ->
+                                                                (new_model, Random.generate RandomizeRandomization (shuffle new_cq_el.randomization))
+                                                        Nothing ->
+                                                                (new_model, Cmd.none)
                                 Nothing ->
                                         (model, Cmd.none)
 

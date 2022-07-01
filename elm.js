@@ -5830,6 +5830,9 @@ var $author$project$HomePage$subscriptions = function (model) {
 };
 var $author$project$Messages$Correct = {$: 'Correct'};
 var $author$project$Messages$Incorrect = {$: 'Incorrect'};
+var $author$project$Messages$RandomizeRandomization = function (a) {
+	return {$: 'RandomizeRandomization', a: a};
+};
 var $author$project$Messages$ShuffleLearnProgress = function (a) {
 	return {$: 'ShuffleLearnProgress', a: a};
 };
@@ -9563,22 +9566,42 @@ var $author$project$HomePage$update = F2(
 						var new_model = _Utils_update(
 							model,
 							{currentQuestion: new_cq, showWeiterButtonFail: false, showWeiterButtonSucc: false});
-						return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+						if (new_cq.$ === 'Just') {
+							var new_cq_el = new_cq.a;
+							return _Utils_Tuple2(
+								new_model,
+								A2(
+									$elm$random$Random$generate,
+									$author$project$Messages$RandomizeRandomization,
+									$elm_community$random_extra$Random$List$shuffle(new_cq_el.randomization)));
+						} else {
+							return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+						}
 					} else {
 						var new_cq = A3($author$project$QuestionSelectionLogic$takeNextQuestion, model, model.learnProgress, cq.index + 1);
 						var new_model = _Utils_update(
 							model,
 							{currentQuestion: new_cq, showWeiterButtonFail: false, showWeiterButtonSucc: false});
-						return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+						if (new_cq.$ === 'Just') {
+							var new_cq_el = new_cq.a;
+							return _Utils_Tuple2(
+								new_model,
+								A2(
+									$elm$random$Random$generate,
+									$author$project$Messages$RandomizeRandomization,
+									$elm_community$random_extra$Random$List$shuffle(new_cq_el.randomization)));
+						} else {
+							return _Utils_Tuple2(new_model, $elm$core$Platform$Cmd$none);
+						}
 					}
 				} else {
 					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 				}
 			default:
 				var index = msg.a;
-				var _v8 = model.currentQuestion;
-				if (_v8.$ === 'Just') {
-					var cq = _v8.a;
+				var _v10 = model.currentQuestion;
+				if (_v10.$ === 'Just') {
+					var cq = _v10.a;
 					if (!index) {
 						var new_learn_progress = A3(
 							$author$project$HomePage$increaseLevel,
