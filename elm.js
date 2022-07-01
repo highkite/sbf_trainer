@@ -10291,6 +10291,38 @@ var $elm$html$Html$Attributes$boolProperty = F2(
 	});
 var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
 var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
+var $author$project$QuestionSelectionLogic$getDueQuestions = F2(
+	function (model, lp) {
+		getDueQuestions:
+		while (true) {
+			if (lp.$ === 'Just') {
+				var lp_lst = lp.a;
+				var _v1 = $elm$core$List$head(lp_lst);
+				if (_v1.$ === 'Just') {
+					var headel = _v1.a;
+					if (A2($author$project$QuestionSelectionLogic$isDue, model, headel)) {
+						return A2(
+							$elm$core$List$cons,
+							headel,
+							A2(
+								$author$project$QuestionSelectionLogic$getDueQuestions,
+								model,
+								$elm$core$List$tail(lp_lst)));
+					} else {
+						var $temp$model = model,
+							$temp$lp = $elm$core$List$tail(lp_lst);
+						model = $temp$model;
+						lp = $temp$lp;
+						continue getDueQuestions;
+					}
+				} else {
+					return _List_Nil;
+				}
+			} else {
+				return _List_Nil;
+			}
+		}
+	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
@@ -10478,8 +10510,21 @@ var $author$project$StartUp$startUp = function (model) {
 																_List_fromArray(
 																	[
 																		$elm$html$Html$text(
-																		'Available questions: ' + $elm$core$String$fromInt(
+																		'Gesamtzahl verfügbarer Fragen: ' + $elm$core$String$fromInt(
 																			$elm$core$List$length(model.learnData)))
+																	])),
+																A2(
+																$elm$html$Html$p,
+																_List_Nil,
+																_List_fromArray(
+																	[
+																		$elm$html$Html$text(
+																		'Heute fällige Fragen: ' + $elm$core$String$fromInt(
+																			$elm$core$List$length(
+																				A2(
+																					$author$project$QuestionSelectionLogic$getDueQuestions,
+																					model,
+																					$elm$core$Maybe$Just(model.learnProgress)))))
 																	])),
 																A2(
 																$elm$html$Html$p,

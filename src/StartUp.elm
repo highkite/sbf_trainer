@@ -6,6 +6,7 @@ import Html.Attributes exposing (..)
 import Html.Attributes.Aria exposing (..)
 
 import Messages exposing (Msg(..), Model, LearnProgress)
+import QuestionSelectionLogic exposing (getDueQuestions)
 import List exposing (length, tail, head)
 
 startUp : Model -> Html Msg
@@ -33,7 +34,10 @@ startUp model =
                                 ,label [class "form-check-label", for "cbx_example_check_2"] [span [style "padding-left" "10px"] [text "Spezifische Fragen Segeln"]]
                         ]
                         ,p [] [
-                                text ("Available questions: " ++ String.fromInt (length model.learnData))
+                                text ("Gesamtzahl verfügbarer Fragen: " ++ String.fromInt (length model.learnData))
+                        ]
+                        ,p [] [
+                                text ("Heute fällige Fragen: " ++ String.fromInt (length (getDueQuestions model (Just model.learnProgress))))
                         ]
                         ,p [] [
                                 text "Starte jetzt dein Training"

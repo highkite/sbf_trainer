@@ -1,4 +1,4 @@
-module QuestionSelectionLogic exposing (takeNextQuestion, mergeModel)
+module QuestionSelectionLogic exposing (takeNextQuestion, mergeModel, getDueQuestions)
 import Date exposing (Unit(..), add, fromIsoString, compare)
 
 import List exposing (head, tail, take, drop, range, length, isEmpty)
@@ -141,6 +141,21 @@ phaseFiveDue today timestamp =
                                         False
                 Err value ->
                         False
+
+getDueQuestions : Model -> Maybe LearnProgress -> LearnProgress
+getDueQuestions model lp =
+    case lp of
+        Just lp_lst ->
+            case head lp_lst of
+                Just headel ->
+                    if isDue model headel then
+                        headel :: getDueQuestions model (tail lp_lst)
+                    else
+                        getDueQuestions model (tail lp_lst)
+                Nothing ->
+                    []
+        Nothing ->
+            []
 
 isDue : Model -> QuestionLearnProgress -> Bool
 isDue model lp =
